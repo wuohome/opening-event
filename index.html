@@ -309,13 +309,15 @@
   <!-- Header -->
   <div class="header">
     <h1>開幕活動橋段參考</h1>
-    <p>全地產 2025/05/08 開幕典禮 &#8212; 請勾選喜歡的橋段</p>
+    <p>全地產 2025/05/08 開幕典禮（去年五月辦的活動，同一日辦兩場，僅供參考）</p>
+    <p style="color:#999;font-size:13px;margin-top:4px;">請勾選喜歡的橋段，看完影片後再選也可以</p>
   </div>
 
   <!-- Reviewer selector -->
   <div class="reviewer-bar">
     <button class="reviewer-btn active" onclick="selectReviewer(this, '吳彥廷')">吳彥廷</button>
     <button class="reviewer-btn" onclick="selectReviewer(this, '蕭靜芳')">蕭靜芳</button>
+    <button class="reviewer-btn" onclick="selectReviewer(this, '邱永盛')">邱永盛</button>
   </div>
 
   <!-- Setup notice (hidden after GAS URL is set) -->
@@ -354,6 +356,30 @@
       <tr><td>媒體車馬費（約20人）</td><td class="num">~$40,000</td></tr>
       <tr class="total-row"><td>合計</td><td class="num">~$278,912</td></tr>
     </table>
+  </div>
+
+  <!-- Date picker -->
+  <div class="overview">
+    <h2 style="margin-bottom:16px;padding-left:12px;border-left:3px solid #c9a96e;">活動日期（吉時）</h2>
+    <p style="font-size:13px;color:#999;margin-bottom:16px;">其他時間吉時都在下午、晚上或大半夜，以下三個時段請選一個偏好的</p>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <label style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f9f9f6;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:all 0.2s;" onmouseover="this.style.background='#f5f3ed'" onmouseout="this.style.background=this.querySelector('input').checked?'#fdfcf8':'#f9f9f6'">
+        <input type="radio" name="date" value="4/3 09:00-11:00" style="accent-color:#c9a96e;width:18px;height:18px;">
+        <div><strong>4/3（四）</strong> 09:00 - 11:00</div>
+      </label>
+      <label style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f9f9f6;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:all 0.2s;" onmouseover="this.style.background='#f5f3ed'" onmouseout="this.style.background=this.querySelector('input').checked?'#fdfcf8':'#f9f9f6'">
+        <input type="radio" name="date" value="4/3 11:00-13:00" style="accent-color:#c9a96e;width:18px;height:18px;">
+        <div><strong>4/3（四）</strong> 11:00 - 13:00</div>
+      </label>
+      <label style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f9f9f6;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:all 0.2s;" onmouseover="this.style.background='#f5f3ed'" onmouseout="this.style.background=this.querySelector('input').checked?'#fdfcf8':'#f9f9f6'">
+        <input type="radio" name="date" value="4/14 11:00-13:00" style="accent-color:#c9a96e;width:18px;height:18px;">
+        <div><strong>4/14（一）</strong> 11:00 - 13:00</div>
+      </label>
+      <label style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#f9f9f6;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:all 0.2s;" onmouseover="this.style.background='#f5f3ed'" onmouseout="this.style.background=this.querySelector('input').checked?'#fdfcf8':'#f9f9f6'">
+        <input type="radio" name="date" value="4/26 11:00-13:00" style="accent-color:#c9a96e;width:18px;height:18px;">
+        <div><strong>4/26（六）</strong> 11:00 - 13:00</div>
+      </label>
+    </div>
   </div>
 
   <!-- Checklist -->
@@ -546,8 +572,12 @@
       return;
     }
 
+    const dateRadio = document.querySelector('input[name="date"]:checked');
+    const selectedDate = dateRadio ? dateRadio.value : '未選擇';
+
     const data = {
       reviewer: currentReviewer,
+      date: selectedDate,
       items: checked,
       comment: document.getElementById('comment').value,
       timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' })
