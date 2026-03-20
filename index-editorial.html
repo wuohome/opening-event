@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>窩的家集團 — 新總部開幕參觀</title>
+<meta name="description" content="2026/4/26（日）三重區平安街59號，窩的家集團新總部盛大開幕，誠摯邀請您蒞臨參觀。">
+<meta property="og:title" content="窩的家集團 — 新總部開幕參觀">
+<meta property="og:description" content="四間公司、一棟建築、一條龍服務。4/26 三重，歡迎蒞臨參觀。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@400;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ====== RESET & BASE ====== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  :root {
+    /* Brand colors (原始) */
+    --navy-origin: #3f5262;
+    --coral-origin: #dd6650;
+    --gold-origin: #f2cf00;
+
+    /* 深色背景用 — Navy 提亮系列 */
+    --navy: #6a90a8;
+    --navy-bright: #85adc5;
+    --navy-dim: #4e6e84;
+    --navy-muted: rgba(106,144,168,0.15);
+
+    /* Coral — 微提亮，在深底更鮮明 */
+    --coral: #e2735f;
+    --coral-bright: #ee8a78;
+    --coral-dim: #c4553f;
+    --coral-muted: rgba(226,115,95,0.12);
+
+    /* Gold — 保持原色，深底自帶奢華感 */
+    --gold: #f2cf00;
+    --gold-bright: #f7dc3e;
+    --gold-dim: #c4a800;
+    --gold-muted: rgba(242,207,0,0.1);
+
+    /* 背景 — 帶深藍灰色調，非純黑 */
+    --bg-dark: #0c1118;
+    --bg-section: #101820;
+    --bg-card: #162029;
+    --bg-card-hover: #1d2a35;
+    --bg-elevated: #1f3040;
+
+    /* 文字 — 帶暖灰，避免冷硬 */
+    --text-primary: #e8ecf0;
+    --text-secondary: #8fa0b0;
+    --text-tertiary: #546778;
+
+    /* 分割線 — Navy 色調 */
+    --divider: rgba(106,144,168,0.1);
+    --divider-strong: rgba(106,144,168,0.18);
+  }
+
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ====== FONTS ====== */
+  .font-display { font-family: 'Playfair Display', Georgia, serif; }
+  .font-heading { font-family: 'Montserrat', 'Noto Sans TC', sans-serif; }
+
+  /* ====== FLOATING GEOMETRIES ====== */
+  .geo-canvas {
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .geo {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    animation: geoFloat 20s ease-in-out infinite;
+  }
+  .geo--tri { border-radius: 0; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+  .geo--ring {
+    border-radius: 50%;
+    background: transparent !important;
+    border: 2px solid;
+  }
+  @keyframes geoFloat {
+    0%, 100% { opacity: 0; transform: translateY(0) rotate(0deg); }
+    15% { opacity: 1; }
+    85% { opacity: 1; }
+    50% { transform: translateY(-80px) rotate(180deg); }
+  }
+
+  /* ====== IRREGULAR DIVIDER ====== */
+  .wave-divider {
+    width: 100%; height: 80px;
+    overflow: hidden;
+  }
+  .wave-divider svg { width: 100%; height: 100%; display: block; }
+
+  /* ====== TILTED TEXT ====== */
+  .tilt-neg2 { transform: rotate(-2deg); transform-origin: left center; }
+  .tilt-neg3 { transform: rotate(-3deg); transform-origin: left center; }
+  .tilt-neg5 { transform: rotate(-5deg); transform-origin: left center; }
+  .tilt-pos2 { transform: rotate(2deg); }
+
+  /* ====== PARALLAX SECTIONS ====== */
+  .parallax-section {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ====== GLASS (DARK) ====== */
+  .glass-dark {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(40px) saturate(120%);
+    -webkit-backdrop-filter: blur(40px) saturate(120%);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .glass-dark-strong {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(60px) saturate(150%);
+    -webkit-backdrop-filter: blur(60px) saturate(150%);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* ====== BUTTONS ====== */
+  .btn-editorial {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 36px;
+    background: var(--coral);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-editorial::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+  }
+  .btn-editorial:hover::before { transform: translateX(100%); }
+  .btn-editorial:hover {
+    background: var(--coral-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(226,115,95,0.35);
+  }
+  .btn-editorial:active { transform: translateY(0); }
+  .btn-editorial:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--navy-bright);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--navy-dim);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover {
+    border-color: var(--navy-bright);
+    color: #fff;
+    background: var(--navy-muted);
+    box-shadow: 0 0 30px rgba(106,144,168,0.12);
+  }
+
+  /* ====== NAV ====== */
+  .nav-editorial {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 24px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: all 0.4s;
+  }
+  .nav-editorial.scrolled {
+    padding: 16px 40px;
+    background: rgba(12,17,24,0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--divider);
+  }
+  .nav-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+  .nav-cta {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--coral);
+    text-decoration: none;
+    padding: 10px 24px;
+    border: 1px solid var(--coral);
+    transition: all 0.3s;
+  }
+  .nav-cta:hover { background: var(--coral); color: #fff; box-shadow: 0 4px 20px rgba(226,115,95,0.25); }
+
+  /* ====== HERO ====== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 40px 80px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    align-items: center;
+  }
+  .hero-overline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-overline::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--gold-dim);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    transform: rotate(-2deg);
+    transform-origin: left center;
+  }
+  .hero-title .accent { color: var(--coral); }
+  .hero-title .accent-navy { color: var(--navy-bright); }
+  .hero-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .hero-desc {
+    font-size: 15px;
+    color: var(--text-tertiary);
+    max-width: 500px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* Hero right - event info with editorial layout */
+  .hero-info-card {
+    background: rgba(106,144,168,0.04);
+    border: 1px solid rgba(106,144,168,0.12);
+    padding: 48px;
+    position: relative;
+    transform: rotate(1deg);
+  }
+  .hero-info-card::before {
+    content: 'EVENT INFO';
+    position: absolute;
+    top: -12px; left: 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: var(--navy-bright);
+    background: var(--bg-dark);
+    padding: 4px 12px;
+  }
+  .info-row {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-icon {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(106,144,168,0.25);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .info-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 4px;
+  }
+  .info-value { font-weight: 600; font-size: 15px; }
+  .info-detail { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+  .info-link {
+    font-size: 12px; color: var(--coral);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 6px;
+    transition: color 0.2s;
+  }
+  .info-link:hover { color: var(--coral-bright); }
+
+  /* ====== COUNTDOWN ====== */
+  .countdown-strip {
+    background: linear-gradient(135deg, var(--bg-section) 0%, rgba(106,144,168,0.05) 100%);
+    border-top: 1px solid var(--divider-strong);
+    border-bottom: 1px solid var(--divider-strong);
+    padding: 40px 0;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .countdown-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .countdown-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+  }
+  .countdown-digits {
+    display: flex;
+    gap: 8px;
+  }
+  .cd-unit {
+    text-align: center;
+    min-width: 80px;
+    padding: 16px 8px;
+    border: 1px solid var(--divider);
+    background: rgba(106,144,168,0.04);
+    position: relative;
+  }
+  .cd-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--coral);
+    line-height: 1;
+  }
+  .cd-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-top: 6px;
+  }
+  .cd-sep {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--text-tertiary);
+    align-self: flex-start;
+    padding-top: 12px;
+  }
+
+  /* ====== MARQUEE ====== */
+  .marquee-editorial {
+    overflow: hidden;
+    white-space: nowrap;
+    background: var(--bg-dark);
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+    padding: 20px 0;
+    position: relative;
+    z-index: 1;
+  }
+  .marquee-track {
+    display: inline-block;
+    animation: marqueeScroll 25s linear infinite;
+  }
+  .marquee-track span {
+    display: inline-block;
+    padding: 0 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+  .marquee-track .dot {
+    color: var(--coral);
+    padding: 0 16px;
+  }
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ====== FLOOR SECTION ====== */
+  .floors-section {
+    padding: 120px 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .floors-header {
+    max-width: 1400px;
+    margin: 0 auto 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: end;
+  }
+  .floors-header-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+  .floors-header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    transform: rotate(-3deg);
+    transform-origin: left center;
+  }
+  .floors-header-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 400px;
+    align-self: end;
+  }
+
+  /* Floor cards - staggered editorial layout */
+  .floors-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    gap: 24px;
+  }
+  .floor-card-ed {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0;
+    border: 1px solid var(--divider);
+    background: var(--bg-card);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .floor-card-ed::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, var(--navy) 0%, var(--coral) 100%);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .floor-card-ed:hover::after { width: 100%; }
+  .floor-card-ed:hover {
+    transform: translateY(-6px) rotate(-0.5deg);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    border-color: rgba(255,255,255,0.12);
+  }
+  .floor-card-ed:nth-child(odd) { transform: translateX(-20px); }
+  .floor-card-ed:nth-child(even) { transform: translateX(20px); }
+  .floor-card-ed:nth-child(odd):hover { transform: translateX(-20px) translateY(-6px) rotate(-0.5deg); }
+  .floor-card-ed:nth-child(even):hover { transform: translateX(20px) translateY(-6px) rotate(0.5deg); }
+
+  .floor-num-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--divider);
+    padding: 32px 0;
+    background: rgba(106,144,168,0.03);
+  }
+  .floor-num-ed {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--navy);
+    opacity: 0.35;
+    transition: all 0.4s;
+    transform: rotate(-5deg);
+  }
+  .floor-card-ed:hover .floor-num-ed { opacity: 0.9; color: var(--navy-bright); }
+
+  .floor-content {
+    padding: 32px 36px;
+  }
+  .floor-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .floor-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .floor-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .floor-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .floor-tags span {
+    font-size: 11px;
+    padding: 5px 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text-tertiary);
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .floor-card-ed:hover .floor-tags span {
+    border-color: rgba(255,255,255,0.15);
+    color: var(--text-secondary);
+  }
+
+  /* Mid CTA */
+  .mid-cta {
+    text-align: center;
+    padding: 80px 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .mid-cta-text {
+    font-size: 14px;
+    color: var(--text-tertiary);
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+  }
+
+  /* ====== REGISTRATION ====== */
+  .register-section {
+    padding: 120px 40px;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(180deg, var(--bg-section) 0%, var(--bg-dark) 100%);
+  }
+  .register-header {
+    max-width: 1400px;
+    margin: 0 auto 60px;
+    text-align: center;
+  }
+  .register-header-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .register-header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 900;
+    transform: rotate(-2deg);
+  }
+  .register-header-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-top: 16px;
+  }
+
+  .register-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* Session cards */
+  .sessions-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 20px;
+  }
+  .session-card-ed {
+    border: 1px solid var(--divider);
+    background: var(--bg-card);
+    padding: 24px 28px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .session-card-ed::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--navy-bright);
+    transform: scaleY(0);
+    transition: transform 0.3s;
+    transform-origin: top;
+  }
+  .session-card-ed:hover { background: var(--bg-card-hover); transform: translateX(4px); }
+  .session-card-ed.selected {
+    border-color: var(--navy);
+    background: rgba(106,144,168,0.06);
+  }
+  .session-card-ed.selected::before { transform: scaleY(1); }
+  .session-card-ed.full {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  .session-card-ed.full:hover { background: var(--bg-card); transform: none; }
+
+  .session-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .session-time {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .session-target {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+  }
+  .session-badge-ed {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+  }
+  .session-badge-ed.open { color: var(--navy-bright); border: 1px solid rgba(133,173,197,0.3); }
+  .session-badge-ed.closing { color: var(--gold); border: 1px solid rgba(242,207,0,0.3); }
+  .session-badge-ed.closed { color: var(--coral); border: 1px solid rgba(226,115,95,0.3); }
+
+  .capacity-bar {
+    height: 2px;
+    background: rgba(255,255,255,0.05);
+    overflow: hidden;
+    margin-top: 2px;
+  }
+  .capacity-bar-fill {
+    height: 100%;
+    background: var(--navy);
+    transition: width 0.5s ease;
+  }
+  .capacity-bar-fill.warn { background: var(--gold); }
+  .capacity-bar-fill.full-bar { background: var(--coral); }
+  .capacity-info {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 6px;
+    text-align: right;
+    font-weight: 500;
+  }
+
+  .session-check-ed {
+    width: 20px; height: 20px;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .session-card-ed.selected .session-check-ed {
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+  .session-check-ed svg { opacity: 0; transition: opacity 0.2s; }
+  .session-card-ed.selected .session-check-ed svg { opacity: 1; }
+
+  /* Form */
+  .form-panel {
+    background: rgba(106,144,168,0.03);
+    border: 1px solid rgba(106,144,168,0.1);
+    padding: 48px;
+    position: relative;
+  }
+  .form-panel::before {
+    content: 'YOUR INFO';
+    position: absolute;
+    top: -12px; left: 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: var(--navy-bright);
+    background: var(--bg-section);
+    padding: 4px 12px;
+  }
+  .form-group { margin-bottom: 24px; }
+  .form-label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 10px;
+  }
+  .form-label .req { color: var(--coral-bright); }
+  .form-input-ed {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-primary);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-input-ed::placeholder { color: var(--text-tertiary); }
+  .form-input-ed:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(106,144,168,0.12);
+  }
+  select.form-input-ed {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23606a78' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+  .form-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 16px;
+  }
+
+  /* ====== NOTICE SECTION ====== */
+  .notice-section {
+    padding: 120px 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .notice-card {
+    max-width: 800px;
+    margin: 0 auto;
+    border: 1px solid var(--divider);
+    background: var(--bg-card);
+    padding: 60px;
+    position: relative;
+  }
+  .notice-card::before {
+    content: 'NOTICE';
+    position: absolute;
+    top: -12px; left: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: var(--gold-dim);
+    background: var(--bg-dark);
+    padding: 4px 12px;
+  }
+  .notice-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 8px;
+    transform: rotate(-2deg);
+    transform-origin: left center;
+  }
+  .notice-subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 32px;
+  }
+  .sponsor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .sponsor-card-ed {
+    border: 1px solid var(--divider);
+    padding: 28px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .sponsor-card-ed:hover {
+    border-color: var(--gold-dim);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .sponsor-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--coral);
+    margin-bottom: 4px;
+  }
+  .sponsor-label {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+  .bank-info {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--divider);
+    padding: 24px;
+  }
+  .bank-info table { width: 100%; font-size: 14px; }
+  .bank-info th {
+    text-align: left;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    padding: 6px 16px 6px 0;
+    width: 60px;
+  }
+  .bank-info td { padding: 6px 0; font-weight: 600; }
+
+  /* ====== FOOTER ====== */
+  .footer-editorial {
+    border-top: 1px solid var(--divider);
+    padding: 48px 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: var(--text-primary);
+  }
+  .footer-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-tertiary);
+    margin-top: 6px;
+  }
+  .footer-copy {
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+
+  /* ====== MODAL ====== */
+  .modal-backdrop-ed {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(12,17,24,0.88);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-backdrop-ed.open { display: flex; }
+  .modal-content-ed {
+    background: var(--bg-card);
+    border: 1px solid rgba(106,144,168,0.12);
+    max-width: 480px;
+    width: 90%;
+    padding: 56px 48px;
+    text-align: center;
+    position: relative;
+  }
+  .modal-icon {
+    width: 56px; height: 56px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+  }
+  .modal-title-ed {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+  .modal-msg {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+  .modal-details {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--divider);
+    padding: 20px;
+    margin-bottom: 32px;
+    text-align: left;
+  }
+  .modal-detail-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+  }
+  .modal-detail-row svg { width: 16px; height: 16px; color: var(--navy-bright); flex-shrink: 0; }
+  .modal-detail-row span { font-size: 14px; color: var(--text-secondary); }
+
+  /* ====== TOAST ====== */
+  .toast-ed {
+    position: fixed; bottom: 40px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--bg-card);
+    border: 1px solid var(--divider);
+    color: var(--text-primary);
+    padding: 14px 32px;
+    font-size: 13px;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 300;
+    max-width: 90vw;
+    text-align: center;
+    font-weight: 500;
+  }
+  .toast-ed.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast-ed.error { border-color: var(--coral); }
+  .toast-ed.success { border-color: var(--gold); }
+
+  /* ====== CONFETTI ====== */
+  .confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 400; }
+
+  /* ====== SKELETON ====== */
+  .skeleton-ed {
+    background: linear-gradient(90deg, rgba(106,144,168,0.08) 25%, rgba(106,144,168,0.03) 50%, rgba(106,144,168,0.08) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    height: 14px; width: 80px;
+    display: inline-block;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* ====== SCROLL REVEAL ====== */
+  .reveal-ed {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-ed.visible { opacity: 1; transform: translateY(0); }
+  .reveal-ed.vis-left { transform: translateX(-40px); }
+  .reveal-ed.vis-left.visible { transform: translateX(0); }
+  .reveal-ed.vis-right { transform: translateX(40px); }
+  .reveal-ed.vis-right.visible { transform: translateX(0); }
+  .rd1 { transition-delay: 0.1s; }
+  .rd2 { transition-delay: 0.2s; }
+  .rd3 { transition-delay: 0.3s; }
+  .rd4 { transition-delay: 0.4s; }
+  .rd5 { transition-delay: 0.5s; }
+
+  /* ====== SCROLLBAR ====== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-dark); }
+  ::-webkit-scrollbar-thumb { background: rgba(106,144,168,0.15); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(106,144,168,0.25); }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-info-card { transform: none; }
+    .floors-header { grid-template-columns: 1fr; }
+    .register-grid { grid-template-columns: 1fr; }
+    .countdown-inner { flex-direction: column; text-align: center; }
+    .floor-card-ed:nth-child(odd),
+    .floor-card-ed:nth-child(even) { transform: none; }
+    .floor-card-ed:nth-child(odd):hover,
+    .floor-card-ed:nth-child(even):hover { transform: translateY(-6px); }
+  }
+  @media (max-width: 768px) {
+    .hero { padding: 100px 24px 60px; }
+    .hero-title { font-size: 2.5rem; transform: rotate(-1deg); }
+    .floors-section { padding: 80px 24px; }
+    .floor-card-ed { grid-template-columns: 80px 1fr; }
+    .floor-num-ed { font-size: 32px; }
+    .floor-content { padding: 24px; }
+    .register-section { padding: 80px 24px; }
+    .form-panel { padding: 32px 24px; }
+    .notice-card { padding: 40px 24px; }
+    .nav-editorial { padding: 16px 20px; }
+    .countdown-digits { gap: 4px; }
+    .cd-unit { min-width: 60px; padding: 12px 4px; }
+    .cd-num { font-size: 28px; }
+    .footer-inner { flex-direction: column; text-align: center; gap: 12px; }
+    .sponsor-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .hero-actions { flex-direction: column; }
+    .btn-editorial { width: 100%; justify-content: center; }
+    .btn-outline { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== FLOATING GEOMETRIES ====== -->
+<div class="geo-canvas" aria-hidden="true" id="geoCanvas"></div>
+
+<!-- ====== NAV ====== -->
+<nav class="nav-editorial" id="nav">
+  <a href="#" class="nav-logo">WUOHOME</a>
+  <a href="#register" class="nav-cta">Register</a>
+</nav>
+
+<!-- ====== HERO ====== -->
+<section class="hero parallax-section">
+  <div class="hero-grid">
+    <!-- Left -->
+    <div class="reveal-ed">
+      <div class="hero-overline">2026.04.26 SUN &mdash; SANCHONG</div>
+      <h1 class="hero-title">
+        <span class="accent-navy">窩的家</span>集團<br><span class="accent">新總部開幕</span>
+      </h1>
+      <p class="hero-subtitle">誠摯邀請您蒞臨參觀</p>
+      <p class="hero-desc">
+        四間公司、一棟建築、一條龍服務——從買賣、租賃、設計到社宅，一次看見完整佈局。歡迎同業夥伴、屋主、BNI 好友蒞臨，一起見證窩的家的新里程碑。
+      </p>
+      <div class="hero-actions">
+        <a href="#register" class="btn-editorial">
+          <span>立即報名</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+        <a href="#building" class="btn-outline">
+          <span>探索建築</span>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Event Info -->
+    <div class="reveal-ed rd2">
+      <div class="hero-info-card">
+        <div class="info-row">
+          <div class="info-icon">
+            <svg width="18" height="18" fill="none" stroke="var(--navy)" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+          </div>
+          <div>
+            <p class="info-label">Date</p>
+            <p class="info-value">2026 年 4 月 26 日（日）</p>
+            <p class="info-detail">上午場 10:00 / 下午場一 13:00 / 下午場二 15:00</p>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">
+            <svg width="18" height="18" fill="none" stroke="var(--navy)" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+          </div>
+          <div>
+            <p class="info-label">Venue</p>
+            <p class="info-value">窩的家集團新總部</p>
+            <p class="info-detail">新北市三重區平安街 59 號</p>
+            <a href="https://maps.app.goo.gl/placeholder" target="_blank" rel="noopener" class="info-link">
+              <span>Google Maps</span>
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">
+            <svg width="18" height="18" fill="none" stroke="var(--navy)" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <p class="info-label">Admission</p>
+            <p class="info-value">免費參加</p>
+            <p class="info-detail">線上報名即可，每場限額 30 人</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== COUNTDOWN ====== -->
+<div class="countdown-strip">
+  <div class="countdown-inner">
+    <p class="countdown-label">距離活動開始</p>
+    <div class="countdown-digits" id="countdown">
+      <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><p class="cd-text">Days</p></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><p class="cd-text">Hours</p></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-mins">--</span><p class="cd-text">Min</p></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-secs">--</span><p class="cd-text">Sec</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MARQUEE ====== -->
+<div class="marquee-editorial">
+  <div class="marquee-track"><span>優式租售 三重窩的家</span><span class="dot">&bull;</span><span>窩的家室內裝修</span><span class="dot">&bull;</span><span>住商不動產 正義國小店</span><span class="dot">&bull;</span><span>中信房屋 蘆洲捷運三民店</span><span class="dot">&bull;</span><span>凌群不動產</span><span class="dot">&bull;</span><span>優式租售 三重窩的家</span><span class="dot">&bull;</span><span>窩的家室內裝修</span><span class="dot">&bull;</span><span>住商不動產 正義國小店</span><span class="dot">&bull;</span><span>中信房屋 蘆洲捷運三民店</span><span class="dot">&bull;</span><span>凌群不動產</span><span class="dot">&bull;</span></div>
+</div>
+
+<!-- ====== BUILDING / FLOORS ====== -->
+<section id="building" class="floors-section parallax-section">
+  <div class="floors-header">
+    <div class="reveal-ed">
+      <p class="floors-header-label">Our Building</p>
+      <h2 class="floors-header-title">一棟建築<br>五層服務</h2>
+    </div>
+    <p class="floors-header-desc reveal-ed rd1">從一樓到五樓，每一層都是窩的家服務版圖的一塊拼圖。四間公司進駐，提供從買賣到社宅的完整生態。</p>
+  </div>
+
+  <div class="floors-grid">
+    <!-- 1F -->
+    <div class="floor-card-ed reveal-ed">
+      <div class="floor-num-col"><span class="floor-num-ed">1F</span></div>
+      <div class="floor-content">
+        <p class="floor-tag">Real Estate</p>
+        <h3 class="floor-name">住商不動產 正義國小店</h3>
+        <p class="floor-desc">全國知名加盟品牌，提供買屋賣屋的專業服務，是客戶踏進這棟樓的第一站。</p>
+        <div class="floor-tags">
+          <span>房屋買賣</span><span>土地仲介</span><span>成交行情</span><span>貸款諮詢</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2F -->
+    <div class="floor-card-ed reveal-ed rd1">
+      <div class="floor-num-col"><span class="floor-num-ed">2F</span></div>
+      <div class="floor-content">
+        <p class="floor-tag">Design</p>
+        <h3 class="floor-name">窩的家室內裝修</h3>
+        <p class="floor-desc">從空間規劃到裝修工程一手包辦，用設計讓每個空間都成為理想的家。</p>
+        <div class="floor-tags">
+          <span>室內設計</span><span>裝修工程</span><span>空間規劃</span><span>3D 模擬</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3F -->
+    <div class="floor-card-ed reveal-ed rd2">
+      <div class="floor-num-col"><span class="floor-num-ed">3F</span></div>
+      <div class="floor-content">
+        <p class="floor-tag">Leasing</p>
+        <h3 class="floor-name">優式租售 三重窩的家加盟店</h3>
+        <p class="floor-desc">專注於租賃市場的全方位服務，從招租、帶看到簽約，協助屋主與房客找到最適配對。</p>
+        <div class="floor-tags">
+          <span>租賃仲介</span><span>包租代管</span><span>租金評估</span><span>租屋管理</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4F -->
+    <div class="floor-card-ed reveal-ed rd3">
+      <div class="floor-num-col"><span class="floor-num-ed">4F</span></div>
+      <div class="floor-content">
+        <p class="floor-tag">Social Housing</p>
+        <h3 class="floor-name">凌群不動產</h3>
+        <p class="floor-desc">以居住正義為核心，專責社會住宅包租代管業務，讓每個人都住得起、住得好。</p>
+        <div class="floor-tags">
+          <span>社會住宅</span><span>包租代管</span><span>居住正義</span><span>政策配合</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5F -->
+    <div class="floor-card-ed reveal-ed rd4">
+      <div class="floor-num-col"><span class="floor-num-ed">5F</span></div>
+      <div class="floor-content">
+        <p class="floor-tag">Studio</p>
+        <h3 class="floor-name">錄播室</h3>
+        <p class="floor-desc">集團自媒體內容製作基地，用影音傳遞品牌價值，讓專業被更多人看見。</p>
+        <div class="floor-tags">
+          <span>影片錄製</span><span>直播空間</span><span>品牌內容</span><span>自媒體經營</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mid CTA -->
+  <div class="mid-cta reveal-ed">
+    <p class="mid-cta-text">想親眼看看這棟建築？選個場次來走走吧</p>
+    <a href="#register" class="btn-editorial">
+      <span>我要報名</span>
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ====== WAVE DIVIDER ====== -->
+<div class="wave-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0,40 C360,80 720,0 1080,50 C1260,65 1360,30 1440,40 L1440,80 L0,80Z" fill="var(--bg-section)" opacity="0.95"/>
+  </svg>
+</div>
+
+<!-- ====== REGISTRATION ====== -->
+<section id="register" class="register-section parallax-section">
+  <div class="register-header reveal-ed">
+    <p class="register-header-label">Registration</p>
+    <h2 class="register-header-title">立即報名參觀</h2>
+    <p class="register-header-desc">選擇場次並填寫資料，我們將為您保留席位。</p>
+  </div>
+
+  <div class="register-grid">
+    <!-- Left: Sessions -->
+    <div class="reveal-ed vis-left">
+      <p class="sessions-label">Select Session</p>
+
+      <!-- Morning -->
+      <div class="session-card-ed" onclick="selectSession(this, 'morning')" id="card-morning">
+        <input type="radio" name="session" value="morning" hidden>
+        <div class="session-top">
+          <div>
+            <p class="session-time">上午場 10:00 - 11:30</p>
+            <p class="session-target">對象：同業夥伴、屋主</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="session-badge-ed" id="badge-morning"></span>
+            <div class="session-check-ed">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="capacity-bar"><div class="capacity-bar-fill" id="fill-morning" style="width:0%"></div></div>
+        <p class="capacity-info" id="cap-morning"><span class="skeleton-ed"></span></p>
+      </div>
+
+      <!-- Afternoon 1 -->
+      <div class="session-card-ed" onclick="selectSession(this, 'afternoon1')" id="card-afternoon1">
+        <input type="radio" name="session" value="afternoon1" hidden>
+        <div class="session-top">
+          <div>
+            <p class="session-time">下午場一 13:00 - 14:30</p>
+            <p class="session-target">對象：同業夥伴、屋主</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="session-badge-ed" id="badge-afternoon1"></span>
+            <div class="session-check-ed">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="capacity-bar"><div class="capacity-bar-fill" id="fill-afternoon1" style="width:0%"></div></div>
+        <p class="capacity-info" id="cap-afternoon1"><span class="skeleton-ed"></span></p>
+      </div>
+
+      <!-- Afternoon 2 -->
+      <div class="session-card-ed" onclick="selectSession(this, 'afternoon2')" id="card-afternoon2">
+        <input type="radio" name="session" value="afternoon2" hidden>
+        <div class="session-top">
+          <div>
+            <p class="session-time">下午場二 15:00 - 16:30</p>
+            <p class="session-target">對象：BNI 夥伴</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <span class="session-badge-ed" id="badge-afternoon2"></span>
+            <div class="session-check-ed">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="capacity-bar"><div class="capacity-bar-fill" id="fill-afternoon2" style="width:0%"></div></div>
+        <p class="capacity-info" id="cap-afternoon2"><span class="skeleton-ed"></span></p>
+      </div>
+    </div>
+
+    <!-- Right: Form -->
+    <div class="reveal-ed vis-right rd2">
+      <div class="form-panel">
+        <form id="registerForm" novalidate>
+          <div class="form-group">
+            <label for="field-name" class="form-label">姓名 <span class="req">*</span></label>
+            <input type="text" id="field-name" name="name" required autocomplete="name" placeholder="您的姓名" class="form-input-ed">
+          </div>
+          <div class="form-group">
+            <label for="field-phone" class="form-label">電話 <span class="req">*</span></label>
+            <input type="tel" id="field-phone" name="phone" required autocomplete="tel" placeholder="0912-345-678" class="form-input-ed">
+          </div>
+          <div class="form-group">
+            <label for="field-unit" class="form-label">單位 / 公司名稱 <span class="req">*</span></label>
+            <input type="text" id="field-unit" name="unit" required placeholder="例：XX不動產、自有屋主、BNI XX分會" class="form-input-ed">
+          </div>
+          <div class="form-group">
+            <label for="field-identity" class="form-label">身份分類 <span class="req">*</span></label>
+            <select id="field-identity" name="identity" required class="form-input-ed">
+              <option value="" disabled selected>請選擇</option>
+              <option value="同業">同業</option>
+              <option value="屋主">屋主</option>
+              <option value="BNI夥伴">BNI 夥伴</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
+          <button type="submit" id="submitBtn" class="btn-editorial" style="width:100%;justify-content:center;margin-top:8px;">
+            <span>確認報名</span>
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          </button>
+          <p class="form-note">報名資訊僅用於活動通知，不會用於其他用途</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== NOTICE ====== -->
+<section class="notice-section parallax-section">
+  <div class="notice-card reveal-ed">
+    <h2 class="notice-title">溫馨提醒</h2>
+    <p class="notice-subtitle">因場地較小，本次開幕不收花籃。想表達心意的話，歡迎贊助當天的餐點與佈置 :)</p>
+    <div class="sponsor-grid">
+      <div class="sponsor-card-ed">
+        <p class="sponsor-amount">$2,000</p>
+        <p class="sponsor-label">餐點贊助</p>
+      </div>
+      <div class="sponsor-card-ed">
+        <p class="sponsor-amount">$3,000</p>
+        <p class="sponsor-label">佈置贊助</p>
+      </div>
+    </div>
+    <div class="bank-info">
+      <table>
+        <tr><th>銀行</th><td id="bankName">待填寫</td></tr>
+        <tr><th>分行</th><td id="bankBranch">待填寫</td></tr>
+        <tr><th>帳號</th><td id="bankAccount">待填寫</td></tr>
+        <tr><th>戶名</th><td id="bankHolder">待填寫</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer-editorial">
+  <div class="footer-inner">
+    <div>
+      <p class="footer-logo">WUOHOME</p>
+      <p class="footer-tagline">您專注事業，我們專注您的家。</p>
+    </div>
+    <p class="footer-copy">&copy; 2026 窩的家集團</p>
+  </div>
+</footer>
+
+<!-- ====== MODAL ====== -->
+<div id="successModal" class="modal-backdrop-ed">
+  <div class="modal-content-ed">
+    <div class="modal-icon">
+      <svg width="24" height="24" fill="none" stroke="var(--gold)" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+    </div>
+    <h3 class="modal-title-ed">報名成功</h3>
+    <p class="modal-msg" id="successMsg">已收到您的報名，我們當天見！</p>
+    <div class="modal-details">
+      <div class="modal-detail-row">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+        <span>4 月 26 日（日）</span>
+      </div>
+      <div class="modal-detail-row">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+        <span>三重區平安街 59 號</span>
+      </div>
+    </div>
+    <button onclick="closeModal()" class="btn-editorial" style="padding:14px 32px;">收到，活動見</button>
+  </div>
+</div>
+
+<!-- ====== TOAST ====== -->
+<div class="toast-ed" id="toast"></div>
+
+<script>
+  // === CONFIG ===
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwxlgJDtjS8YpXTr9CTVBpQ4JEl2WhiAxl8t6bt8Q_OuZ3EBf312JBTCD6AdF2QeQ6s7A/exec';
+  const MAX_PER_SESSION = 30;
+  const SESSION_LABELS = { morning: '上午場 10:00', afternoon1: '下午場一 13:00', afternoon2: '下午場二 15:00' };
+
+  let selectedSession = null;
+  let sessionCounts = { morning: 0, afternoon1: 0, afternoon2: 0 };
+
+  // === FLOATING GEOMETRIES ===
+  (function createGeos() {
+    const canvas = document.getElementById('geoCanvas');
+    const shapes = [
+      { type: 'circle', size: 120, color: 'rgba(106,144,168,0.07)', left: '8%', top: '15%', delay: 0, dur: 22 },
+      { type: 'ring', size: 200, color: 'rgba(106,144,168,0.06)', left: '80%', top: '10%', delay: 3, dur: 28 },
+      { type: 'tri', size: 80, color: 'rgba(242,207,0,0.04)', left: '60%', top: '60%', delay: 5, dur: 25 },
+      { type: 'circle', size: 60, color: 'rgba(226,115,95,0.05)', left: '25%', top: '70%', delay: 8, dur: 20 },
+      { type: 'ring', size: 140, color: 'rgba(226,115,95,0.04)', left: '45%', top: '30%', delay: 2, dur: 30 },
+      { type: 'tri', size: 100, color: 'rgba(106,144,168,0.05)', left: '90%', top: '50%', delay: 7, dur: 24 },
+      { type: 'circle', size: 180, color: 'rgba(106,144,168,0.04)', left: '5%', top: '85%', delay: 4, dur: 26 },
+      { type: 'ring', size: 90, color: 'rgba(242,207,0,0.04)', left: '70%', top: '80%', delay: 10, dur: 22 },
+    ];
+    shapes.forEach(s => {
+      const el = document.createElement('div');
+      el.className = 'geo' + (s.type === 'tri' ? ' geo--tri' : s.type === 'ring' ? ' geo--ring' : '');
+      el.style.cssText = `
+        width: ${s.size}px; height: ${s.size}px;
+        left: ${s.left}; top: ${s.top};
+        ${s.type === 'ring' ? 'border-color:' + s.color : 'background:' + s.color};
+        animation-duration: ${s.dur}s;
+        animation-delay: ${s.delay}s;
+      `;
+      canvas.appendChild(el);
+    });
+  })();
+
+  // === NAV SCROLL ===
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // === SCROLL REVEAL ===
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal-ed').forEach(el => revealObs.observe(el));
+
+  // === PARALLAX (subtle) ===
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const geoCanvas = document.getElementById('geoCanvas');
+    if (geoCanvas) geoCanvas.style.transform = `translateY(${scrollY * 0.15}px)`;
+  });
+
+  // === COUNTDOWN ===
+  const eventDate = new Date('2026-04-26T10:00:00+08:00').getTime();
+  function updateCountdown() {
+    const diff = eventDate - Date.now();
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '0');
+      return;
+    }
+    document.getElementById('cd-days').textContent = Math.floor(diff / 86400000);
+    document.getElementById('cd-hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+    document.getElementById('cd-mins').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+    document.getElementById('cd-secs').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // === REGISTRATION ===
+  function fetchCounts() {
+    if (!GAS_URL) return;
+    fetch(GAS_URL + '?action=counts')
+      .then(r => r.json())
+      .then(data => {
+        sessionCounts = { morning: data.morning || 0, afternoon1: data.afternoon1 || 0, afternoon2: data.afternoon2 || 0 };
+        updateCapacityUI();
+      })
+      .catch(() => {
+        ['morning', 'afternoon1', 'afternoon2'].forEach(s => {
+          document.getElementById('cap-' + s).textContent = '剩餘 ' + MAX_PER_SESSION + ' 位';
+          const badge = document.getElementById('badge-' + s);
+          badge.className = 'session-badge-ed open';
+          badge.textContent = '開放報名';
+        });
+      });
+  }
+
+  function updateCapacityUI() {
+    ['morning', 'afternoon1', 'afternoon2'].forEach(s => {
+      const count = sessionCounts[s];
+      const remaining = MAX_PER_SESSION - count;
+      const pct = (count / MAX_PER_SESSION) * 100;
+      const fill = document.getElementById('fill-' + s);
+      const cap = document.getElementById('cap-' + s);
+      const card = document.getElementById('card-' + s);
+      const badge = document.getElementById('badge-' + s);
+
+      fill.style.width = pct + '%';
+      fill.className = 'capacity-bar-fill' + (pct >= 100 ? ' full-bar' : pct >= 80 ? ' warn' : '');
+      cap.textContent = remaining > 0 ? '剩餘 ' + remaining + ' 位' : '已額滿';
+
+      if (remaining <= 0) {
+        badge.className = 'session-badge-ed closed';
+        badge.textContent = '已額滿';
+        card.classList.add('full');
+        if (selectedSession === s) { card.classList.remove('selected'); selectedSession = null; }
+      } else if (remaining <= 5) {
+        badge.className = 'session-badge-ed closing';
+        badge.textContent = '即將額滿';
+      } else {
+        badge.className = 'session-badge-ed open';
+        badge.textContent = '開放報名';
+      }
+    });
+  }
+
+  function selectSession(card, session) {
+    if (card.classList.contains('full')) return;
+    document.querySelectorAll('.session-card-ed').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    card.querySelector('input[type="radio"]').checked = true;
+    selectedSession = session;
+  }
+
+  function showToast(msg, type) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = 'toast-ed show' + (type ? ' ' + type : '');
+    setTimeout(() => toast.className = 'toast-ed', 3000);
+  }
+
+  // === FORM ===
+  const form = document.getElementById('registerForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const phone = form.phone.value.trim();
+    const unit = form.unit.value.trim();
+    const identity = form.identity.value;
+
+    if (!selectedSession) { showToast('請選擇參觀場次', 'error'); return; }
+    if (!name) { showToast('請填寫姓名', 'error'); return; }
+    if (!phone) { showToast('請填寫電話', 'error'); return; }
+    if (!unit) { showToast('請填寫單位', 'error'); return; }
+    if (!identity) { showToast('請選擇身份分類', 'error'); return; }
+    if (sessionCounts[selectedSession] >= MAX_PER_SESSION) { showToast('此場次已額滿', 'error'); return; }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<svg width="20" height="20" fill="none" viewBox="0 0 24 24" style="animation:spin 1s linear infinite"><circle opacity=".25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path opacity=".75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg><span>報名中...</span>';
+
+    try {
+      await fetch(GAS_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'register', name, phone, unit, identity,
+          session: selectedSession,
+          sessionLabel: SESSION_LABELS[selectedSession],
+          timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' })
+        })
+      });
+      sessionCounts[selectedSession]++;
+      updateCapacityUI();
+      document.getElementById('successMsg').textContent = name + ' 您好，已為您報名「' + SESSION_LABELS[selectedSession] + '」場次，當天見！';
+      showModal();
+      createConfetti(4000);
+      form.reset();
+      document.querySelectorAll('.session-card-ed').forEach(c => c.classList.remove('selected'));
+      selectedSession = null;
+    } catch { showToast('報名失敗，請稍後再試', 'error'); }
+    finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<span>確認報名</span><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>';
+    }
+  });
+
+  function showModal() {
+    document.getElementById('successModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('successModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('successModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // === CONFETTI ===
+  function createConfetti(duration) {
+    const canvas = document.createElement('canvas');
+    canvas.className = 'confetti-canvas';
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    const colors = ['#6a90a8', '#85adc5', '#e2735f', '#ee8a78', '#f2cf00', '#f7dc3e', '#c4a800'];
+    const ribbons = [];
+    const total = Math.min(Math.floor(canvas.width / 4), 180);
+    for (let i = 0; i < total; i++) {
+      ribbons.push({
+        x: Math.random() * canvas.width, y: Math.random() * -canvas.height,
+        w: 4 + Math.random() * 6, h: 10 + Math.random() * 16,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vy: 2 + Math.random() * 4, vx: (Math.random() - 0.5) * 3,
+        angle: Math.random() * Math.PI * 2, va: (Math.random() - 0.5) * 0.15,
+        wobble: Math.random() * Math.PI * 2, wobbleSpeed: 0.03 + Math.random() * 0.05, opacity: 1
+      });
+    }
+    const start = performance.now(), fadeStart = duration - 800;
+    function draw(now) {
+      const elapsed = now - start;
+      if (elapsed > duration) { canvas.remove(); return; }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const fadeFactor = elapsed > fadeStart ? 1 - (elapsed - fadeStart) / 800 : 1;
+      ribbons.forEach(r => {
+        r.y += r.vy; r.x += r.vx + Math.sin(r.wobble) * 0.8;
+        r.angle += r.va; r.wobble += r.wobbleSpeed;
+        if (r.y > canvas.height + 20) { r.y = -20; r.x = Math.random() * canvas.width; }
+        ctx.save(); ctx.translate(r.x, r.y); ctx.rotate(r.angle);
+        ctx.globalAlpha = r.opacity * fadeFactor; ctx.fillStyle = r.color;
+        ctx.fillRect(-r.w / 2, -r.h / 2, r.w, r.h); ctx.restore();
+      });
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+  }
+
+  // Add spin keyframe for loading button
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
+  document.head.appendChild(styleSheet);
+
+  // === INIT ===
+  fetchCounts();
+  setInterval(fetchCounts, 30000);
+</script>
+
+</body>
+</html>

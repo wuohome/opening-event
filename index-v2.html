@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>窩的家集團 — 新總部開幕參觀</title>
+<meta name="description" content="2026/4/26（日）三重區平安街59號，窩的家集團新總部盛大開幕，誠摯邀請您蒞臨參觀。">
+<meta property="og:title" content="窩的家集團 — 新總部開幕參觀">
+<meta property="og:description" content="四間公司、一棟建築、一條龍服務。4/26 三重，歡迎蒞臨參觀。">
+<meta property="og:type" content="website">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        coral: '#dd6650',
+        'coral-dark': '#c4553f',
+        gold: '#f2cf00',
+        navy: '#3f5262',
+        'navy-dark': '#2d3d4a',
+        'navy-light': '#5a7080',
+        cream: '#FDFBF7',
+        'cream-dark': '#F5F0EA',
+        txt: '#1a2a3a',
+        'txt-secondary': '#4a5568',
+        'txt-tertiary': '#8a94a6',
+      },
+      fontFamily: {
+        serif: ['"Noto Serif TC"', 'Georgia', 'serif'],
+        sans: ['"Noto Sans TC"', '-apple-system', 'system-ui', 'sans-serif'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ====== FIXED BACKGROUND ====== */
+  .fixed-bg {
+    position: fixed; inset: 0;
+    background: #FDFBF7;
+    z-index: -1;
+  }
+
+  /* ====== PARTICLE CANVAS (single layer for balloons + confetti) ====== */
+  #particleCanvas {
+    position: fixed; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ====== BURST CANVAS ====== */
+  .burst-canvas {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 10;
+  }
+
+  /* ====== DARK HERO ====== */
+  .hero-dark {
+    background: linear-gradient(175deg, #2d3d4a 0%, #3f5262 60%, #4a6070 100%);
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+  }
+  .hero-dark::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 140px;
+    background: linear-gradient(to bottom, transparent, #FDFBF7);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ====== CONTENT WRAPPER ====== */
+  .content-layer { position: relative; z-index: 2; }
+
+  /* ====== BUTTONS ====== */
+  .btn-coral {
+    background: #dd6650;
+    color: #fff;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(221, 102, 80, 0.35);
+  }
+  .btn-coral:hover {
+    background: #c4553f;
+    box-shadow: 0 6px 24px rgba(221, 102, 80, 0.45);
+    transform: translateY(-1px);
+  }
+  .btn-coral:active {
+    background: #b04a38;
+    transform: translateY(0);
+  }
+  .btn-coral:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: #fff;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  .btn-outline:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.6);
+  }
+
+  /* ====== SESSION CARD ====== */
+  .session-card {
+    background: #fff;
+    border: 1.5px solid rgba(63, 82, 98, 0.08);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  .session-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    border-color: rgba(63, 82, 98, 0.15);
+  }
+  .session-card.selected {
+    border-color: #dd6650 !important;
+    box-shadow: 0 0 0 3px rgba(221, 102, 80, 0.1);
+  }
+  .session-card.full {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .session-card.full:hover { transform: none; box-shadow: none; }
+  .session-check {
+    width: 22px; height: 22px;
+    border: 1.5px solid rgba(63, 82, 98, 0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .session-card.selected .session-check {
+    background: #dd6650;
+    border-color: #dd6650;
+  }
+  .session-check svg { opacity: 0; transition: opacity 0.2s; }
+  .session-card.selected .session-check svg { opacity: 1; }
+
+  .capacity-fill {
+    height: 100%;
+    background: #3f5262;
+    transition: width 0.5s ease;
+    border-radius: 2px;
+  }
+  .capacity-fill.warn { background: #f2cf00; }
+  .capacity-fill.full-bar { background: #dd6650; }
+
+  /* ====== FORM ====== */
+  .form-input { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+  .form-input:focus {
+    outline: none;
+    border-color: #dd6650;
+    box-shadow: 0 0 0 3px rgba(221, 102, 80, 0.08);
+  }
+
+  /* ====== SCROLL REVEAL ====== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.2s; }
+  .reveal-d3 { transition-delay: 0.3s; }
+  .reveal-d4 { transition-delay: 0.4s; }
+
+  /* ====== MARQUEE ====== */
+  .marquee {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-block;
+    animation: marqueeScroll 22s linear infinite;
+  }
+  .marquee-inner span {
+    display: inline-block;
+    padding: 0 16px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+  }
+  .marquee-inner .dot {
+    padding: 0 8px;
+    font-size: 13px;
+    color: #dd6650;
+    opacity: 0.4;
+  }
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ====== FLOOR CARD ====== */
+  .floor-card {
+    background: #fff;
+    border: 1px solid rgba(63, 82, 98, 0.06);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .floor-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.07);
+  }
+
+  /* ====== MODAL ====== */
+  .modal-backdrop {
+    background: rgba(45, 61, 74, 0.5);
+  }
+
+  /* ====== SELECT ====== */
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238a94a6' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+  }
+
+  /* ====== TOAST ====== */
+  .toast {
+    position: fixed;
+    bottom: 40px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #2d3d4a;
+    color: #fff;
+    padding: 14px 32px;
+    font-size: 14px;
+    border-radius: 12px;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 200;
+    max-width: 90vw;
+    text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.error { background: #c4553f; }
+  .toast.success { background: #2e7d32; }
+
+  /* ====== CONFETTI (on success) ====== */
+  .confetti-canvas {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 100;
+  }
+
+  /* ====== SKELETON ====== */
+  .skeleton {
+    background: linear-gradient(90deg, rgba(63,82,98,0.08) 25%, rgba(63,82,98,0.03) 50%, rgba(63,82,98,0.08) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    height: 14px; width: 80px;
+    display: inline-block;
+    border-radius: 4px;
+  }
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* ====== SCROLLBAR ====== */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 3px; }
+</style>
+</head>
+<body class="text-txt font-sans">
+
+<!-- Fixed cream background -->
+<div class="fixed-bg" aria-hidden="true"></div>
+
+<!-- Single particle canvas (balloons + gold confetti) -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- ========== NAV ========== -->
+<nav class="content-layer fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="nav">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 py-5 flex justify-between items-center">
+    <span class="text-sm font-bold tracking-[4px] transition-colors duration-300" id="navBrand">WUOHOME</span>
+    <a href="#register" class="btn-coral px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider">立即報名</a>
+  </div>
+</nav>
+
+<!-- ========== HERO (DARK) ========== -->
+<section class="content-layer hero-dark min-h-screen flex items-center px-6 md:px-10 lg:px-16 pt-24 pb-32">
+  <div class="max-w-6xl mx-auto w-full">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+
+      <!-- Left: Big headline (8 cols) -->
+      <div class="lg:col-span-7 reveal">
+        <p class="text-gold/80 text-xs font-semibold tracking-[6px] uppercase mb-8">2026.04.26 — Grand Opening</p>
+
+        <h1 class="font-serif text-5xl md:text-6xl lg:text-[4.5rem] font-black text-white leading-[1.1] mb-6">
+          窩的家集團<br>新總部開幕
+        </h1>
+
+        <p class="text-xl md:text-2xl text-white/70 font-serif mb-10 max-w-lg">
+          四間公司、一棟建築、一條龍服務<br class="hidden md:inline">
+          誠摯邀請您蒞臨參觀
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4 mb-12">
+          <a href="#register" class="btn-coral inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base">
+            <span>立即報名</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          </a>
+          <span class="text-white/40 text-sm">每場限 30 人 · 免費參加</span>
+        </div>
+
+        <!-- Countdown -->
+        <div>
+          <p class="text-white/30 text-[11px] tracking-[4px] uppercase mb-3">距離活動</p>
+          <div class="flex gap-3" id="countdown">
+            <div class="bg-white/8 rounded-xl px-4 py-3 text-center min-w-[60px]">
+              <span class="text-xl font-serif font-black text-white" id="cd-days">--</span>
+              <p class="text-[10px] text-white/40 mt-0.5">天</p>
+            </div>
+            <div class="bg-white/8 rounded-xl px-4 py-3 text-center min-w-[60px]">
+              <span class="text-xl font-serif font-black text-white" id="cd-hours">--</span>
+              <p class="text-[10px] text-white/40 mt-0.5">時</p>
+            </div>
+            <div class="bg-white/8 rounded-xl px-4 py-3 text-center min-w-[60px]">
+              <span class="text-xl font-serif font-black text-white" id="cd-mins">--</span>
+              <p class="text-[10px] text-white/40 mt-0.5">分</p>
+            </div>
+            <div class="bg-white/8 rounded-xl px-4 py-3 text-center min-w-[60px]">
+              <span class="text-xl font-serif font-black text-white" id="cd-secs">--</span>
+              <p class="text-[10px] text-white/40 mt-0.5">秒</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Info (5 cols) -->
+      <div class="lg:col-span-5 reveal reveal-d2">
+        <div class="bg-white/6 border border-white/10 rounded-2xl p-8 space-y-6">
+          <p class="text-white/40 text-[11px] tracking-[4px] uppercase font-medium">活動資訊</p>
+
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-coral/15 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-coral" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+            </div>
+            <div>
+              <p class="font-serif font-bold text-white text-lg">2026 年 4 月 26 日（日）</p>
+              <p class="text-white/50 text-sm mt-1">上午 10:00 / 下午 13:00 / 下午 15:00</p>
+            </div>
+          </div>
+
+          <div class="h-px bg-white/8"></div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-coral/15 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-coral" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+            </div>
+            <div>
+              <p class="font-serif font-bold text-white text-lg">窩的家集團新總部</p>
+              <p class="text-white/50 text-sm mt-1">新北市三重區平安街 59 號</p>
+              <a href="https://maps.app.goo.gl/placeholder" target="_blank" rel="noopener" class="text-coral text-sm font-medium hover:text-coral-dark inline-flex items-center gap-1 mt-2 cursor-pointer">
+                查看地圖
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="h-px bg-white/8"></div>
+
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-xl bg-gold/15 flex items-center justify-center flex-shrink-0">
+              <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div>
+              <p class="font-serif font-bold text-white">免費參加</p>
+              <p class="text-white/50 text-sm">線上報名即可，每場限 30 人</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MARQUEE ========== -->
+<div class="content-layer marquee py-4 border-b border-navy/5">
+  <div class="marquee-inner"><span class="text-coral">優式租售 三重窩的家</span><span class="dot">·</span><span class="text-navy">窩的家室內裝修</span><span class="dot">·</span><span style="color:#2e8b57">住商不動產 正義國小店</span><span class="dot">·</span><span style="color:#e67e22">中信房屋 蘆洲捷運三民店</span><span class="dot">·</span><span style="color:#e67e22">凌群不動產</span><span class="dot">·</span><span class="text-coral">優式租售 三重窩的家</span><span class="dot">·</span><span class="text-navy">窩的家室內裝修</span><span class="dot">·</span><span style="color:#2e8b57">住商不動產 正義國小店</span><span class="dot">·</span><span style="color:#e67e22">中信房屋 蘆洲捷運三民店</span><span class="dot">·</span><span style="color:#e67e22">凌群不動產</span><span class="dot">·</span></div>
+</div>
+
+<!-- ========== BUILDING / FLOORS ========== -->
+<section class="content-layer py-24 px-6 md:px-10">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-16 reveal">
+      <p class="text-coral text-xs font-semibold tracking-[5px] uppercase mb-4">Our Building</p>
+      <h2 class="font-serif text-3xl md:text-4xl font-black tracking-tight">一棟建築，五層服務</h2>
+      <p class="text-txt-secondary mt-3 max-w-md">從一樓到五樓，每一層都是窩的家服務版圖的一塊拼圖。</p>
+    </div>
+
+    <!-- Floor grid: 2-col staggered on desktop -->
+    <div class="grid md:grid-cols-2 gap-5">
+
+      <!-- 1F (full width) -->
+      <div class="md:col-span-2 floor-card rounded-2xl p-8 reveal">
+        <div class="flex items-start gap-5">
+          <span class="text-6xl font-serif font-black text-navy/8 leading-none hidden sm:block">1F</span>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+              <span class="sm:hidden text-sm font-bold text-navy/40">1F</span>
+              <h3 class="font-serif text-lg font-bold">住商不動產 正義國小店</h3>
+              <span class="text-[10px] font-semibold tracking-wider bg-navy/5 text-navy px-2.5 py-1 rounded-full">REAL ESTATE</span>
+            </div>
+            <p class="text-txt-secondary text-sm leading-relaxed mb-3">全國知名加盟品牌，提供買屋賣屋的專業服務，是客戶踏進這棟樓的第一站。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">房屋買賣</span>
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">土地仲介</span>
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">成交行情</span>
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">貸款諮詢</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2F -->
+      <div class="floor-card rounded-2xl p-8 reveal reveal-d1">
+        <div class="flex items-start gap-4">
+          <span class="text-5xl font-serif font-black text-coral/10 leading-none hidden sm:block">2F</span>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+              <span class="sm:hidden text-sm font-bold text-coral/40">2F</span>
+              <h3 class="font-serif text-lg font-bold">窩的家室內裝修</h3>
+              <span class="text-[10px] font-semibold tracking-wider bg-coral/8 text-coral px-2.5 py-1 rounded-full">DESIGN</span>
+            </div>
+            <p class="text-txt-secondary text-sm leading-relaxed mb-3">從空間規劃到裝修工程一手包辦，用設計讓每個空間都成為理想的家。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">室內設計</span>
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">裝修工程</span>
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">空間規劃</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3F -->
+      <div class="floor-card rounded-2xl p-8 reveal reveal-d2">
+        <div class="flex items-start gap-4">
+          <span class="text-5xl font-serif font-black text-gold/15 leading-none hidden sm:block">3F</span>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+              <span class="sm:hidden text-sm font-bold text-gold/60">3F</span>
+              <h3 class="font-serif text-lg font-bold">優式租售 三重窩的家</h3>
+              <span class="text-[10px] font-semibold tracking-wider bg-gold/10 text-yellow-700 px-2.5 py-1 rounded-full">LEASING</span>
+            </div>
+            <p class="text-txt-secondary text-sm leading-relaxed mb-3">專注於租賃市場的全方位服務，從招租、帶看到簽約，協助屋主與房客找到最適配對。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">租賃仲介</span>
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">包租代管</span>
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">租金評估</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4F -->
+      <div class="floor-card rounded-2xl p-8 reveal reveal-d3">
+        <div class="flex items-start gap-4">
+          <span class="text-5xl font-serif font-black text-navy/8 leading-none hidden sm:block">4F</span>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+              <span class="sm:hidden text-sm font-bold text-navy/40">4F</span>
+              <h3 class="font-serif text-lg font-bold">凌群不動產</h3>
+              <span class="text-[10px] font-semibold tracking-wider bg-navy/5 text-navy px-2.5 py-1 rounded-full">SOCIAL HOUSING</span>
+            </div>
+            <p class="text-txt-secondary text-sm leading-relaxed mb-3">以居住正義為核心，專責社會住宅包租代管業務，讓每個人都住得起、住得好。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">社會住宅</span>
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">包租代管</span>
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">居住正義</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5F -->
+      <div class="floor-card rounded-2xl p-8 reveal reveal-d4">
+        <div class="flex items-start gap-4">
+          <span class="text-5xl font-serif font-black text-coral/10 leading-none hidden sm:block">5F</span>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+              <span class="sm:hidden text-sm font-bold text-coral/40">5F</span>
+              <h3 class="font-serif text-lg font-bold">錄播室</h3>
+              <span class="text-[10px] font-semibold tracking-wider bg-coral/8 text-coral px-2.5 py-1 rounded-full">STUDIO</span>
+            </div>
+            <p class="text-txt-secondary text-sm leading-relaxed mb-3">集團自媒體內容製作基地，用影音傳遞品牌價值，讓專業被更多人看見。</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">影片錄製</span>
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">直播空間</span>
+              <span class="text-xs px-3 py-1 rounded-full border border-navy/8 text-txt-tertiary">品牌內容</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-16 reveal">
+      <a href="#register" class="btn-coral inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base cursor-pointer">
+        <span>選個場次來走走</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== REGISTRATION ========== -->
+<section id="register" class="content-layer py-24 px-6 md:px-10">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-14 reveal">
+      <p class="text-coral text-xs font-semibold tracking-[5px] uppercase mb-4">Registration</p>
+      <h2 class="font-serif text-3xl md:text-4xl font-black tracking-tight">立即報名參觀</h2>
+      <p class="text-txt-secondary mt-3 max-w-md">選擇場次並填寫資料，我們將為您保留席位。</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-10 items-start">
+      <!-- Left: Sessions -->
+      <div class="reveal">
+        <p class="text-[11px] font-medium text-txt-tertiary tracking-[3px] uppercase mb-5">選擇場次</p>
+        <div class="space-y-4" id="sessions">
+          <div class="session-card rounded-2xl p-6" onclick="selectSession(this, 'morning')" id="card-morning">
+            <input type="radio" name="session" value="morning" class="hidden">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-serif font-bold text-txt text-base mb-1">上午場 10:00 - 11:30</p>
+                <p class="text-txt-tertiary text-xs">對象：同業夥伴、屋主</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="session-badge text-[10px] font-semibold tracking-wider px-3 py-1 rounded-full" id="badge-morning"></span>
+                <div class="session-check">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="h-0.5 bg-navy/5 rounded-full overflow-hidden"><div class="capacity-fill" id="fill-morning" style="width:0%"></div></div>
+              <p class="text-[11px] text-txt-tertiary mt-1.5 text-right" id="cap-morning"><span class="skeleton"></span></p>
+            </div>
+          </div>
+
+          <div class="session-card rounded-2xl p-6" onclick="selectSession(this, 'afternoon1')" id="card-afternoon1">
+            <input type="radio" name="session" value="afternoon1" class="hidden">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-serif font-bold text-txt text-base mb-1">下午場一 13:00 - 14:30</p>
+                <p class="text-txt-tertiary text-xs">對象：同業夥伴、屋主</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="session-badge text-[10px] font-semibold tracking-wider px-3 py-1 rounded-full" id="badge-afternoon1"></span>
+                <div class="session-check">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="h-0.5 bg-navy/5 rounded-full overflow-hidden"><div class="capacity-fill" id="fill-afternoon1" style="width:0%"></div></div>
+              <p class="text-[11px] text-txt-tertiary mt-1.5 text-right" id="cap-afternoon1"><span class="skeleton"></span></p>
+            </div>
+          </div>
+
+          <div class="session-card rounded-2xl p-6" onclick="selectSession(this, 'afternoon2')" id="card-afternoon2">
+            <input type="radio" name="session" value="afternoon2" class="hidden">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="font-serif font-bold text-txt text-base mb-1">下午場二 15:00 - 16:30</p>
+                <p class="text-txt-tertiary text-xs">對象：BNI 夥伴</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="session-badge text-[10px] font-semibold tracking-wider px-3 py-1 rounded-full" id="badge-afternoon2"></span>
+                <div class="session-check">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <div class="h-0.5 bg-navy/5 rounded-full overflow-hidden"><div class="capacity-fill" id="fill-afternoon2" style="width:0%"></div></div>
+              <p class="text-[11px] text-txt-tertiary mt-1.5 text-right" id="cap-afternoon2"><span class="skeleton"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="reveal reveal-d2">
+        <div class="bg-white rounded-2xl p-8 md:p-10 border border-navy/5 shadow-sm">
+          <p class="text-[11px] font-medium text-txt-tertiary tracking-[3px] uppercase mb-6">填寫資料</p>
+
+          <form id="registerForm" class="space-y-5" novalidate>
+            <div>
+              <label for="field-name" class="block text-sm font-medium text-txt-secondary mb-2">姓名 <span class="text-coral">*</span></label>
+              <input type="text" id="field-name" name="name" required autocomplete="name" placeholder="您的姓名"
+                class="form-input w-full px-4 py-3.5 bg-cream/50 border border-navy/8 rounded-xl text-txt placeholder-txt-tertiary text-sm">
+            </div>
+            <div>
+              <label for="field-phone" class="block text-sm font-medium text-txt-secondary mb-2">電話 <span class="text-coral">*</span></label>
+              <input type="tel" id="field-phone" name="phone" required autocomplete="tel" placeholder="0912-345-678"
+                class="form-input w-full px-4 py-3.5 bg-cream/50 border border-navy/8 rounded-xl text-txt placeholder-txt-tertiary text-sm">
+            </div>
+            <div>
+              <label for="field-unit" class="block text-sm font-medium text-txt-secondary mb-2">單位 / 公司名稱 <span class="text-coral">*</span></label>
+              <input type="text" id="field-unit" name="unit" required placeholder="例：XX不動產、自有屋主、BNI XX分會"
+                class="form-input w-full px-4 py-3.5 bg-cream/50 border border-navy/8 rounded-xl text-txt placeholder-txt-tertiary text-sm">
+            </div>
+            <div>
+              <label for="field-identity" class="block text-sm font-medium text-txt-secondary mb-2">身份分類 <span class="text-coral">*</span></label>
+              <select id="field-identity" name="identity" required
+                class="form-input w-full px-4 py-3.5 bg-cream/50 border border-navy/8 rounded-xl text-txt text-sm appearance-none cursor-pointer pr-10">
+                <option value="" disabled selected>請選擇</option>
+                <option value="同業">同業</option>
+                <option value="屋主">屋主</option>
+                <option value="BNI夥伴">BNI 夥伴</option>
+                <option value="其他">其他</option>
+              </select>
+            </div>
+
+            <button type="submit" id="submitBtn"
+              class="btn-coral w-full py-4 rounded-xl font-semibold text-base mt-2 flex items-center justify-center gap-2 cursor-pointer">
+              <span>確認報名</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </button>
+            <p class="text-txt-tertiary text-xs text-center">報名資訊僅用於活動通知，不會用於其他用途</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== NOTICE ========== -->
+<section class="content-layer py-24 px-6 md:px-10">
+  <div class="max-w-3xl mx-auto">
+    <div class="bg-white rounded-2xl p-8 md:p-10 border border-navy/5 shadow-sm reveal">
+      <div class="mb-8">
+        <p class="text-coral text-xs font-semibold tracking-[5px] uppercase mb-4">Notice</p>
+        <h2 class="font-serif text-2xl md:text-3xl font-black tracking-tight">溫馨提醒</h2>
+      </div>
+
+      <div class="bg-cream rounded-xl p-6 mb-6">
+        <h3 class="font-serif font-bold text-txt mb-2">因場地較小，本次開幕不收花籃</h3>
+        <p class="text-txt-secondary text-sm leading-relaxed">想表達心意的話，歡迎贊助當天的餐點與佈置 :)</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="bg-cream rounded-xl p-6 text-center">
+          <p class="text-2xl font-serif font-black text-navy mb-1">$2,000</p>
+          <p class="text-txt-tertiary text-xs tracking-wider">餐點贊助</p>
+        </div>
+        <div class="bg-cream rounded-xl p-6 text-center">
+          <p class="text-2xl font-serif font-black text-navy mb-1">$3,000</p>
+          <p class="text-txt-tertiary text-xs tracking-wider">佈置贊助</p>
+        </div>
+      </div>
+
+      <div class="bg-navy/3 rounded-xl p-5">
+        <table class="w-full text-sm">
+          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5 w-16">銀行</th><td class="py-1.5 font-semibold" id="bankName">待填寫</td></tr>
+          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">分行</th><td class="py-1.5 font-semibold" id="bankBranch">待填寫</td></tr>
+          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">帳號</th><td class="py-1.5 font-semibold" id="bankAccount">待填寫</td></tr>
+          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">戶名</th><td class="py-1.5 font-semibold" id="bankHolder">待填寫</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="content-layer py-12 px-6 bg-navy-dark text-white/60">
+  <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="text-center md:text-left">
+      <p class="text-white font-bold text-sm tracking-[4px] mb-1">WUOHOME</p>
+      <p class="text-white/40 text-xs font-serif italic">您專注事業，我們專注您的家。</p>
+    </div>
+    <p class="text-white/30 text-xs">&copy; 2026 窩的家集團</p>
+  </div>
+</footer>
+
+<!-- ========== SUCCESS MODAL ========== -->
+<div id="successModal" class="fixed inset-0 z-50 hidden items-center justify-center modal-backdrop">
+  <div class="bg-white rounded-2xl p-10 max-w-md mx-4 text-center shadow-2xl">
+    <div class="w-16 h-16 rounded-full bg-green-50 mx-auto mb-6 flex items-center justify-center">
+      <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+      </svg>
+    </div>
+    <h3 class="font-serif text-2xl font-bold text-txt mb-2">報名成功</h3>
+    <p class="text-txt-secondary mb-8" id="successMsg">已收到您的報名，我們當天見！</p>
+    <div class="bg-cream rounded-xl p-5 mb-8 text-left space-y-3">
+      <div class="flex items-center gap-3">
+        <svg class="w-4 h-4 text-coral flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+        <span class="text-sm text-txt-secondary">4 月 26 日（日）</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg class="w-4 h-4 text-coral flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+        <span class="text-sm text-txt-secondary">三重區平安街 59 號</span>
+      </div>
+    </div>
+    <button onclick="closeModal()" class="btn-coral px-8 py-3 rounded-full font-semibold text-sm cursor-pointer">收到，活動見</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // === CONFIG ===
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwxlgJDtjS8YpXTr9CTVBpQ4JEl2WhiAxl8t6bt8Q_OuZ3EBf312JBTCD6AdF2QeQ6s7A/exec';
+  const MAX_PER_SESSION = 30;
+  const SESSION_LABELS = { morning: '上午場 10:00', afternoon1: '下午場一 13:00', afternoon2: '下午場二 15:00' };
+  let selectedSession = null;
+  let sessionCounts = { morning: 0, afternoon1: 0, afternoon2: 0 };
+
+  // === NAV: dark on hero, light after scroll ===
+  const nav = document.getElementById('nav');
+  const navBrand = document.getElementById('navBrand');
+  const heroHeight = () => document.querySelector('.hero-dark').offsetHeight - 100;
+  function updateNav() {
+    if (window.scrollY > heroHeight()) {
+      nav.style.background = 'rgba(253, 251, 247, 0.95)';
+      nav.style.borderBottom = '1px solid rgba(63,82,98,0.06)';
+      navBrand.style.color = '#3f5262';
+    } else {
+      nav.style.background = 'transparent';
+      nav.style.borderBottom = 'none';
+      navBrand.style.color = '#fff';
+    }
+  }
+  window.addEventListener('scroll', updateNav);
+  updateNav();
+
+  // === SCROLL REVEAL ===
+  const ro = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // === SINGLE CANVAS: balloons + gold confetti ===
+  (function() {
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function rand(a, b) { return a + Math.random() * (b - a); }
+
+    // --- Balloons (drawn as simple ellipses for performance) ---
+    const balloonColors = [
+      { fill: '#3f5262', highlight: 'rgba(120,160,190,0.3)' },
+      { fill: '#3f5262', highlight: 'rgba(120,160,190,0.3)' },
+      { fill: '#dd6650', highlight: 'rgba(255,190,170,0.35)' },
+      { fill: '#dd6650', highlight: 'rgba(255,190,170,0.35)' },
+      { fill: '#f2cf00', highlight: 'rgba(255,240,170,0.4)' },
+    ];
+    const balloons = [];
+    const bCount = 24;
+    for (let i = 0; i < bCount; i++) {
+      const col = balloonColors[i % balloonColors.length];
+      const depth = rand(0, 1); // 0 = far, 1 = close
+      const size = 30 + depth * 55;
+      balloons.push({
+        x: rand(0, canvas.width),
+        y: rand(0, canvas.height),
+        w: size,
+        h: size * 1.25,
+        vy: -(0.3 + depth * 0.5),
+        vx: 0,
+        sway: rand(0, Math.PI * 2),
+        swaySpeed: 0.005 + rand(0, 0.008),
+        swayAmp: 0.3 + rand(0, 0.5),
+        fill: col.fill,
+        highlight: col.highlight,
+        opacity: 0.35 + depth * 0.55,
+        stringLen: size * 1.2,
+      });
+    }
+
+    // --- Gold confetti ---
+    const goldColors = ['#f2cf00', '#f5d833', '#e8c200', '#dab800'];
+    const confetti = [];
+    const cCount = Math.min(Math.floor(window.innerWidth / 25), 30);
+    for (let i = 0; i < cCount; i++) {
+      confetti.push({
+        x: rand(0, canvas.width),
+        y: rand(0, canvas.height),
+        size: 3 + rand(0, 4),
+        color: goldColors[Math.floor(Math.random() * goldColors.length)],
+        vy: 0.2 + rand(0, 0.4),
+        vx: (Math.random() - 0.5) * 0.15,
+        wobble: rand(0, Math.PI * 2),
+        wobbleSpeed: 0.006 + rand(0, 0.01),
+        wobbleAmp: 0.4 + rand(0, 0.6),
+        angle: rand(0, Math.PI * 2),
+        va: (Math.random() - 0.5) * 0.01,
+        flipPhase: rand(0, Math.PI * 2),
+        flipSpeed: 0.015 + rand(0, 0.02),
+        opacity: 0.25 + rand(0, 0.3),
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw balloons
+      balloons.forEach(b => {
+        b.y += b.vy;
+        b.sway += b.swaySpeed;
+        b.vx = Math.sin(b.sway) * b.swayAmp;
+        b.x += b.vx;
+
+        if (b.y < -b.h * 3) {
+          b.y = canvas.height + b.h * 2;
+          b.x = rand(0, canvas.width);
+        }
+
+        ctx.save();
+        ctx.globalAlpha = b.opacity;
+
+        // String
+        ctx.beginPath();
+        ctx.moveTo(b.x, b.y + b.h * 0.45);
+        ctx.quadraticCurveTo(b.x + Math.sin(b.sway) * 8, b.y + b.h * 0.45 + b.stringLen * 0.5, b.x + Math.sin(b.sway) * 4, b.y + b.h * 0.45 + b.stringLen);
+        ctx.strokeStyle = b.fill;
+        ctx.globalAlpha = b.opacity * 0.3;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Body
+        ctx.globalAlpha = b.opacity;
+        ctx.beginPath();
+        ctx.ellipse(b.x, b.y, b.w * 0.5, b.h * 0.5, 0, 0, Math.PI * 2);
+        ctx.fillStyle = b.fill;
+        ctx.fill();
+
+        // Highlight
+        ctx.beginPath();
+        ctx.ellipse(b.x - b.w * 0.15, b.y - b.h * 0.18, b.w * 0.2, b.h * 0.15, -0.3, 0, Math.PI * 2);
+        ctx.fillStyle = b.highlight;
+        ctx.fill();
+
+        // Knot
+        ctx.beginPath();
+        ctx.moveTo(b.x, b.y + b.h * 0.45);
+        ctx.lineTo(b.x - 3, b.y + b.h * 0.5 + 4);
+        ctx.lineTo(b.x + 3, b.y + b.h * 0.5 + 4);
+        ctx.closePath();
+        ctx.fillStyle = b.fill;
+        ctx.fill();
+
+        ctx.restore();
+      });
+
+      // Draw confetti
+      confetti.forEach(p => {
+        p.y += p.vy;
+        p.x += p.vx + Math.sin(p.wobble) * p.wobbleAmp;
+        p.wobble += p.wobbleSpeed;
+        p.angle += p.va;
+        p.flipPhase += p.flipSpeed;
+
+        if (p.y > canvas.height + 20) {
+          p.y = -20;
+          p.x = rand(0, canvas.width);
+        }
+
+        const scaleX = Math.cos(p.flipPhase);
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.scale(scaleX, 1);
+        ctx.globalAlpha = p.opacity * (0.5 + Math.abs(scaleX) * 0.5);
+        ctx.shadowColor = p.color;
+        ctx.shadowBlur = 3;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size * 0.5, -p.size, p.size, p.size * 2);
+        ctx.shadowBlur = 0;
+        ctx.restore();
+      });
+
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+  })();
+
+  // === INITIAL BURST ===
+  (function() {
+    const canvas = document.createElement('canvas');
+    canvas.className = 'burst-canvas';
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+
+    const golds = ['#f2cf00', '#f5d833', '#e8c200', '#dab800', '#c4a800'];
+    const pieces = [];
+    const total = Math.min(Math.floor(canvas.width / 5), 120);
+    for (let i = 0; i < total; i++) {
+      pieces.push({
+        x: Math.random() * canvas.width,
+        y: canvas.height + Math.random() * 80,
+        w: 3 + Math.random() * 5, h: 8 + Math.random() * 12,
+        color: golds[Math.floor(Math.random() * golds.length)],
+        vy: -(5 + Math.random() * 8), vx: (Math.random() - 0.5) * 4,
+        angle: Math.random() * Math.PI * 2, va: (Math.random() - 0.5) * 0.1,
+        flipPhase: Math.random() * Math.PI * 2, flipSpeed: 0.03 + Math.random() * 0.05,
+        opacity: 0.6 + Math.random() * 0.3,
+      });
+    }
+    const duration = 3500, start = performance.now(), fadeStart = duration - 800;
+    function draw(now) {
+      const elapsed = now - start;
+      if (elapsed > duration) { canvas.remove(); return; }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const fade = elapsed > fadeStart ? 1 - (elapsed - fadeStart) / 800 : 1;
+      pieces.forEach(p => {
+        p.y += p.vy; p.x += p.vx; p.vy += 0.08; p.angle += p.va; p.flipPhase += p.flipSpeed;
+        const sx = Math.cos(p.flipPhase);
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.angle); ctx.scale(sx, 1);
+        ctx.globalAlpha = p.opacity * fade * (0.5 + Math.abs(sx) * 0.5);
+        ctx.fillStyle = p.color; ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+        ctx.restore();
+      });
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+  })();
+
+  // === REGISTRATION LOGIC ===
+  function fetchCounts() {
+    if (!GAS_URL) return;
+    fetch(GAS_URL + '?action=counts').then(r => r.json()).then(data => {
+      sessionCounts = { morning: data.morning||0, afternoon1: data.afternoon1||0, afternoon2: data.afternoon2||0 };
+      updateCapacityUI();
+    }).catch(() => {
+      ['morning','afternoon1','afternoon2'].forEach(s => {
+        document.getElementById('cap-'+s).textContent = '剩餘 '+MAX_PER_SESSION+' 位';
+        const b = document.getElementById('badge-'+s);
+        b.className = 'session-badge text-[10px] font-semibold tracking-wider px-3 py-1 rounded-full bg-green-50 text-green-700';
+        b.textContent = '開放報名';
+      });
+    });
+  }
+  function updateCapacityUI() {
+    ['morning','afternoon1','afternoon2'].forEach(s => {
+      const count = sessionCounts[s], remaining = MAX_PER_SESSION - count, pct = (count/MAX_PER_SESSION)*100;
+      const fill = document.getElementById('fill-'+s), cap = document.getElementById('cap-'+s);
+      const card = document.getElementById('card-'+s), badge = document.getElementById('badge-'+s);
+      fill.style.width = pct+'%';
+      fill.className = 'capacity-fill'+(pct>=100?' full-bar':pct>=80?' warn':'');
+      cap.textContent = remaining>0?'剩餘 '+remaining+' 位':'已額滿';
+      if (remaining<=0) {
+        badge.className='session-badge text-[10px] font-semibold tracking-wider px-3 py-1 rounded-full bg-red-50 text-red-700'; badge.textContent='已額滿';
+        card.classList.add('full'); if(selectedSession===s){card.classList.remove('selected');selectedSession=null;}
+      } else if(remaining<=5) {
+        badge.className='session-badge text-[10px] font-semibold tracking-wider px-3 py-1 rounded-full bg-amber-50 text-amber-700'; badge.textContent='即將額滿';
+      } else {
+        badge.className='session-badge text-[10px] font-semibold tracking-wider px-3 py-1 rounded-full bg-green-50 text-green-700'; badge.textContent='開放報名';
+      }
+    });
+  }
+  function selectSession(card, session) {
+    if(card.classList.contains('full')) return;
+    document.querySelectorAll('.session-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected'); card.querySelector('input[type="radio"]').checked=true; selectedSession=session;
+  }
+  function showToast(msg, type) {
+    const t=document.getElementById('toast'); t.textContent=msg;
+    t.className='toast show'+(type?' '+type:''); setTimeout(()=>t.className='toast',3000);
+  }
+
+  // === FORM ===
+  const form=document.getElementById('registerForm'), submitBtn=document.getElementById('submitBtn');
+  form.addEventListener('submit', async(e)=>{
+    e.preventDefault();
+    const name=form.name.value.trim(), phone=form.phone.value.trim(), unit=form.unit.value.trim(), identity=form.identity.value;
+    if(!selectedSession){showToast('請選擇參觀場次','error');return;}
+    if(!name){showToast('請填寫姓名','error');return;}
+    if(!phone){showToast('請填寫電話','error');return;}
+    if(!unit){showToast('請填寫單位','error');return;}
+    if(!identity){showToast('請選擇身份分類','error');return;}
+    if(sessionCounts[selectedSession]>=MAX_PER_SESSION){showToast('此場次已額滿','error');return;}
+    submitBtn.disabled=true;
+    submitBtn.innerHTML='<svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg><span>報名中...</span>';
+    try{
+      await fetch(GAS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({action:'register',name,phone,unit,identity,session:selectedSession,sessionLabel:SESSION_LABELS[selectedSession],timestamp:new Date().toLocaleString('zh-TW',{timeZone:'Asia/Taipei'})})});
+      sessionCounts[selectedSession]++; updateCapacityUI();
+      document.getElementById('successMsg').textContent=name+' 您好，已為您報名「'+SESSION_LABELS[selectedSession]+'」場次，當天見！';
+      showModal(); createConfetti(4000);
+      form.reset(); document.querySelectorAll('.session-card').forEach(c=>c.classList.remove('selected')); selectedSession=null;
+    }catch{showToast('報名失敗，請稍後再試','error');}
+    finally{
+      submitBtn.disabled=false;
+      submitBtn.innerHTML='<span>確認報名</span><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>';
+    }
+  });
+  function showModal(){const m=document.getElementById('successModal');m.classList.remove('hidden');m.classList.add('flex');document.body.style.overflow='hidden';}
+  function closeModal(){const m=document.getElementById('successModal');m.classList.add('hidden');m.classList.remove('flex');document.body.style.overflow='';}
+  document.getElementById('successModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+  // === CONFETTI (success) ===
+  function createConfetti(duration){
+    const c=document.createElement('canvas');c.className='confetti-canvas';document.body.appendChild(c);
+    const x=c.getContext('2d');c.width=window.innerWidth;c.height=window.innerHeight;
+    const cols=['#3f5262','#dd6650','#f2cf00','#e8e8e8','#5a7080','#e8836f','#f7e066'];
+    const r=[];const total=Math.min(Math.floor(c.width/4),160);
+    for(let i=0;i<total;i++){r.push({x:Math.random()*c.width,y:Math.random()*-c.height,w:4+Math.random()*6,h:10+Math.random()*16,color:cols[Math.floor(Math.random()*cols.length)],vy:2+Math.random()*4,vx:(Math.random()-0.5)*3,angle:Math.random()*Math.PI*2,va:(Math.random()-0.5)*0.15,wobble:Math.random()*Math.PI*2,wobbleSpeed:0.03+Math.random()*0.05,opacity:1});}
+    const start=performance.now(),fadeStart=duration-800;
+    function draw(now){const el=now-start;if(el>duration){c.remove();return;}x.clearRect(0,0,c.width,c.height);const f=el>fadeStart?1-(el-fadeStart)/800:1;r.forEach(p=>{p.y+=p.vy;p.x+=p.vx+Math.sin(p.wobble)*0.8;p.angle+=p.va;p.wobble+=p.wobbleSpeed;if(p.y>c.height+20){p.y=-20;p.x=Math.random()*c.width;}x.save();x.translate(p.x,p.y);x.rotate(p.angle);x.globalAlpha=p.opacity*f;x.fillStyle=p.color;x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore();});requestAnimationFrame(draw);}
+    requestAnimationFrame(draw);
+  }
+
+  // === COUNTDOWN ===
+  const eventDate=new Date('2026-04-26T10:00:00+08:00').getTime();
+  function updateCountdown(){
+    const d=eventDate-Date.now();
+    if(d<=0){['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>document.getElementById(id).textContent='0');return;}
+    document.getElementById('cd-days').textContent=Math.floor(d/86400000);
+    document.getElementById('cd-hours').textContent=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
+    document.getElementById('cd-mins').textContent=String(Math.floor((d%3600000)/60000)).padStart(2,'0');
+    document.getElementById('cd-secs').textContent=String(Math.floor((d%60000)/1000)).padStart(2,'0');
+  }
+  updateCountdown(); setInterval(updateCountdown,1000);
+
+  // === INIT ===
+  fetchCounts(); setInterval(fetchCounts,30000);
+</script>
+</body>
+</html>
