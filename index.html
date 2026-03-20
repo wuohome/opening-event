@@ -347,8 +347,8 @@ tailwind.config = {
 <div class="balloon-bg" aria-hidden="true">
 </div>
 
-<!-- Frosted glass overlay -->
-<div style="position:fixed;inset:0;z-index:1;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);pointer-events:none;" aria-hidden="true"></div>
+<!-- Frosted glass overlay (lightweight, no blur) -->
+<div style="position:fixed;inset:0;z-index:1;background:rgba(255,255,255,0.18);pointer-events:none;" aria-hidden="true"></div>
 
 <!-- ========== NAV ========== -->
 <nav class="content-layer fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 transition-all" id="nav">
@@ -1019,7 +1019,7 @@ tailwind.config = {
 
     const goldColors = ['#f2cf00', '#f5d833', '#e8c200', '#dab800'];
     const papers = [];
-    const count = Math.min(Math.floor(window.innerWidth / 18), 45);
+    const count = Math.min(Math.floor(window.innerWidth / 40), 20);
 
     for (let i = 0; i < count; i++) {
       papers.push({
@@ -1087,7 +1087,7 @@ tailwind.config = {
 
     const golds = ['#f2cf00', '#f5d833', '#e8c200', '#dab800', '#c4a800'];
     const pieces = [];
-    const total = Math.min(Math.floor(canvas.width / 3), 200);
+    const total = Math.min(Math.floor(canvas.width / 8), 80);
 
     for (let i = 0; i < total; i++) {
       pieces.push({
@@ -1148,20 +1148,17 @@ tailwind.config = {
     const container = document.querySelector('.balloon-bg');
     // Navy 50%, Coral 30%, Gold 20%
     const palette = [
-      { body: '#3f5262', highlight: 'rgba(130,170,200,0.35)', string: '#2d3d4a', count: 23 },
-      { body: '#dd6650', highlight: 'rgba(255,200,180,0.4)',  string: '#b04a38', count: 13 },
-      { body: '#f2cf00', highlight: 'rgba(255,245,180,0.5)',  string: '#c4a800', count: 9 },
+      { body: '#3f5262', highlight: 'rgba(130,170,200,0.35)', string: '#2d3d4a', count: 9 },
+      { body: '#dd6650', highlight: 'rgba(255,200,180,0.4)',  string: '#b04a38', count: 5 },
+      { body: '#f2cf00', highlight: 'rgba(255,245,180,0.5)',  string: '#c4a800', count: 4 },
     ];
-    // Depth: close=big+sharp, mid=medium+slight blur, far=small+blurry
+    // Depth: 3 layers only, no heavy blur
     const depths = [
-      { blur: 0,  opacity: [1.0, 1.0], size: [400, 500], speed: [20, 26], z: 5 },
-      { blur: 1,  opacity: [1.0, 1.0], size: [300, 400], speed: [18, 24], z: 4 },
-      { blur: 3,  opacity: [1.0, 1.0], size: [210, 300], speed: [20, 28], z: 3 },
-      { blur: 6,  opacity: [1.0, 1.0], size: [140, 210], speed: [22, 30], z: 2 },
-      { blur: 10, opacity: [1.0, 1.0], size: [80, 140],  speed: [24, 32], z: 1 },
-      { blur: 16, opacity: [1.0, 1.0], size: [40, 80],   speed: [26, 36], z: 0 },
+      { blur: 0,  opacity: [1.0, 1.0], size: [300, 420], speed: [20, 26], z: 3 },
+      { blur: 0,  opacity: [0.8, 0.9], size: [180, 300], speed: [22, 28], z: 2 },
+      { blur: 2,  opacity: [0.5, 0.7], size: [80, 180],  speed: [24, 32], z: 1 },
     ];
-    const depthWeights = [0.12, 0.16, 0.20, 0.20, 0.18, 0.14];
+    const depthWeights = [0.3, 0.4, 0.3];
 
     function rand(min, max) { return min + Math.random() * (max - min); }
 
