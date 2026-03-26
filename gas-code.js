@@ -45,8 +45,14 @@ function doGet(e) {
 // POST — 新增報名
 function doPost(e) {
   try {
-    const body = JSON.parse(e.postData.contents);
-    const { name, phone, unit, identity, session, sessionLabel, timestamp } = body;
+    const raw = JSON.parse(e.postData.contents);
+    const name = decodeURIComponent(raw.name);
+    const phone = raw.phone;
+    const unit = decodeURIComponent(raw.unit);
+    const identity = decodeURIComponent(raw.identity);
+    const session = raw.session;
+    const sessionLabel = raw.sessionLabel ? decodeURIComponent(raw.sessionLabel) : session;
+    const timestamp = raw.timestamp ? decodeURIComponent(raw.timestamp) : null;
 
     // Validate required fields
     if (!name || !phone || !unit || !identity || !session) {

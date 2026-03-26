@@ -1054,10 +1054,14 @@ tailwind.config = {
         method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          action: 'register', name, phone, unit, identity,
+          action: 'register',
+          name: encodeURIComponent(name),
+          phone,
+          unit: encodeURIComponent(unit),
+          identity: encodeURIComponent(identity),
           session: selectedSession,
-          sessionLabel: SESSION_LABELS[selectedSession],
-          timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' })
+          sessionLabel: encodeURIComponent(SESSION_LABELS[selectedSession]),
+          timestamp: encodeURIComponent(new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }))
         })
       });
       // no-cors 無法讀回應，等 2 秒後用 GET 回查驗證
