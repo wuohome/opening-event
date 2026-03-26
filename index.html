@@ -153,6 +153,18 @@ tailwind.config = {
     transition: opacity 0.25s ease;
   }
   .floor-card:hover .floor-number { opacity: 0.45; }
+  .floor-logo {
+    width: 64px; height: 64px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .floor-logo img {
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;
+  }
+  @media (min-width: 768px) {
+    .floor-logo { width: 80px; height: 80px; }
+  }
 
   /* ====== SESSION CARD ====== */
   .session-card {
@@ -263,20 +275,30 @@ tailwind.config = {
     display: inline-block;
     animation: marqueeScroll 20s linear infinite;
   }
-  .marquee-inner span {
-    display: inline-block;
-    padding: 0 12px;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: rgba(63, 82, 98, 0.5);
+  .marquee-inner .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 20px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: rgba(63, 82, 98, 0.6);
+    vertical-align: middle;
+  }
+  .marquee-inner .marquee-item img {
+    height: 22px;
+    width: auto;
+    opacity: 0.5;
+    filter: grayscale(100%);
+    mix-blend-mode: multiply;
   }
   .marquee-inner .dot {
     display: inline-block;
-    padding: 0 12px;
-    font-size: 20px;
-    color: #3f5262;
-    opacity: 0.5;
+    padding: 0 6px;
+    font-size: 10px;
+    color: rgba(221, 102, 80, 0.3);
+    vertical-align: middle;
   }
   @keyframes marqueeScroll {
     from { transform: translateX(0); }
@@ -351,7 +373,7 @@ tailwind.config = {
 <div style="position:fixed;inset:0;z-index:1;background:rgba(255,255,255,0.18);pointer-events:none;" aria-hidden="true"></div>
 
 <!-- ========== NAV ========== -->
-<nav class="content-layer fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 transition-all" id="nav">
+<nav class="content-layer fixed top-3 left-4 right-4 md:left-6 md:right-6 z-50 px-4 md:px-8 py-3 rounded-2xl transition-all" id="nav">
   <div class="max-w-6xl mx-auto flex justify-between items-center">
     <img src="logo.png" alt="窩的家 WUOHOME" class="h-8">
     <a href="#register" class="btn-primary px-6 py-2.5 rounded-full text-xs font-bold tracking-wider">立即報名</a>
@@ -384,6 +406,21 @@ tailwind.config = {
   </div>
 </section>
 
+<!-- ========== SPONSORS ========== -->
+<section class="content-layer px-4 md:px-8 -mt-6 pb-4">
+  <div class="max-w-5xl mx-auto reveal">
+    <div class="text-center mb-5">
+      <p class="text-txt-tertiary text-xs tracking-[0.15em] uppercase font-semibold font-heading">Supported By</p>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12" id="sponsorLogos">
+      <!-- 有贊助商後在這裡加 Logo：
+      <img src="sponsor-logo.png" alt="公司名稱" class="h-8 md:h-10 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer">
+      -->
+      <p class="text-txt-tertiary text-sm py-4">贊助夥伴持續更新中</p>
+    </div>
+  </div>
+</section>
+
 <!-- ========== EVENT INFO + COUNTDOWN ========== -->
 <section class="content-layer px-4 md:px-8 -mt-8 pb-8">
   <div class="max-w-5xl mx-auto">
@@ -411,6 +448,7 @@ tailwind.config = {
               <span>查看地圖</span>
               <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
             </a>
+            <p class="text-txt-tertiary text-xs mt-1">路邊停車或三重國小地下停車場（步行 3 分鐘）</p>
           </div>
         </div>
 
@@ -459,7 +497,7 @@ tailwind.config = {
 
 <!-- ========== MARQUEE ========== -->
 <div class="content-layer marquee py-4">
-  <div class="marquee-inner"><span style="color:#dd6650">優式租售 三重窩的家</span><span class="dot">/</span><span style="color:#3f5262">窩的家室內裝修</span><span class="dot">/</span><span style="color:#2e8b57">住商不動產 正義國小店</span><span class="dot">/</span><span style="color:#e67e22">中信房屋 蘆洲捷運三民店</span><span class="dot">/</span><span style="color:#e67e22">凌群不動產</span><span class="dot">/</span><span style="color:#dd6650">優式租售 三重窩的家</span><span class="dot">/</span><span style="color:#3f5262">窩的家室內裝修</span><span class="dot">/</span><span style="color:#2e8b57">住商不動產 正義國小店</span><span class="dot">/</span><span style="color:#e67e22">中信房屋 蘆洲捷運三民店</span><span class="dot">/</span><span style="color:#e67e22">凌群不動產</span><span class="dot">/</span></div>
+  <div class="marquee-inner"><span class="marquee-item">優式租售 三重窩的家</span><span class="dot">&#10043;</span><span class="marquee-item">窩的家室內裝修</span><span class="dot">&#10043;</span><span class="marquee-item">住商不動產 正義國小店</span><span class="dot">&#10043;</span><span class="marquee-item">中信房屋 蘆洲捷運三民店</span><span class="dot">&#10043;</span><span class="marquee-item">凌群不動產</span><span class="dot">&#10043;</span><span class="marquee-item">優式租售 三重窩的家</span><span class="dot">&#10043;</span><span class="marquee-item">窩的家室內裝修</span><span class="dot">&#10043;</span><span class="marquee-item">住商不動產 正義國小店</span><span class="dot">&#10043;</span><span class="marquee-item">中信房屋 蘆洲捷運三民店</span><span class="dot">&#10043;</span><span class="marquee-item">凌群不動產</span><span class="dot">&#10043;</span></div>
 </div>
 
 <!-- ========== BUILDING / FLOORS ========== -->
@@ -473,11 +511,12 @@ tailwind.config = {
 
     <div class="space-y-5">
       <!-- 1F -->
-      <div class="floor-card glass rounded-3xl p-8 reveal">
-        <div class="flex items-start gap-5">
-          <span class="floor-number">1F</span>
-          <div class="pt-1 flex-1">
-            <div class="flex items-center gap-3 mb-2">
+      <div class="floor-card glass rounded-3xl p-6 md:p-8 reveal">
+        <div class="flex items-center gap-5 md:gap-8">
+          <span class="floor-number flex-shrink-0">1F</span>
+          <div class="floor-logo"><img src="logo-hbhousing.png" alt="住商不動產" class="mix-blend-multiply"></div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-2 flex-wrap">
               <h3 class="text-lg font-bold text-txt">住商不動產 正義國小店</h3>
               <span class="text-[10px] font-bold tracking-[0.12em] font-heading bg-navy/5 text-navy px-2.5 py-1 rounded-full">REAL ESTATE</span>
             </div>
@@ -493,11 +532,12 @@ tailwind.config = {
       </div>
 
       <!-- 2F -->
-      <div class="floor-card glass rounded-3xl p-8 reveal reveal-d1">
-        <div class="flex items-start gap-5">
-          <span class="floor-number">2F</span>
-          <div class="pt-1 flex-1">
-            <div class="flex items-center gap-3 mb-2">
+      <div class="floor-card glass rounded-3xl p-6 md:p-8 reveal reveal-d1">
+        <div class="flex items-center gap-5 md:gap-8">
+          <span class="floor-number flex-shrink-0">2F</span>
+          <div class="floor-logo"><img src="設計部LOGO.png" alt="窩的家室內裝修" class="rounded-lg"></div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-2 flex-wrap">
               <h3 class="text-lg font-bold text-txt">窩的家室內裝修</h3>
               <span class="text-[10px] font-bold tracking-[0.12em] font-heading bg-coral-soft text-coral px-2.5 py-1 rounded-full">DESIGN</span>
             </div>
@@ -513,11 +553,12 @@ tailwind.config = {
       </div>
 
       <!-- 3F -->
-      <div class="floor-card glass rounded-3xl p-8 reveal reveal-d2">
-        <div class="flex items-start gap-5">
-          <span class="floor-number">3F</span>
-          <div class="pt-1 flex-1">
-            <div class="flex items-center gap-3 mb-2">
+      <div class="floor-card glass rounded-3xl p-6 md:p-8 reveal reveal-d2">
+        <div class="flex items-center gap-5 md:gap-8">
+          <span class="floor-number flex-shrink-0">3F</span>
+          <div class="floor-logo"><img src="logo-yourhouse.jpg" alt="優式租售" class="mix-blend-multiply"></div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-2 flex-wrap">
               <h3 class="text-lg font-bold text-txt">優式租售 三重窩的家加盟店</h3>
               <span class="text-[10px] font-bold tracking-[0.12em] font-heading bg-gold-soft text-yellow-700 px-2.5 py-1 rounded-full">LEASING</span>
             </div>
@@ -533,11 +574,12 @@ tailwind.config = {
       </div>
 
       <!-- 4F -->
-      <div class="floor-card glass rounded-3xl p-8 reveal reveal-d3">
-        <div class="flex items-start gap-5">
-          <span class="floor-number">4F</span>
-          <div class="pt-1 flex-1">
-            <div class="flex items-center gap-3 mb-2">
+      <div class="floor-card glass rounded-3xl p-6 md:p-8 reveal reveal-d3">
+        <div class="flex items-center gap-5 md:gap-8">
+          <span class="floor-number flex-shrink-0">4F</span>
+          <div class="floor-logo"><img src="logo-lingchun.png" alt="凌群不動產" class="mix-blend-multiply"></div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-2 flex-wrap">
               <h3 class="text-lg font-bold text-txt">凌群不動產</h3>
               <span class="text-[10px] font-bold tracking-[0.12em] font-heading bg-navy/5 text-navy px-2.5 py-1 rounded-full">SOCIAL HOUSING</span>
             </div>
@@ -553,13 +595,14 @@ tailwind.config = {
       </div>
 
       <!-- 5F -->
-      <div class="floor-card glass rounded-3xl p-8 reveal reveal-d4">
-        <div class="flex items-start gap-5">
-          <span class="floor-number">5F</span>
-          <div class="pt-1 flex-1">
-            <div class="flex items-center gap-3 mb-2">
+      <div class="floor-card glass rounded-3xl p-6 md:p-8 reveal reveal-d4">
+        <div class="flex items-center gap-5 md:gap-8">
+          <span class="floor-number flex-shrink-0">5F</span>
+          <div class="floor-logo"><img src="logo.png" alt="窩的家"></div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-3 mb-2 flex-wrap">
               <h3 class="text-lg font-bold text-txt">錄播室</h3>
-              <span class="text-[10px] font-bold tracking-[0.12em] font-heading bg-coral-soft text-coral px-2.5 py-1 rounded-full">STUDIO</span>
+              <span class="text-[10px] font-bold tracking-[0.12em] font-heading bg-gold-soft text-yellow-700 px-2.5 py-1 rounded-full">STUDIO</span>
             </div>
             <p class="text-txt-secondary text-sm leading-relaxed mb-3">集團自媒體內容製作基地，用影音傳遞品牌價值，讓專業被更多人看見。</p>
             <div class="flex flex-wrap gap-2">
@@ -604,7 +647,7 @@ tailwind.config = {
             <div class="flex justify-between items-start">
               <div>
                 <p class="font-bold text-txt text-base mb-1">上午場 10:00 - 11:30</p>
-                <p class="text-txt-tertiary text-xs">對象：同業夥伴、屋主</p>
+                <p class="text-txt-tertiary text-xs">對象：合作夥伴、廠商</p>
               </div>
               <div class="flex items-center gap-3">
                 <span class="session-badge text-[10px] font-bold tracking-[0.12em] font-heading px-3 py-1 rounded-full" id="badge-morning"></span>
@@ -625,7 +668,7 @@ tailwind.config = {
             <div class="flex justify-between items-start">
               <div>
                 <p class="font-bold text-txt text-base mb-1">下午場一 13:00 - 14:30</p>
-                <p class="text-txt-tertiary text-xs">對象：同業夥伴、屋主</p>
+                <p class="text-txt-tertiary text-xs">對象：屋主、瘋理財學員</p>
               </div>
               <div class="flex items-center gap-3">
                 <span class="session-badge text-[10px] font-bold tracking-[0.12em] font-heading px-3 py-1 rounded-full" id="badge-afternoon1"></span>
@@ -700,8 +743,9 @@ tailwind.config = {
               <select id="field-identity" name="identity" required
                 class="form-input w-full px-4 py-3.5 bg-white/60 border border-black/8 rounded-xl text-txt text-sm appearance-none cursor-pointer pr-10">
                 <option value="" disabled selected class="text-txt-tertiary">請選擇</option>
-                <option value="同業">同業</option>
+                <option value="合作夥伴/廠商">合作夥伴 / 廠商</option>
                 <option value="屋主">屋主</option>
+                <option value="瘋理財學員">瘋理財學員</option>
                 <option value="BNI夥伴">BNI 夥伴</option>
                 <option value="其他">其他</option>
               </select>
@@ -735,24 +779,100 @@ tailwind.config = {
         <p class="text-txt-secondary text-sm leading-relaxed">想表達心意的話，歡迎贊助當天的餐點與佈置 :)</p>
       </div>
 
-      <div class="grid grid-cols-2 gap-4 mb-6">
-        <div class="sponsor-card glass-subtle rounded-2xl p-6 text-center">
+      <!-- Sponsor tiers -->
+      <div class="grid grid-cols-3 gap-3 mb-6">
+        <div class="sponsor-card glass-subtle rounded-2xl p-5 text-center">
+          <p class="text-2xl font-black text-navy mb-1">$1,000</p>
+          <p class="text-txt-tertiary text-xs tracking-wider">友情贊助</p>
+        </div>
+        <div class="sponsor-card glass-subtle rounded-2xl p-5 text-center">
           <p class="text-2xl font-black text-navy mb-1">$2,000</p>
           <p class="text-txt-tertiary text-xs tracking-wider">餐點贊助</p>
         </div>
-        <div class="sponsor-card glass-subtle rounded-2xl p-6 text-center">
+        <div class="sponsor-card glass-subtle rounded-2xl p-5 text-center">
           <p class="text-2xl font-black text-navy mb-1">$3,000</p>
           <p class="text-txt-tertiary text-xs tracking-wider">佈置贊助</p>
         </div>
       </div>
 
-      <div class="bg-navy/4 rounded-xl p-5">
+      <!-- Sponsor benefits -->
+      <div class="bg-gold-soft rounded-xl p-5 mb-6">
+        <p class="text-sm font-semibold text-txt mb-3">贊助者專屬曝光</p>
+        <div class="space-y-2.5">
+          <div class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75"/></svg>
+            <p class="text-sm text-txt-secondary">開幕<strong class="text-txt">背板</strong>展示贊助者 Logo / 公司名稱 / 姓名</p>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75"/></svg>
+            <p class="text-sm text-txt-secondary">Facebook <strong class="text-txt">貼文</strong>感謝曝光</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bank info -->
+      <div class="bg-navy/4 rounded-xl p-5 mb-5">
+        <p class="text-xs text-txt-tertiary font-medium mb-3 tracking-wider uppercase font-heading">匯款資訊</p>
         <table class="w-full text-sm">
-          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1 w-16">銀行</th><td class="py-1 font-semibold" id="bankName">待填寫</td></tr>
-          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1">分行</th><td class="py-1 font-semibold" id="bankBranch">待填寫</td></tr>
-          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1">帳號</th><td class="py-1 font-semibold" id="bankAccount">待填寫</td></tr>
-          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1">戶名</th><td class="py-1 font-semibold" id="bankHolder">待填寫</td></tr>
+          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5 w-16">銀行</th><td class="py-1.5 font-semibold">合作金庫（006）</td></tr>
+          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">分行</th><td class="py-1.5 font-semibold">民族分行</td></tr>
+          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">帳號</th><td class="py-1.5 font-semibold font-heading tracking-wider">0903-717-107411</td></tr>
+          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">戶名</th><td class="py-1.5 font-semibold">窩的家裝潢管理顧問有限公司</td></tr>
         </table>
+      </div>
+
+      <!-- Transfer reminder -->
+      <div class="bg-coral-soft rounded-xl p-4 mb-5 flex items-start gap-3">
+        <svg class="w-5 h-5 text-coral flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+        <p class="text-sm text-txt-secondary leading-relaxed">匯款備註請填「<strong class="text-txt">公司名稱或姓名</strong>」即可<br>例如：<span class="text-txt font-medium">王小明</span>、<span class="text-txt font-medium">XX不動產</span></p>
+      </div>
+
+      <!-- Invoice + opt-out -->
+      <div class="space-y-3 text-sm">
+        <p class="text-txt-secondary">匯款後請告知姓名/公司名稱與金額，方便我們核對與製作背板。</p>
+        <label class="flex items-start gap-2.5 cursor-pointer group">
+          <input type="checkbox" class="mt-1 w-4 h-4 rounded border-gray-300 text-navy accent-navy cursor-pointer">
+          <span class="text-txt-secondary group-hover:text-txt transition-colors">我<strong>不</strong>希望名稱出現在背板上</span>
+        </label>
+        <label class="flex items-start gap-2.5 cursor-pointer group">
+          <input type="checkbox" class="mt-1 w-4 h-4 rounded border-gray-300 text-navy accent-navy cursor-pointer">
+          <span class="text-txt-secondary group-hover:text-txt transition-colors">需要開立發票</span>
+        </label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHAT TO EXPECT ========== -->
+<section class="content-layer py-16 px-4 md:px-8">
+  <div class="max-w-3xl mx-auto">
+    <div class="glass rounded-3xl p-8 md:p-10 reveal">
+      <div class="text-center mb-6">
+        <p class="text-coral text-xs tracking-[0.2em] uppercase font-semibold mb-3 font-heading">What to Expect</p>
+        <h2 class="text-2xl md:text-3xl font-black tracking-[0.04em]">活動當天流程</h2>
+      </div>
+      <div class="space-y-4">
+        <div class="flex items-start gap-4">
+          <span class="w-8 h-8 rounded-full bg-coral-soft flex items-center justify-center flex-shrink-0 text-coral text-xs font-bold">1</span>
+          <div>
+            <p class="font-semibold text-txt text-sm">報到入場</p>
+            <p class="text-txt-secondary text-sm">現場簽到，確認報名場次</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="w-8 h-8 rounded-full bg-coral-soft flex items-center justify-center flex-shrink-0 text-coral text-xs font-bold">2</span>
+          <div>
+            <p class="font-semibold text-txt text-sm">一條龍服務導覽</p>
+            <p class="text-txt-secondary text-sm">了解從買房、裝修、出租到管理的完整服務佈局</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="w-8 h-8 rounded-full bg-coral-soft flex items-center justify-center flex-shrink-0 text-coral text-xs font-bold">3</span>
+          <div>
+            <p class="font-semibold text-txt text-sm">茶敘交流</p>
+            <p class="text-txt-secondary text-sm">輕鬆茶點、自由交流，認識同業與合作夥伴</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -760,17 +880,31 @@ tailwind.config = {
 
 <!-- ========== FOOTER ========== -->
 <footer class="content-layer py-10 px-4">
-  <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-    <div class="text-center md:text-left">
-      <img src="logo.png" alt="窩的家 WUOHOME" class="h-10 mb-1">
-      <p class="text-txt-tertiary text-xs italic">您專注事業，我們專注您的家。</p>
+  <div class="max-w-5xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+      <div class="text-center md:text-left">
+        <img src="logo.png" alt="窩的家 WUOHOME" class="h-10 mb-1">
+        <p class="text-txt-tertiary text-xs italic">您專注事業，我們專注您的家。</p>
+      </div>
+      <div class="text-center md:text-right">
+        <p class="text-txt-secondary text-sm font-medium mb-1">活動聯絡人：張小姐（Joan）</p>
+        <p class="text-txt-tertiary text-xs">有任何問題歡迎來電或加 LINE 詢問</p>
+        <div class="flex items-center justify-center md:justify-end gap-3 mt-2">
+          <a href="https://line.me/R/ti/p/@wuohome" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-[#06C755] text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-[#05b34c] transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+            <span>LINE 詢問</span>
+          </a>
+        </div>
+      </div>
     </div>
-    <p class="text-txt-tertiary text-xs">&copy; 2026 窩的家集團</p>
+    <div class="border-t border-black/5 pt-4">
+      <p class="text-txt-tertiary text-xs text-center">&copy; 2026 窩的家集團</p>
+    </div>
   </div>
 </footer>
 
 <!-- ========== SUCCESS MODAL ========== -->
-<div id="successModal" class="fixed inset-0 z-50 hidden items-center justify-center modal-backdrop">
+<div id="successModal" class="fixed inset-0 z-50 hidden items-center justify-center modal-backdrop" role="dialog" aria-modal="true">
   <div class="glass-strong rounded-3xl p-10 max-w-md mx-4 text-center shadow-2xl">
     <div class="w-16 h-16 rounded-full bg-green-50 mx-auto mb-6 flex items-center justify-center">
       <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -789,6 +923,10 @@ tailwind.config = {
         <svg class="w-4 h-4 text-coral flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
         <span class="text-sm text-txt-secondary">三重區平安街 59 號</span>
       </div>
+      <div class="flex items-center gap-3">
+        <svg class="w-4 h-4 text-coral flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/></svg>
+        <span class="text-sm text-txt-secondary">活動前將以電話確認報名</span>
+      </div>
     </div>
 
     <button onclick="closeModal()" class="btn-primary px-8 py-3 rounded-full font-bold text-sm cursor-pointer">
@@ -798,7 +936,7 @@ tailwind.config = {
 </div>
 
 <!-- ========== TOAST ========== -->
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" aria-live="assertive" role="alert"></div>
 
 <script>
   // === CONFIG ===
@@ -933,10 +1071,8 @@ tailwind.config = {
         getWorked = true;
       } catch { /* GET 失敗，無法驗證 */ }
       if (getWorked && sessionCounts[submittedSession] <= prevCount) {
-        // GET 正常但人數沒增加 → 報名沒進去
         showToast('報名可能未成功，請稍後再試或聯繫主辦方', 'error');
       } else {
-        // GET 驗證通過（人數+1）或 GET 也壞了（樂觀信任 POST）
         if (!getWorked) { sessionCounts[submittedSession]++; updateCapacityUI(); }
         document.getElementById('successMsg').textContent = name + ' 您好，已為您報名「' + SESSION_LABELS[submittedSession] + '」場次，當天見！';
         showModal();
