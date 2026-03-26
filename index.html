@@ -928,14 +928,13 @@ tailwind.config = {
 
 <script>
   // === CONFIG ===
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbwxlgJDtjS8YpXTr9CTVBpQ4JEl2WhiAxl8t6bt8Q_OuZ3EBf312JBTCD6AdF2QeQ6s7A/exec';
+  const RAGIC_API = 'https://ap15.ragic.com/wuohome/operation/13';
+  const RAGIC_KEY = 'VEZsOEwzYzVJdWdoWXRDM3ptS2YwRytLV21BaWhPTDRLWXhPb2FLZ3VBUm1BZE90VzJtZzlTNjVlbCszRnZkRw==';
   const MAX_PER_SESSION = 30;
   const SESSION_LABELS = { morning: '上午場 10:00', afternoon1: '下午場一 13:00', afternoon2: '下午場二 15:00' };
 
   let selectedSession = null;
   let sessionCounts = { morning: 0, afternoon1: 0, afternoon2: 0 };
-
-  // NAV removed
 
   // === SCROLL REVEAL ===
   const ro = new IntersectionObserver((entries) => {
@@ -943,13 +942,19 @@ tailwind.config = {
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-  // === REGISTRATION ===
+  // === REGISTRATION (Ragic API) ===
   function fetchCounts() {
-    if (!GAS_URL) return;
-    fetch(GAS_URL + '?action=counts')
+    fetch(RAGIC_API + '?v=3&api', {
+      headers: { 'Authorization': 'Basic ' + RAGIC_KEY }
+    })
       .then(r => r.json())
       .then(data => {
-        sessionCounts = { morning: data.morning || 0, afternoon1: data.afternoon1 || 0, afternoon2: data.afternoon2 || 0 };
+        const counts = { morning: 0, afternoon1: 0, afternoon2: 0 };
+        Object.values(data).forEach(row => {
+          const session = row['場次'];
+          if (counts.hasOwnProperty(session)) counts[session]++;
+        });
+        sessionCounts = counts;
         updateCapacityUI();
       })
       .catch(() => {
@@ -1028,42 +1033,38 @@ tailwind.config = {
     submitBtn.innerHTML = '<svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg><span>報名中...</span>';
 
     try {
-      const prevCount = sessionCounts[selectedSession] || 0;
       const submittedSession = selectedSession;
-      await fetch(GAS_URL, {
-        method: 'POST', mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+      const now = new Date();
+      const ts = now.getFullYear() + '/' + (now.getMonth()+1).toString().padStart(2,'0') + '/' + now.getDate().toString().padStart(2,'0') + ' ' + now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+
+      const res = await fetch(RAGIC_API + '?v=3&api', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Basic ' + RAGIC_KEY,
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
-          action: 'register',
-          name: encodeURIComponent(name),
-          phone,
-          unit: encodeURIComponent(unit),
-          identity: encodeURIComponent(identity),
-          session: selectedSession,
-          sessionLabel: encodeURIComponent(SESSION_LABELS[selectedSession]),
-          timestamp: encodeURIComponent(new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' }))
+          1002043: ts,
+          1002044: name,
+          1002045: phone,
+          1002046: unit,
+          1002047: identity,
+          1002048: submittedSession,
+          1002049: SESSION_LABELS[submittedSession]
         })
       });
-      // no-cors 無法讀回應，等 2 秒後用 GET 回查驗證
-      await new Promise(r => setTimeout(r, 2000));
-      let getWorked = false;
-      try {
-        const checkRes = await fetch(GAS_URL + '?action=counts');
-        const checkData = await checkRes.json();
-        sessionCounts = { morning: checkData.morning || 0, afternoon1: checkData.afternoon1 || 0, afternoon2: checkData.afternoon2 || 0 };
+
+      if (res.ok) {
+        sessionCounts[submittedSession]++;
         updateCapacityUI();
-        getWorked = true;
-      } catch { /* GET 失敗，無法驗證 */ }
-      if (getWorked && sessionCounts[submittedSession] <= prevCount) {
-        showToast('報名可能未成功，請稍後再試或聯繫主辦方', 'error');
-      } else {
-        if (!getWorked) { sessionCounts[submittedSession]++; updateCapacityUI(); }
         document.getElementById('successMsg').textContent = name + ' 您好，已為您報名「' + SESSION_LABELS[submittedSession] + '」場次，當天見！';
         showModal();
         createConfetti(4000);
         form.reset();
         document.querySelectorAll('.session-card').forEach(c => c.classList.remove('selected'));
         selectedSession = null;
+      } else {
+        showToast('報名失敗，請稍後再試', 'error');
       }
     } catch { showToast('報名失敗，請稍後再試', 'error'); }
     finally {
