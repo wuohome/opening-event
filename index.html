@@ -928,8 +928,7 @@ tailwind.config = {
 
 <script>
   // === CONFIG ===
-  const RAGIC_API = 'https://ap15.ragic.com/wuohome/operation/13';
-  const RAGIC_KEY = 'VEZsOEwzYzVJdWdoWXRDM3ptS2YwRytLV21BaWhPTDRLWXhPb2FLZ3VBUm1BZE90VzJtZzlTNjVlbCszRnZkRw==';
+  const API_BASE = 'https://opening-event-proxy.wuohome.workers.dev';
   const MAX_PER_SESSION = 30;
   const SESSION_LABELS = { morning: '上午場 10:00', afternoon1: '下午場一 13:00', afternoon2: '下午場二 15:00' };
 
@@ -942,19 +941,12 @@ tailwind.config = {
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-  // === REGISTRATION (Ragic API) ===
+  // === REGISTRATION (via Cloudflare Worker proxy) ===
   function fetchCounts() {
-    fetch(RAGIC_API + '?v=3&api', {
-      headers: { 'Authorization': 'Basic ' + RAGIC_KEY }
-    })
+    fetch(API_BASE + '/counts')
       .then(r => r.json())
       .then(data => {
-        const counts = { morning: 0, afternoon1: 0, afternoon2: 0 };
-        Object.values(data).forEach(row => {
-          const session = row['場次'];
-          if (counts.hasOwnProperty(session)) counts[session]++;
-        });
-        sessionCounts = counts;
+        sessionCounts = { morning: data.morning || 0, afternoon1: data.afternoon1 || 0, afternoon2: data.afternoon2 || 0 };
         updateCapacityUI();
       })
       .catch(() => {
@@ -1037,20 +1029,17 @@ tailwind.config = {
       const now = new Date();
       const ts = now.getFullYear() + '/' + (now.getMonth()+1).toString().padStart(2,'0') + '/' + now.getDate().toString().padStart(2,'0') + ' ' + now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
 
-      const res = await fetch(RAGIC_API + '?v=3&api', {
+      const res = await fetch(API_BASE + '/register', {
         method: 'POST',
-        headers: {
-          'Authorization': 'Basic ' + RAGIC_KEY,
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          1002043: ts,
-          1002044: name,
-          1002045: phone,
-          1002046: unit,
-          1002047: identity,
-          1002048: submittedSession,
-          1002049: SESSION_LABELS[submittedSession]
+          timestamp: ts,
+          name: name,
+          phone: phone,
+          unit: unit,
+          identity: identity,
+          session: submittedSession,
+          sessionLabel: SESSION_LABELS[submittedSession]
         })
       });
 
