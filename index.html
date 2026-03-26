@@ -372,13 +372,7 @@ tailwind.config = {
 <!-- Frosted glass overlay (lightweight, no blur) -->
 <div style="position:fixed;inset:0;z-index:1;background:rgba(255,255,255,0.18);pointer-events:none;" aria-hidden="true"></div>
 
-<!-- ========== NAV ========== -->
-<nav class="content-layer fixed top-3 left-4 right-4 md:left-6 md:right-6 z-50 px-4 md:px-8 py-3 rounded-2xl transition-all" id="nav">
-  <div class="max-w-6xl mx-auto flex justify-between items-center">
-    <img src="logo.png" alt="窩的家 WUOHOME" class="h-8">
-    <a href="#register" class="btn-primary px-6 py-2.5 rounded-full text-xs font-bold tracking-wider">立即報名</a>
-  </div>
-</nav>
+<!-- NAV removed -->
 
 <!-- ========== HERO ========== -->
 <section class="content-layer min-h-screen flex items-center px-4 md:px-8 lg:px-16 py-20">
@@ -941,15 +935,7 @@ tailwind.config = {
   let selectedSession = null;
   let sessionCounts = { morning: 0, afternoon1: 0, afternoon2: 0 };
 
-  // === NAV SCROLL ===
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 60) {
-      nav.classList.add('glass-strong');
-    } else {
-      nav.classList.remove('glass-strong');
-    }
-  });
+  // NAV removed
 
   // === SCROLL REVEAL ===
   const ro = new IntersectionObserver((entries) => {
