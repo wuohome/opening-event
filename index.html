@@ -910,6 +910,8 @@ tailwind.config = {
     submitBtn.innerHTML = '<svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg><span>報名中...</span>';
 
     try {
+      const prevCount = sessionCounts[selectedSession] || 0;
+      const submittedSession = selectedSession;
       await fetch(GAS_URL, {
         method: 'POST', mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
@@ -920,14 +922,29 @@ tailwind.config = {
           timestamp: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' })
         })
       });
-      sessionCounts[selectedSession]++;
-      updateCapacityUI();
-      document.getElementById('successMsg').textContent = name + ' 您好，已為您報名「' + SESSION_LABELS[selectedSession] + '」場次，當天見！';
-      showModal();
-      createConfetti(4000);
-      form.reset();
-      document.querySelectorAll('.session-card').forEach(c => c.classList.remove('selected'));
-      selectedSession = null;
+      // no-cors 無法讀回應，等 2 秒後用 GET 回查驗證
+      await new Promise(r => setTimeout(r, 2000));
+      let getWorked = false;
+      try {
+        const checkRes = await fetch(GAS_URL + '?action=counts');
+        const checkData = await checkRes.json();
+        sessionCounts = { morning: checkData.morning || 0, afternoon1: checkData.afternoon1 || 0, afternoon2: checkData.afternoon2 || 0 };
+        updateCapacityUI();
+        getWorked = true;
+      } catch { /* GET 失敗，無法驗證 */ }
+      if (getWorked && sessionCounts[submittedSession] <= prevCount) {
+        // GET 正常但人數沒增加 → 報名沒進去
+        showToast('報名可能未成功，請稍後再試或聯繫主辦方', 'error');
+      } else {
+        // GET 驗證通過（人數+1）或 GET 也壞了（樂觀信任 POST）
+        if (!getWorked) { sessionCounts[submittedSession]++; updateCapacityUI(); }
+        document.getElementById('successMsg').textContent = name + ' 您好，已為您報名「' + SESSION_LABELS[submittedSession] + '」場次，當天見！';
+        showModal();
+        createConfetti(4000);
+        form.reset();
+        document.querySelectorAll('.session-card').forEach(c => c.classList.remove('selected'));
+        selectedSession = null;
+      }
     } catch { showToast('報名失敗，請稍後再試', 'error'); }
     finally {
       submitBtn.disabled = false;
