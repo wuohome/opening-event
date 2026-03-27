@@ -474,10 +474,10 @@ tailwind.config = {
             </div>
           </div>
         </div>
-        <a href="#register" class="btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-base">
+        <button onclick="revealRegister()" class="btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-base cursor-pointer">
           <span>立即報名</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-        </a>
+        </button>
       </div>
     </div>
   </div>
@@ -544,7 +544,7 @@ tailwind.config = {
       <div class="floor-card glass rounded-3xl p-6 md:p-8 reveal reveal-d2">
         <div class="flex items-center gap-5 md:gap-8">
           <span class="floor-number flex-shrink-0">3F</span>
-          <div class="floor-logo"><img src="logo-yourhouse.avif" alt="優式租售" class="mix-blend-multiply"></div>
+          <div class="floor-logo"><img src="logo-yourhouse.jpg" alt="優式租售管理" class="rounded-lg"></div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-3 mb-2 flex-wrap">
               <h3 class="text-lg font-bold text-txt">優式租售 三重窩的家加盟店</h3>
@@ -607,16 +607,137 @@ tailwind.config = {
     <!-- Mid-page CTA -->
     <div class="text-center mt-16 reveal">
       <p class="text-txt-secondary text-sm mb-5">想親眼看看這棟建築？選個場次來走走吧</p>
-      <a href="#register" class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-base">
+      <button onclick="revealRegister()" class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-base cursor-pointer">
         <span>我要報名</span>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-      </a>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ========== NOTICE ========== -->
+<section class="content-layer py-24 px-4 md:px-8">
+  <div class="max-w-3xl mx-auto">
+    <div class="glass rounded-3xl p-8 md:p-10 reveal">
+      <div class="text-center mb-6">
+        <p class="text-coral text-xs tracking-[0.2em] uppercase font-semibold mb-3 font-heading">Notice</p>
+        <h2 class="text-2xl md:text-3xl font-black tracking-[0.04em]">溫馨提醒</h2>
+      </div>
+
+      <div class="glass-subtle rounded-2xl p-6 mb-6">
+        <h3 class="font-bold text-txt mb-2">因場地較小，本次開幕不收花籃</h3>
+        <p class="text-txt-secondary text-sm leading-relaxed">想表達心意的話，歡迎贊助當天的餐點與佈置 :)</p>
+      </div>
+
+      <!-- Sponsor tiers -->
+      <div class="grid grid-cols-3 gap-3 mb-6">
+        <div class="sponsor-card glass-subtle rounded-2xl p-5 text-center">
+          <p class="text-2xl font-black text-navy mb-1">$1,000</p>
+          <p class="text-txt-tertiary text-xs tracking-wider">友情贊助</p>
+        </div>
+        <div class="sponsor-card glass-subtle rounded-2xl p-5 text-center">
+          <p class="text-2xl font-black text-navy mb-1">$2,000</p>
+          <p class="text-txt-tertiary text-xs tracking-wider">餐點贊助</p>
+        </div>
+        <div class="sponsor-card glass-subtle rounded-2xl p-5 text-center">
+          <p class="text-2xl font-black text-navy mb-1">$3,000</p>
+          <p class="text-txt-tertiary text-xs tracking-wider">佈置贊助</p>
+        </div>
+      </div>
+
+      <!-- Sponsor benefits -->
+      <div class="bg-gold-soft rounded-xl p-5 mb-6">
+        <p class="text-sm font-semibold text-txt mb-3">贊助者專屬曝光</p>
+        <div class="space-y-2.5">
+          <div class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75"/></svg>
+            <p class="text-sm text-txt-secondary">開幕<strong class="text-txt">背板</strong>展示贊助者 Logo / 公司名稱 / 姓名</p>
+          </div>
+          <div class="flex items-start gap-2.5">
+            <svg class="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75"/></svg>
+            <p class="text-sm text-txt-secondary">Facebook <strong class="text-txt">貼文</strong>感謝曝光</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bank info -->
+      <div class="bg-navy/4 rounded-xl p-5 mb-5">
+        <p class="text-xs text-txt-tertiary font-medium mb-3 tracking-wider uppercase font-heading">匯款資訊</p>
+        <table class="w-full text-sm">
+          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5 w-16">銀行</th><td class="py-1.5 font-semibold">合作金庫（006）</td></tr>
+          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">分行</th><td class="py-1.5 font-semibold">民族分行</td></tr>
+          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">帳號</th><td class="py-1.5 font-semibold font-heading tracking-wider">0903-717-107411</td></tr>
+          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">戶名</th><td class="py-1.5 font-semibold">窩的家裝潢管理顧問有限公司</td></tr>
+        </table>
+      </div>
+
+      <!-- Transfer reminder -->
+      <div class="bg-coral-soft rounded-xl p-4 mb-5 flex items-start gap-3">
+        <svg class="w-5 h-5 text-coral flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+        <p class="text-sm text-txt-secondary leading-relaxed">匯款備註請填「<strong class="text-txt">公司名稱或姓名</strong>」即可<br>例如：<span class="text-txt font-medium">王小明</span>、<span class="text-txt font-medium">XX不動產</span></p>
+      </div>
+
+      <!-- Invoice + opt-out -->
+      <div class="space-y-3 text-sm mb-8">
+        <p class="text-txt-secondary">匯款後請告知姓名/公司名稱與金額，方便我們核對與製作背板。</p>
+        <label class="flex items-start gap-2.5 cursor-pointer group">
+          <input type="checkbox" class="mt-1 w-4 h-4 rounded border-gray-300 text-navy accent-navy cursor-pointer">
+          <span class="text-txt-secondary group-hover:text-txt transition-colors">我<strong>不</strong>希望名稱出現在背板上</span>
+        </label>
+        <label class="flex items-start gap-2.5 cursor-pointer group">
+          <input type="checkbox" class="mt-1 w-4 h-4 rounded border-gray-300 text-navy accent-navy cursor-pointer">
+          <span class="text-txt-secondary group-hover:text-txt transition-colors">需要開立發票</span>
+        </label>
+      </div>
+
+      <!-- CTA to reveal registration -->
+      <div class="text-center">
+        <button onclick="revealRegister()" class="btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-base cursor-pointer">
+          <span>我要報名參觀</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHAT TO EXPECT ========== -->
+<section class="content-layer py-16 px-4 md:px-8">
+  <div class="max-w-3xl mx-auto">
+    <div class="glass rounded-3xl p-8 md:p-10 reveal">
+      <div class="text-center mb-6">
+        <p class="text-coral text-xs tracking-[0.2em] uppercase font-semibold mb-3 font-heading">What to Expect</p>
+        <h2 class="text-2xl md:text-3xl font-black tracking-[0.04em]">活動當天流程</h2>
+      </div>
+      <div class="space-y-4">
+        <div class="flex items-start gap-4">
+          <span class="w-8 h-8 rounded-full bg-coral-soft flex items-center justify-center flex-shrink-0 text-coral text-xs font-bold">1</span>
+          <div>
+            <p class="font-semibold text-txt text-sm">報到入場</p>
+            <p class="text-txt-secondary text-sm">現場簽到，確認報名場次</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="w-8 h-8 rounded-full bg-coral-soft flex items-center justify-center flex-shrink-0 text-coral text-xs font-bold">2</span>
+          <div>
+            <p class="font-semibold text-txt text-sm">一條龍服務導覽</p>
+            <p class="text-txt-secondary text-sm">了解從買房、裝修、出租到管理的完整服務佈局</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="w-8 h-8 rounded-full bg-coral-soft flex items-center justify-center flex-shrink-0 text-coral text-xs font-bold">3</span>
+          <div>
+            <p class="font-semibold text-txt text-sm">茶敘交流</p>
+            <p class="text-txt-secondary text-sm">輕鬆茶點、自由交流，認識同業與合作夥伴</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ========== REGISTRATION ========== -->
-<section id="register" class="content-layer py-24 px-4 md:px-8">
+<section id="register" class="content-layer py-24 px-4 md:px-8" style="display:none;">
   <div class="max-w-5xl mx-auto">
     <div class="text-center mb-16 reveal">
       <p class="text-coral text-xs tracking-[0.2em] uppercase font-semibold mb-3 font-heading">Registration</p>
@@ -753,118 +874,6 @@ tailwind.config = {
   </div>
 </section>
 
-<!-- ========== NOTICE ========== -->
-<section class="content-layer py-24 px-4 md:px-8">
-  <div class="max-w-3xl mx-auto">
-    <div class="glass rounded-3xl p-8 md:p-10 reveal">
-      <div class="text-center mb-6">
-        <p class="text-coral text-xs tracking-[0.2em] uppercase font-semibold mb-3 font-heading">Notice</p>
-        <h2 class="text-2xl md:text-3xl font-black tracking-[0.04em]">溫馨提醒</h2>
-      </div>
-
-      <div class="glass-subtle rounded-2xl p-6 mb-6">
-        <h3 class="font-bold text-txt mb-2">因場地較小，本次開幕不收花籃</h3>
-        <p class="text-txt-secondary text-sm leading-relaxed">想表達心意的話，歡迎贊助當天的餐點與佈置 :)</p>
-      </div>
-
-      <!-- Sponsor tiers -->
-      <div class="grid grid-cols-3 gap-3 mb-6">
-        <div class="sponsor-card glass-subtle rounded-2xl p-5 text-center">
-          <p class="text-2xl font-black text-navy mb-1">$1,000</p>
-          <p class="text-txt-tertiary text-xs tracking-wider">友情贊助</p>
-        </div>
-        <div class="sponsor-card glass-subtle rounded-2xl p-5 text-center">
-          <p class="text-2xl font-black text-navy mb-1">$2,000</p>
-          <p class="text-txt-tertiary text-xs tracking-wider">餐點贊助</p>
-        </div>
-        <div class="sponsor-card glass-subtle rounded-2xl p-5 text-center">
-          <p class="text-2xl font-black text-navy mb-1">$3,000</p>
-          <p class="text-txt-tertiary text-xs tracking-wider">佈置贊助</p>
-        </div>
-      </div>
-
-      <!-- Sponsor benefits -->
-      <div class="bg-gold-soft rounded-xl p-5 mb-6">
-        <p class="text-sm font-semibold text-txt mb-3">贊助者專屬曝光</p>
-        <div class="space-y-2.5">
-          <div class="flex items-start gap-2.5">
-            <svg class="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75"/></svg>
-            <p class="text-sm text-txt-secondary">開幕<strong class="text-txt">背板</strong>展示贊助者 Logo / 公司名稱 / 姓名</p>
-          </div>
-          <div class="flex items-start gap-2.5">
-            <svg class="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75"/></svg>
-            <p class="text-sm text-txt-secondary">Facebook <strong class="text-txt">貼文</strong>感謝曝光</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bank info -->
-      <div class="bg-navy/4 rounded-xl p-5 mb-5">
-        <p class="text-xs text-txt-tertiary font-medium mb-3 tracking-wider uppercase font-heading">匯款資訊</p>
-        <table class="w-full text-sm">
-          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5 w-16">銀行</th><td class="py-1.5 font-semibold">合作金庫（006）</td></tr>
-          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">分行</th><td class="py-1.5 font-semibold">民族分行</td></tr>
-          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">帳號</th><td class="py-1.5 font-semibold font-heading tracking-wider">0903-717-107411</td></tr>
-          <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">戶名</th><td class="py-1.5 font-semibold">窩的家裝潢管理顧問有限公司</td></tr>
-        </table>
-      </div>
-
-      <!-- Transfer reminder -->
-      <div class="bg-coral-soft rounded-xl p-4 mb-5 flex items-start gap-3">
-        <svg class="w-5 h-5 text-coral flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
-        <p class="text-sm text-txt-secondary leading-relaxed">匯款備註請填「<strong class="text-txt">公司名稱或姓名</strong>」即可<br>例如：<span class="text-txt font-medium">王小明</span>、<span class="text-txt font-medium">XX不動產</span></p>
-      </div>
-
-      <!-- Invoice + opt-out -->
-      <div class="space-y-3 text-sm">
-        <p class="text-txt-secondary">匯款後請告知姓名/公司名稱與金額，方便我們核對與製作背板。</p>
-        <label class="flex items-start gap-2.5 cursor-pointer group">
-          <input type="checkbox" class="mt-1 w-4 h-4 rounded border-gray-300 text-navy accent-navy cursor-pointer">
-          <span class="text-txt-secondary group-hover:text-txt transition-colors">我<strong>不</strong>希望名稱出現在背板上</span>
-        </label>
-        <label class="flex items-start gap-2.5 cursor-pointer group">
-          <input type="checkbox" class="mt-1 w-4 h-4 rounded border-gray-300 text-navy accent-navy cursor-pointer">
-          <span class="text-txt-secondary group-hover:text-txt transition-colors">需要開立發票</span>
-        </label>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== WHAT TO EXPECT ========== -->
-<section class="content-layer py-16 px-4 md:px-8">
-  <div class="max-w-3xl mx-auto">
-    <div class="glass rounded-3xl p-8 md:p-10 reveal">
-      <div class="text-center mb-6">
-        <p class="text-coral text-xs tracking-[0.2em] uppercase font-semibold mb-3 font-heading">What to Expect</p>
-        <h2 class="text-2xl md:text-3xl font-black tracking-[0.04em]">活動當天流程</h2>
-      </div>
-      <div class="space-y-4">
-        <div class="flex items-start gap-4">
-          <span class="w-8 h-8 rounded-full bg-coral-soft flex items-center justify-center flex-shrink-0 text-coral text-xs font-bold">1</span>
-          <div>
-            <p class="font-semibold text-txt text-sm">報到入場</p>
-            <p class="text-txt-secondary text-sm">現場簽到，確認報名場次</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-4">
-          <span class="w-8 h-8 rounded-full bg-coral-soft flex items-center justify-center flex-shrink-0 text-coral text-xs font-bold">2</span>
-          <div>
-            <p class="font-semibold text-txt text-sm">一條龍服務導覽</p>
-            <p class="text-txt-secondary text-sm">了解從買房、裝修、出租到管理的完整服務佈局</p>
-          </div>
-        </div>
-        <div class="flex items-start gap-4">
-          <span class="w-8 h-8 rounded-full bg-coral-soft flex items-center justify-center flex-shrink-0 text-coral text-xs font-bold">3</span>
-          <div>
-            <p class="font-semibold text-txt text-sm">茶敘交流</p>
-            <p class="text-txt-secondary text-sm">輕鬆茶點、自由交流，認識同業與合作夥伴</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ========== FOOTER ========== -->
 <footer class="content-layer py-10 px-4">
@@ -933,6 +942,15 @@ tailwind.config = {
   const SESSION_LABELS = { morning: '上午場 10:00', afternoon1: '下午場一 13:00', afternoon2: '下午場二 15:00' };
 
   let selectedSession = null;
+
+  // === REVEAL REGISTRATION ===
+  function revealRegister() {
+    const reg = document.getElementById('register');
+    reg.style.display = '';
+    // re-observe reveal elements inside the now-visible section
+    reg.querySelectorAll('.reveal').forEach(el => { el.classList.remove('visible'); ro.observe(el); });
+    setTimeout(() => reg.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
   let sessionCounts = { morning: 0, afternoon1: 0, afternoon2: 0 };
 
   // === SCROLL REVEAL ===
