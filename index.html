@@ -142,7 +142,7 @@ tailwind.config = {
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
   }
   .floor-number {
-    font-size: 3.5rem;
+    font-size: 2rem;
     font-weight: 900;
     line-height: 1;
     background: linear-gradient(135deg, #3f5262, #5a7080);
@@ -154,7 +154,7 @@ tailwind.config = {
   }
   .floor-card:hover .floor-number { opacity: 0.45; }
   .floor-logo {
-    width: 64px; height: 64px;
+    width: 48px; height: 48px;
     flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
   }
@@ -163,6 +163,7 @@ tailwind.config = {
     object-fit: contain;
   }
   @media (min-width: 768px) {
+    .floor-number { font-size: 3.5rem; }
     .floor-logo { width: 80px; height: 80px; }
   }
 
@@ -436,7 +437,7 @@ tailwind.config = {
               <span>查看地圖</span>
               <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
             </a>
-            <p class="text-txt-tertiary text-xs mt-1">路邊停車或三重國小地下停車場（步行 3 分鐘）</p>
+            <p class="text-txt-tertiary text-xs mt-1">三重正義國小地下停車場（步行 3 分鐘）</p>
           </div>
         </div>
 
@@ -456,19 +457,19 @@ tailwind.config = {
         <div>
           <p class="text-xs text-txt-tertiary uppercase tracking-[0.15em] mb-3 font-medium font-heading">距離活動開始</p>
           <div class="flex gap-3" id="countdown">
-            <div class="glass-subtle rounded-2xl px-4 py-3 text-center min-w-[68px]">
+            <div class="glass-subtle rounded-2xl px-3 py-3 text-center min-w-[56px] md:min-w-[68px] md:px-4">
               <span class="text-2xl font-black text-txt" id="cd-days">--</span>
               <p class="text-[10px] text-txt-tertiary mt-0.5 font-medium">天</p>
             </div>
-            <div class="glass-subtle rounded-2xl px-4 py-3 text-center min-w-[68px]">
+            <div class="glass-subtle rounded-2xl px-3 py-3 text-center min-w-[56px] md:min-w-[68px] md:px-4">
               <span class="text-2xl font-black text-txt" id="cd-hours">--</span>
               <p class="text-[10px] text-txt-tertiary mt-0.5 font-medium">時</p>
             </div>
-            <div class="glass-subtle rounded-2xl px-4 py-3 text-center min-w-[68px]">
+            <div class="glass-subtle rounded-2xl px-3 py-3 text-center min-w-[56px] md:min-w-[68px] md:px-4">
               <span class="text-2xl font-black text-txt" id="cd-mins">--</span>
               <p class="text-[10px] text-txt-tertiary mt-0.5 font-medium">分</p>
             </div>
-            <div class="glass-subtle rounded-2xl px-4 py-3 text-center min-w-[68px]">
+            <div class="glass-subtle rounded-2xl px-3 py-3 text-center min-w-[56px] md:min-w-[68px] md:px-4">
               <span class="text-2xl font-black text-txt" id="cd-secs">--</span>
               <p class="text-[10px] text-txt-tertiary mt-0.5 font-medium">秒</p>
             </div>
@@ -500,7 +501,7 @@ tailwind.config = {
     <div class="space-y-5">
       <!-- 1F -->
       <div class="floor-card glass rounded-3xl p-6 md:p-8 reveal">
-        <div class="flex items-center gap-5 md:gap-8">
+        <div class="flex items-center gap-3 md:gap-8">
           <span class="floor-number flex-shrink-0">1F</span>
           <div class="floor-logo"><img src="logo-hbhousing.png" alt="住商不動產" class="mix-blend-multiply"></div>
           <div class="flex-1 min-w-0">
@@ -521,7 +522,7 @@ tailwind.config = {
 
       <!-- 2F -->
       <div class="floor-card glass rounded-3xl p-6 md:p-8 reveal reveal-d1">
-        <div class="flex items-center gap-5 md:gap-8">
+        <div class="flex items-center gap-3 md:gap-8">
           <span class="floor-number flex-shrink-0">2F</span>
           <div class="floor-logo"><img src="設計部LOGO.png" alt="窩的家室內裝修" class="rounded-lg"></div>
           <div class="flex-1 min-w-0">
@@ -542,7 +543,7 @@ tailwind.config = {
 
       <!-- 3F -->
       <div class="floor-card glass rounded-3xl p-6 md:p-8 reveal reveal-d2">
-        <div class="flex items-center gap-5 md:gap-8">
+        <div class="flex items-center gap-3 md:gap-8">
           <span class="floor-number flex-shrink-0">3F</span>
           <div class="floor-logo"><img src="logo-yourhouse.jpg" alt="優式租售管理" class="rounded-lg"></div>
           <div class="flex-1 min-w-0">
@@ -563,7 +564,7 @@ tailwind.config = {
 
       <!-- 4F -->
       <div class="floor-card glass rounded-3xl p-6 md:p-8 reveal reveal-d3">
-        <div class="flex items-center gap-5 md:gap-8">
+        <div class="flex items-center gap-3 md:gap-8">
           <span class="floor-number flex-shrink-0">4F</span>
           <div class="floor-logo"><img src="logo-lingchun.png" alt="凌群不動產" class="mix-blend-multiply"></div>
           <div class="flex-1 min-w-0">
@@ -584,7 +585,7 @@ tailwind.config = {
 
       <!-- 5F -->
       <div class="floor-card glass rounded-3xl p-6 md:p-8 reveal reveal-d4">
-        <div class="flex items-center gap-5 md:gap-8">
+        <div class="flex items-center gap-3 md:gap-8">
           <span class="floor-number flex-shrink-0">5F</span>
           <div class="floor-logo"><img src="logo.png" alt="窩的家"></div>
           <div class="flex-1 min-w-0">
@@ -630,18 +631,18 @@ tailwind.config = {
       </div>
 
       <!-- Sponsor tiers -->
-      <div class="grid grid-cols-3 gap-3 mb-6">
-        <div class="sponsor-card glass-subtle rounded-2xl p-5 text-center">
-          <p class="text-2xl font-black text-navy mb-1">$1,000</p>
-          <p class="text-txt-tertiary text-xs tracking-wider">友情贊助</p>
+      <div class="grid grid-cols-3 gap-2 md:gap-3 mb-6">
+        <div class="sponsor-card glass-subtle rounded-2xl p-3 md:p-5 text-center">
+          <p class="text-lg md:text-2xl font-black text-navy mb-1">$1,000</p>
+          <p class="text-txt-tertiary text-[10px] md:text-xs tracking-wider">友情贊助</p>
         </div>
-        <div class="sponsor-card glass-subtle rounded-2xl p-5 text-center">
-          <p class="text-2xl font-black text-navy mb-1">$2,000</p>
-          <p class="text-txt-tertiary text-xs tracking-wider">餐點贊助</p>
+        <div class="sponsor-card glass-subtle rounded-2xl p-3 md:p-5 text-center">
+          <p class="text-lg md:text-2xl font-black text-navy mb-1">$2,000</p>
+          <p class="text-txt-tertiary text-[10px] md:text-xs tracking-wider">餐點贊助</p>
         </div>
-        <div class="sponsor-card glass-subtle rounded-2xl p-5 text-center">
-          <p class="text-2xl font-black text-navy mb-1">$3,000</p>
-          <p class="text-txt-tertiary text-xs tracking-wider">佈置贊助</p>
+        <div class="sponsor-card glass-subtle rounded-2xl p-3 md:p-5 text-center">
+          <p class="text-lg md:text-2xl font-black text-navy mb-1">$3,000</p>
+          <p class="text-txt-tertiary text-[10px] md:text-xs tracking-wider">佈置贊助</p>
         </div>
       </div>
 
@@ -661,9 +662,9 @@ tailwind.config = {
       </div>
 
       <!-- Bank info -->
-      <div class="bg-navy/4 rounded-xl p-5 mb-5">
+      <div class="bg-navy/4 rounded-xl p-4 md:p-5 mb-5 overflow-x-auto">
         <p class="text-xs text-txt-tertiary font-medium mb-3 tracking-wider uppercase font-heading">匯款資訊</p>
-        <table class="w-full text-sm">
+        <table class="w-full text-sm" style="word-break:break-all;">
           <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5 w-16">銀行</th><td class="py-1.5 font-semibold">合作金庫（006）</td></tr>
           <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">分行</th><td class="py-1.5 font-semibold">民族分行</td></tr>
           <tr><th class="text-left text-txt-tertiary font-medium pr-4 py-1.5">帳號</th><td class="py-1.5 font-semibold font-heading tracking-wider">0903-717-107411</td></tr>
@@ -751,7 +752,7 @@ tailwind.config = {
         <p class="text-xs font-semibold text-txt-tertiary tracking-[0.2em] uppercase mb-4 font-heading">Select Session</p>
         <div class="space-y-4" id="sessions">
           <!-- Morning -->
-          <div class="session-card glass rounded-2xl p-6" onclick="selectSession(this, 'morning')" id="card-morning">
+          <div class="session-card glass rounded-2xl p-4 md:p-6" onclick="selectSession(this, 'morning')" id="card-morning">
             <input type="radio" name="session" value="morning" class="hidden">
             <div class="flex justify-between items-start">
               <div>
@@ -772,7 +773,7 @@ tailwind.config = {
           </div>
 
           <!-- Afternoon 1 -->
-          <div class="session-card glass rounded-2xl p-6" onclick="selectSession(this, 'afternoon1')" id="card-afternoon1">
+          <div class="session-card glass rounded-2xl p-4 md:p-6" onclick="selectSession(this, 'afternoon1')" id="card-afternoon1">
             <input type="radio" name="session" value="afternoon1" class="hidden">
             <div class="flex justify-between items-start">
               <div>
@@ -793,7 +794,7 @@ tailwind.config = {
           </div>
 
           <!-- Afternoon 2 -->
-          <div class="session-card glass rounded-2xl p-6" onclick="selectSession(this, 'afternoon2')" id="card-afternoon2">
+          <div class="session-card glass rounded-2xl p-4 md:p-6" onclick="selectSession(this, 'afternoon2')" id="card-afternoon2">
             <input type="radio" name="session" value="afternoon2" class="hidden">
             <div class="flex justify-between items-start">
               <div>
