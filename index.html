@@ -422,7 +422,7 @@ tailwind.config = {
           </div>
           <div>
             <p class="font-semibold text-txt">2026 年 4 月 26 日（日）</p>
-            <p class="text-txt-secondary text-sm">上午場 10:00 / 下午場一 13:00 / 下午場二 15:00</p>
+            <p class="text-txt-secondary text-sm">上午場 10:00 / 下午場一 13:00</p>
           </div>
         </div>
 
@@ -788,7 +788,7 @@ tailwind.config = {
             <div class="flex justify-between items-start">
               <div>
                 <p class="font-bold text-txt text-base mb-1">下午場一 13:00 - 14:30</p>
-                <p class="text-txt-tertiary text-xs">對象：屋主、學員、親友</p>
+                <p class="text-txt-tertiary text-xs">對象：屋主、學員、親友、BNI 夥伴</p>
               </div>
               <div class="flex items-center gap-3">
                 <span class="session-badge text-[10px] font-bold tracking-[0.12em] font-heading px-3 py-1 rounded-full" id="badge-afternoon1"></span>
@@ -803,26 +803,6 @@ tailwind.config = {
             </div>
           </div>
 
-          <!-- Afternoon 2 -->
-          <div class="session-card glass rounded-2xl p-4 md:p-6" onclick="selectSession(this, 'afternoon2')" id="card-afternoon2">
-            <input type="radio" name="session" value="afternoon2" class="hidden">
-            <div class="flex justify-between items-start">
-              <div>
-                <p class="font-bold text-txt text-base mb-1">下午場二 15:00 - 16:30</p>
-                <p class="text-txt-tertiary text-xs">對象：BNI 夥伴</p>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="session-badge text-[10px] font-bold tracking-[0.12em] font-heading px-3 py-1 rounded-full" id="badge-afternoon2"></span>
-                <div class="session-check">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-              </div>
-            </div>
-            <div class="mt-4">
-              <div class="h-0.5 bg-black/5 rounded-full overflow-hidden"><div class="capacity-fill" id="fill-afternoon2" style="width:0%"></div></div>
-              <p class="text-[11px] text-txt-tertiary mt-1.5 text-right font-medium" id="cap-afternoon2"><span class="skeleton"></span></p>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -950,7 +930,7 @@ tailwind.config = {
   // === CONFIG ===
   const API_BASE = 'https://opening-event-proxy.wuohome.workers.dev';
   const MAX_PER_SESSION = 30;
-  const SESSION_LABELS = { morning: '上午場 10:00', afternoon1: '下午場一 13:00', afternoon2: '下午場二 15:00' };
+  const SESSION_LABELS = { morning: '上午場 10:00', afternoon1: '下午場一 13:00' };
 
   let selectedSession = null;
 
@@ -962,7 +942,7 @@ tailwind.config = {
     reg.querySelectorAll('.reveal').forEach(el => { el.classList.remove('visible'); ro.observe(el); });
     setTimeout(() => reg.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   }
-  let sessionCounts = { morning: 0, afternoon1: 0, afternoon2: 0 };
+  let sessionCounts = { morning: 0, afternoon1: 0 };
 
   // === SCROLL REVEAL ===
   const ro = new IntersectionObserver((entries) => {
@@ -975,11 +955,12 @@ tailwind.config = {
     fetch(API_BASE + '/counts')
       .then(r => r.json())
       .then(data => {
-        sessionCounts = { morning: data.morning || 0, afternoon1: data.afternoon1 || 0, afternoon2: data.afternoon2 || 0 };
+        // 原第三場次 (afternoon2) 取消，舊有報名人數併入下午場一
+        sessionCounts = { morning: data.morning || 0, afternoon1: (data.afternoon1 || 0) + (data.afternoon2 || 0) };
         updateCapacityUI();
       })
       .catch(() => {
-        ['morning', 'afternoon1', 'afternoon2'].forEach(s => {
+        ['morning', 'afternoon1'].forEach(s => {
           document.getElementById('cap-' + s).textContent = '剩餘 ' + MAX_PER_SESSION + ' 位';
           const badge = document.getElementById('badge-' + s);
           badge.className = 'session-badge text-[10px] font-bold tracking-[0.12em] font-heading px-3 py-1 rounded-full bg-green-50 text-green-700';
@@ -989,7 +970,7 @@ tailwind.config = {
   }
 
   function updateCapacityUI() {
-    ['morning', 'afternoon1', 'afternoon2'].forEach(s => {
+    ['morning', 'afternoon1'].forEach(s => {
       const count = sessionCounts[s];
       const remaining = MAX_PER_SESSION - count;
       const pct = (count / MAX_PER_SESSION) * 100;
