@@ -1,0 +1,3868 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>窩的家 4/26 開幕 · 會議版作戰手冊</title>
+<style>
+  :root {
+    --red: #E8473F;
+    --yellow: #F5C518;
+    --dark: #1A1A2E;
+    --gray: #4A4A5A;
+    --light: #F7F7F9;
+    --border: #E0E0E8;
+    --pending: #F0A500;
+    --green: #2E7D32;
+    --blue: #1565C0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ══════ 頂部 Tab 列 ══════ */
+  .topbar {
+    background: var(--dark);
+    color: #fff;
+    padding: 12px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .topbar-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .tb-clock {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--yellow);
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
+    min-width: 85px;
+  }
+  .tb-title {
+    font-size: 14px;
+    color: #ccc;
+    flex: 1;
+  }
+  .tb-tabs {
+    display: flex;
+    gap: 4px;
+    background: rgba(255,255,255,0.08);
+    padding: 4px;
+    border-radius: 10px;
+    flex-wrap: wrap;
+  }
+  .tb-tab {
+    background: transparent;
+    color: #ccc;
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .tb-tab:hover { color: #fff; }
+  .tb-tab.active { background: var(--red); color: #fff; }
+
+  /* ══════ 頁面切換 ══════ */
+  .page { display: none; max-width: 1400px; margin: 0 auto; padding: 24px 20px 60px; }
+  .page.active { display: block; }
+
+  /* ══════ 共用元件 ══════ */
+  .section-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--dark);
+    border-left: 6px solid var(--red);
+    padding-left: 12px;
+    margin-bottom: 16px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  /* ══════ 全景頁：故事線 Hero ══════ */
+  .hero {
+    background: linear-gradient(135deg, var(--red) 0%, #B8342D 100%);
+    color: #fff;
+    padding: 32px 28px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+  }
+  .hero-meta-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .hm-label { font-size: 11px; opacity: 0.75; letter-spacing: 1px; }
+  .hm-value { font-size: 15px; font-weight: 700; }
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  .hero-lead {
+    font-size: 15px;
+    opacity: 0.9;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .hero-points {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media (min-width: 800px) {
+    .hero-points { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  .hp {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+  }
+  .hp-num {
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    background: var(--yellow);
+    color: var(--dark);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: 900;
+    font-size: 16px;
+  }
+  .hp-title {
+    font-size: 16px;
+    font-weight: 800;
+    margin: 6px 0 4px;
+    color: #fff;
+  }
+  .hp-sub {
+    font-size: 12px;
+    opacity: 0.85;
+    line-height: 1.5;
+  }
+  .hero-foot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .hf-label {
+    font-size: 12px;
+    opacity: 0.75;
+    letter-spacing: 2px;
+    margin-right: 4px;
+  }
+  .hf-chip {
+    background: rgba(255,255,255,0.15);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* ══════ 視覺時間軸（橫向 10 段）══════ */
+  .vtimeline {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    overflow-x: auto;
+  }
+  .vtimeline-track {
+    display: flex;
+    gap: 0;
+    min-width: max-content;
+    position: relative;
+  }
+  .vt-step {
+    min-width: 128px;
+    padding: 14px 10px 14px 10px;
+    text-align: center;
+    position: relative;
+    border-top: 4px solid var(--border);
+    margin-top: 30px;
+  }
+  .vt-step::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: var(--red);
+    border-radius: 50%;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 2px var(--red);
+  }
+  .vt-step.highlight { border-top-color: var(--red); }
+  .vt-step.highlight::before { background: var(--yellow); box-shadow: 0 0 0 2px var(--yellow); }
+  .vt-time { font-size: 15px; font-weight: 800; color: var(--red); }
+  .vt-name { font-size: 13px; font-weight: 700; margin-top: 4px; }
+  .vt-ico { font-size: 24px; margin-top: 6px; }
+  .vt-people {
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  /* ══════ 三欄格：賓客 / 今天結果 / 名詞表 ══════ */
+  .grid3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  @media (min-width: 900px) { .grid3 { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1200px) { .grid3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+  /* 賓客三種人 */
+  .guest-group {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .gg-head {
+    padding: 14px 18px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 16px;
+  }
+  .gg-head.g1 { background: var(--blue); }
+  .gg-head.g2 { background: #9C27B0; }
+  .gg-head.g3 { background: var(--green); }
+  .gg-body { padding: 14px 18px 18px; }
+  .gg-body ul { padding-left: 18px; font-size: 13px; color: var(--gray); line-height: 1.7; }
+  .gg-body .receptor {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: var(--light);
+    border-left: 3px solid var(--red);
+    font-size: 12px;
+    border-radius: 4px;
+  }
+  .gg-body .receptor strong { color: var(--red); }
+
+  /* 今天 3 大任務 */
+  .top-tasks {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .top-task-grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 800px) { .top-task-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  .top-task {
+    padding: 18px;
+    border-radius: 12px;
+    border: 2px solid var(--border);
+    position: relative;
+  }
+  .top-task.t1 { border-color: var(--red); background: #FFF5F4; }
+  .top-task.t2 { border-color: var(--yellow); background: #FFFBE8; }
+  .top-task.t3 { border-color: var(--green); background: #F1F8F1; }
+  .top-task .num {
+    position: absolute;
+    top: -12px;
+    left: 12px;
+    background: var(--dark);
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .top-task h3 { font-size: 16px; font-weight: 800; margin: 6px 0 8px; }
+  .top-task p { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+  /* 名詞表 */
+  .glossary {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .glossary-grid {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 700px) { .glossary-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1100px) { .glossary-grid { grid-template-columns: 1fr 1fr 1fr; } }
+  .gloss-item {
+    padding: 12px 14px;
+    background: var(--light);
+    border-radius: 8px;
+    border-left: 4px solid var(--yellow);
+  }
+  .gloss-term { font-size: 14px; font-weight: 800; color: var(--dark); }
+  .gloss-def { font-size: 12px; color: var(--gray); margin-top: 4px; line-height: 1.5; }
+
+  /* ══════ 我的任務頁 ══════ */
+  .me-picker-wrap {
+    background: #fff;
+    padding: 20px 24px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .me-picker-wrap label {
+    display: block;
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .me-picker-wrap select {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 18px;
+    font-weight: 800;
+    border: 2px solid var(--red);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--dark);
+  }
+  .me-summary {
+    background: var(--yellow);
+    color: var(--dark);
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    font-size: 15px;
+    font-weight: 700;
+    display: none;
+  }
+  .me-summary.show { display: block; }
+  .me-summary .cnt { font-size: 22px; font-weight: 900; color: var(--red); }
+  .me-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .me-card {
+    background: #fff;
+    border-left: 5px solid var(--red);
+    border-radius: 10px;
+    padding: 16px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .me-card-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .me-time { font-size: 20px; font-weight: 900; color: var(--red); font-variant-numeric: tabular-nums; }
+  .me-role { font-size: 16px; font-weight: 700; color: var(--dark); }
+  .me-do { font-size: 14px; color: var(--dark); line-height: 1.7; margin-bottom: 10px; }
+  .me-helpers {
+    background: var(--light);
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--gray);
+  }
+  .me-helpers strong { color: var(--red); }
+  .me-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gray);
+    font-size: 14px;
+  }
+  .me-empty-big { font-size: 48px; margin-bottom: 10px; }
+
+  .me-contact-card {
+    background: var(--dark);
+    color: #fff;
+    padding: 18px 22px;
+    border-radius: 12px;
+    margin-top: 20px;
+  }
+  .me-contact-card h3 { font-size: 15px; margin-bottom: 10px; color: var(--yellow); }
+  .me-contact-card a { color: var(--yellow); text-decoration: none; font-weight: 700; }
+  .me-contact-card .contact-row { margin-bottom: 6px; font-size: 14px; }
+
+  /* ══════ 排班指派頁：矩陣 + 池 ══════ */
+  .assign-toolbar {
+    background: var(--dark);
+    color: #fff;
+    padding: 16px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .asn-title { font-size: 18px; font-weight: 800; }
+  .asn-sub { font-size: 13px; color: #bbb; margin-top: 2px; }
+  .asn-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .asn-status {
+    padding: 8px 14px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 6px;
+    font-size: 13px;
+    color: #ffd;
+  }
+  .asn-status.saving { background: var(--blue); color: #fff; }
+  .asn-status.saved { background: var(--green); color: #fff; }
+  .asn-status.error { background: #C62828; color: #fff; }
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 800;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .btn-primary:hover { background: #d03a33; }
+  .btn-primary:disabled { background: #888; cursor: not-allowed; }
+  .btn-primary.yellow { background: var(--yellow); color: var(--dark); }
+  .btn-primary.yellow:hover { background: #ffd500; }
+
+  .matrix-wrap {
+    background: #fff;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 16px;
+  }
+  table.matrix {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: max-content;
+    min-width: 100%;
+    font-size: 13px;
+  }
+  table.matrix thead th {
+    background: var(--dark);
+    color: #fff;
+    font-weight: 700;
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 12px;
+    border: 1px solid #333;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    min-width: 110px;
+    vertical-align: middle;
+  }
+  table.matrix thead th .t-big { display: block; font-size: 14px; font-weight: 800; color: var(--yellow); }
+  table.matrix thead th .t-sub { display: block; font-size: 11px; color: #ddd; font-weight: 500; }
+  table.matrix thead th:first-child {
+    min-width: 130px;
+    position: sticky;
+    left: 0;
+    z-index: 6;
+    text-align: left;
+    padding-left: 14px;
+  }
+  table.matrix tbody td {
+    border: 1px solid var(--border);
+    padding: 0;
+    vertical-align: middle;
+    text-align: center;
+    height: 44px;
+    background: #fff;
+  }
+  th.mv-group-th {
+    min-width: 32px !important;
+    background: var(--dark) !important;
+    padding: 4px 0 !important;
+    font-size: 11px !important;
+    writing-mode: horizontal-tb;
+  }
+  td.mv-group-td {
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    text-align: center;
+    padding: 10px 4px !important;
+    letter-spacing: 2px;
+    min-width: 28px;
+    width: 28px;
+    line-height: 1.2;
+    border-right: 2px solid #fff !important;
+    position: sticky;
+    left: 0;
+    z-index: 3;
+  }
+  table.matrix tbody td.mv-name {
+    left: 28px !important;
+  }
+  table.matrix tbody td.mv-name {
+    position: sticky;
+    left: 0;
+    background: #FAFAFA;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--dark);
+    padding: 6px 12px;
+    text-align: left;
+    z-index: 2;
+    border-right: 2px solid var(--dark);
+    white-space: nowrap;
+  }
+  table.matrix tbody td.mv-name .nm-tag {
+    display: block;
+    font-size: 10px;
+    color: #999;
+    font-weight: 400;
+  }
+  table.matrix tbody td.mv-name .nm-count {
+    display: inline-block;
+    background: var(--border);
+    color: var(--gray);
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-left: 4px;
+    font-weight: 700;
+  }
+  table.matrix tbody td.mv-name .nm-count.busy { background: var(--red); color: #fff; }
+  table.matrix tbody td.mv-name .nm-count.normal { background: #E8F5E9; color: #2E7D32; }
+
+  .mv-cell {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    padding: 4px;
+    min-height: 38px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .mv-cell.drag-over {
+    background: #FFF8E1 !important;
+    outline: 2px dashed var(--red);
+    outline-offset: -2px;
+  }
+  .mv-cell.empty:hover { background: #F5F5F5; }
+  .mv-cell.inactive {
+    background: #F5F5F7;
+    cursor: default;
+    min-height: 38px;
+  }
+  .mv-role-chip {
+    background: var(--red);
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: grab;
+    white-space: nowrap;
+    line-height: 1.3;
+  }
+  .mv-role-chip:active { cursor: grabbing; }
+  .mv-role-chip.color-joan { background: #E8473F; }
+  .mv-role-chip.color-ivy { background: #9C27B0; }
+  .mv-role-chip.color-boss { background: #F5C518; color: #1A1A2E; }
+  .mv-role-chip.color-vip { background: #1565C0; }
+  .mv-role-chip.color-food { background: #FF9800; }
+  .mv-role-chip.color-welcome { background: #00ACC1; }
+  .mv-role-chip.color-cut { background: #D81B60; }
+  .mv-role-chip.color-float { background: #6A1B9A; }
+  .mv-role-chip.color-floor { background: #2E7D32; }
+  .mv-role-chip.color-clean { background: #00838F; }
+  .mv-role-chip.color-shoot { background: #455A64; }
+  .mv-role-chip.color-bento { background: #795548; }
+  .mv-role-chip.color-closer { background: #546E7A; }
+
+  .pool-wrap {
+    background: #FAFAFA;
+    padding: 18px 20px;
+    border-radius: 12px;
+    border: 2px dashed var(--dark);
+    position: sticky;
+    bottom: 10px;
+    z-index: 70;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+    transition: padding 0.2s;
+  }
+  .pool-wrap.collapsed {
+    padding: 10px 18px;
+  }
+  .pool-wrap.collapsed .pool-label {
+    margin-bottom: 0;
+  }
+  .pool-wrap.collapsed .pool-chips {
+    display: none;
+  }
+  .pool-label {
+    font-size: 14px;
+    color: var(--dark);
+    margin-bottom: 10px;
+    font-weight: 800;
+  }
+  .pool-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 50px;
+  }
+  .pool-chips.drag-over {
+    background: #FFF8E1;
+    border-radius: 8px;
+    padding: 6px;
+  }
+  .pool-chip {
+    background: #fff;
+    border: 2px solid var(--dark);
+    color: var(--dark);
+    padding: 8px 14px;
+    border-radius: 22px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: grab;
+    user-select: none;
+    transition: all 0.12s;
+  }
+  .pool-chip:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
+  .pool-chip:active { cursor: grabbing; }
+  .pool-chip.dragging { opacity: 0.4; }
+  .pool-chip.vendor { border-color: #9C27B0; color: #9C27B0; }
+
+  /* 崗位選擇浮層 */
+  .spp-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .spp-overlay.show { display: flex; }
+  .spp-box {
+    background: #fff;
+    border-radius: 12px;
+    max-width: 540px;
+    width: 100%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .spp-head {
+    background: var(--dark);
+    color: #fff;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .spp-title { font-size: 15px; font-weight: 700; }
+  .spp-head .close-x {
+    background: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .spp-body {
+    padding: 12px 18px 18px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .spp-opt {
+    padding: 12px 14px;
+    background: #F7F7F9;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .spp-opt:hover { border-color: var(--red); background: #FFF8E1; }
+  .spp-opt .so-meta { font-size: 11px; color: #999; }
+  .spp-opt.full { opacity: 0.5; }
+  .spp-opt.full:hover { border-color: var(--border); background: #F7F7F9; }
+
+  /* ══════ 合作廠商頁 ══════ */
+  .subtab-bar {
+    display: flex;
+    gap: 4px;
+    background: var(--light);
+    padding: 6px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .subtab {
+    flex: 1;
+    min-width: 120px;
+    background: transparent;
+    color: var(--gray);
+    border: none;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .subtab:hover { color: var(--dark); }
+  .subtab.active {
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(232,71,63,0.3);
+  }
+  .subpage { display: none; }
+  .subpage.active { display: block; }
+
+  .vendor-card {
+    background: #fff;
+    border-radius: 14px;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 24px;
+  }
+  .v-hero-row {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .v-photo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 14px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  .v-photo.v-logo { object-fit: contain; background: #fff; padding: 14px; }
+  @media (max-width: 600px) {
+    .v-photo { width: 150px; height: 150px; }
+  }
+  .v-hero-info { flex: 1; min-width: 200px; }
+  .v-name-big {
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .v-tag {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+  .v-role-big { font-size: 14px; color: var(--gray); }
+  .v-msg-box {
+    background: #FFF8E1;
+    border-left: 4px solid var(--yellow);
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+  .v-section { margin-bottom: 16px; }
+  .v-section-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--red);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .v-section ul {
+    padding-left: 18px;
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.8;
+  }
+  .v-contact-box {
+    background: var(--light);
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--dark);
+    border-left: 3px solid var(--red);
+  }
+
+  footer { text-align: center; font-size: 12px; color: #999; padding: 20px; }
+
+  /* 小螢幕隱藏副標 */
+  @media (max-width: 600px) {
+    .tb-title { display: none; }
+    .hero h1 { font-size: 22px; }
+    .hero-story { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 頂部 Tab -->
+<div class="topbar">
+  <div class="topbar-row">
+    <div class="tb-clock" id="liveClock">--:--</div>
+    <div class="tb-title">窩的家集團 · 4/26（日）開幕作戰手冊 · 會議版</div>
+    <div class="tb-tabs">
+      <button class="tb-tab active" data-page="overview">📖 活動全景</button>
+      <button class="tb-tab" data-page="roles">🎯 崗位總覽</button>
+      <button class="tb-tab" data-page="speakers">🏆 致詞嘉賓</button>
+      <button class="tb-tab" data-page="registrations">📋 報名名單</button>
+      <button class="tb-tab" data-page="me">👤 我的任務</button>
+      <button class="tb-tab" data-page="assign">📊 任務分配</button>
+      <button class="tb-tab" data-page="vendor">🤝 合作廠商</button>
+      <button class="tb-tab" data-page="reels">🎬 短影音</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- 📖 活動全景頁                            -->
+<!-- ══════════════════════════════════════════ -->
+<div id="page-overview" class="page active">
+
+  <!-- Hero 故事線 -->
+  <div class="hero">
+    <div class="hero-meta-row">
+      <div class="hero-meta-item">
+        <span class="hm-label">📅 開幕日（當天）</span>
+        <span class="hm-value">2026/04/26（日）10:00–17:30</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hm-label">⏰ 倒數</span>
+        <span class="hm-value" id="countdown">計算中…</span>
+      </div>
+    </div>
+    <h1>窩的家集團 三重新總部 開幕日</h1>
+    <p class="hero-lead">今天這場活動要做三件事：</p>
+    <div class="hero-points">
+      <div class="hp">
+        <div class="hp-num">①</div>
+        <div class="hp-title">慶祝新總部開幕剪綵</div>
+        <div class="hp-sub">10:45 騎樓紅布條剪綵儀式，5 位嘉賓站台</div>
+      </div>
+      <div class="hp">
+        <div class="hp-num">②</div>
+        <div class="hp-title">4 大品牌同日亮相</div>
+        <div class="hp-sub">住商（1F）· 設計（2F）· 優式（3F）· 凌群（4F）</div>
+      </div>
+      <div class="hp">
+        <div class="hp-num">③</div>
+        <div class="hp-title">讓夥伴客戶認識一條龍服務</div>
+        <div class="hp-sub">買賣 → 設計 → 租賃 → 社宅，四條業務線串起來</div>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <span class="hf-label">全天 4 大重點</span>
+      <span class="hf-chip">⭐ Google 五星好評</span>
+      <span class="hf-chip">🚦 1F 人流控制（上限 25 人）</span>
+      <span class="hf-chip">😊 保持微笑服務</span>
+      <span class="hf-chip">🙋 先找機動 A/B，緊急才找瓊安</span>
+    </div>
+  </div>
+
+  <!-- 視覺時間軸 -->
+  <h2 class="section-title">🕐 當天時間主軸</h2>
+  <div class="vtimeline">
+    <div class="vtimeline-track" id="vtTrack"></div>
+  </div>
+
+  <!-- 誰會來 -->
+  <h2 class="section-title">👥 今天誰會來？</h2>
+  <div class="grid3">
+    <div class="guest-group">
+      <div class="gg-head g1">① 上午：住商總部 + 中信夥伴</div>
+      <div class="gg-body">
+        <p style="font-size:13px;color:var(--gray);margin-bottom:10px;line-height:1.7;">
+          <strong>1F 住商正義國小加盟店</strong>的合作體系。小吳哥另外還有一間<strong>蘆洲中信房屋（品客不動產）</strong>，兩邊夥伴都會來。
+        </p>
+        <ul>
+          <li><strong>李杰峰副總</strong>（住商總部）· 致詞 + <strong>10:45 剪綵後贈匾主角</strong>，手上會有匾</li>
+          <li><strong>邱福臨店長</strong>（合作好夥伴）· 剪綵嘉賓、致詞順位第 2</li>
+          <li>住商總部其他代表（陪同李副總）</li>
+          <li><strong>蘆洲中信房屋</strong>夥伴（小吳哥另一間店的同仁）</li>
+        </ul>
+        <div class="receptor">接待窗口：<strong>小吳哥本人</strong>（李副總層級）<br>→ 其他住商/中信夥伴由 1F 業務自然招呼</div>
+      </div>
+    </div>
+    <div class="guest-group">
+      <div class="gg-head g2">② 優式店東圈</div>
+      <div class="gg-body">
+        <p style="font-size:13px;color:var(--gray);margin-bottom:10px;line-height:1.7;">
+          <strong>優式租售</strong>是我們 3F 加盟的品牌，合作好夥伴。上午 10:00–11:00 主力客群。
+        </p>
+        <ul>
+          <li><strong>Teresa 老師</strong>（優式總部代表）· 剪綵嘉賓之一，到場直接帶給 TINA</li>
+          <li>優式各加盟店店東</li>
+        </ul>
+        <div class="receptor">接待窗口：<strong>TINA</strong><br>→ TINA 只接優式系統，不接 BNI</div>
+      </div>
+    </div>
+    <div class="guest-group">
+      <div class="gg-head g3">③ 鄰居／潛在客戶</div>
+      <div class="gg-body">
+        <p style="font-size:13px;color:var(--gray);margin-bottom:10px;line-height:1.7;">
+          掃街發名片邀來的鄰居、過路被吸引進場的客人。<strong>凌群辜總團隊</strong>（我們社宅業務借牌的合作方）會過來吃喝祝賀，約 11:00–11:30 到。
+        </p>
+        <ul>
+          <li>平安街周邊鄰居（4/24 傍晚掃街發名片後邀約）</li>
+          <li>過路被吸引進來的客人（全天陸續到場）</li>
+          <li><strong>辜博鴻</strong>（凌群總經理，茶會贊助者）· 約 11:00 到，主動道謝</li>
+          <li><strong>吳沂修 🍗</strong>（辜總員工）· 約 11:30 到</li>
+        </ul>
+        <div class="receptor">接待窗口：<strong>入口招呼 + 機動 A/B</strong><br>→ 主要引導到 1F、2F 看服務介紹<br>→ 辜總到場立刻 cue 瓊安</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 今天 3 大任務 -->
+  <h2 class="section-title">🎯 今天全員 3 大任務</h2>
+  <div class="top-tasks">
+    <div class="top-task-grid">
+      <div class="top-task t1">
+        <div class="num">1</div>
+        <h3>⭐ Google 五星好評</h3>
+        <p>全場最重要 KPI，直接影響店家 SEO 排名。QR Code 共 6 個放各樓層。目標 30 則以上。</p>
+        <div style="margin-top:10px;text-align:center;">
+          <img src="vendor_photos/google五星好評_桌牌.png" alt="Google 五星好評桌牌" style="max-width:280px;width:100%;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,0.18);">
+          <div style="font-size:11px;color:var(--gray);margin-top:6px;">↑ 各樓層桌面立牌示意</div>
+        </div>
+        <div style="background:#fff;border-radius:6px;padding:10px 12px;margin-top:8px;font-size:12px;line-height:1.6;">
+          <strong style="color:var(--red);">💬 話術示範</strong><br>
+          入口招呼：「今天剛好是我們開幕，覺得場佈或服務還不錯的話，可以幫我們掃這 QR Code 留 5 星嗎？30 秒就好。」<br>
+          樓層導覽：「剛剛介紹對您有幫助，掃一下 QR Code 給個 5 星對我們同仁是很大鼓勵。」
+        </div>
+      </div>
+      <div class="top-task t2">
+        <div class="num">2</div>
+        <h3>🚦 1F 人流管制</h3>
+        <p>1F 同時在場上限 <strong>25 人</strong>。超過就往 2/3/4F 導覽帶，<strong>不往外面帶</strong>（外面熱且影響平安街馬路動線）。機動 A、B 負責盯人數。</p>
+      </div>
+      <div class="top-task t3">
+        <div class="num">3</div>
+        <h3>😊 保持微笑服務</h3>
+        <p>當天人多可能影響平安街馬路動線，<strong>鄰居會在外面看 — 鄰居的觀感就是未來的口碑</strong>。全員保持微笑與禮貌。鄰居或客人不開心時主動上前協調、不讓問題擴大。解決不了再找瓊安。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⚠️ 緊急才找瓊安原則 -->
+  <h2 class="section-title">🙋 當天找人原則</h2>
+  <div class="card" style="border-left:6px solid var(--red);">
+    <p style="font-size:15px;line-height:1.8;margin-bottom:12px;">
+      <strong style="color:var(--red);">瓊安當天會很忙，請先自己處理、真正緊急才找她。</strong>
+    </p>
+    <div style="display:grid;grid-template-columns:1fr;gap:12px;">
+      <div style="padding:12px 14px;background:#F1F8F1;border-radius:8px;border-left:4px solid var(--green);">
+        <strong style="color:var(--green);">✅ 日常問題 → 自己處理 or 找機動 A/B</strong>
+        <ul style="padding-left:20px;font-size:13px;color:var(--gray);margin-top:6px;line-height:1.7;">
+          <li>茶水/餐點不夠 → 自己補 or 找茶水補給同仁</li>
+          <li>客人問路、找廁所 → 直接帶路</li>
+          <li>物料位置、補位 → 找機動 A/B</li>
+          <li>身份辨識不確定 → 先客氣招呼再說</li>
+        </ul>
+      </div>
+      <div style="padding:12px 14px;background:#FFF5F4;border-radius:8px;border-left:4px solid var(--red);">
+        <strong style="color:var(--red);">🚨 真正緊急 → 找瓊安</strong>
+        <ul style="padding-left:20px;font-size:13px;color:var(--gray);margin-top:6px;line-height:1.7;">
+          <li>嘉賓臨時變動（致詞人沒到、剪綵嘉賓缺席）</li>
+          <li>客訴升級（同仁處理不了的）</li>
+          <li>流程斷點（音響故障、主持人不在位）</li>
+          <li>安全問題（有人身體不適、設備危險）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 聯絡人 -->
+  <!-- 週五任務（4/24 下午→晚上） -->
+  <h2 class="section-title">📅 週五任務（4/24 · 今日排程）</h2>
+  <div style="background:#fff;border-left:6px solid var(--blue);border-radius:12px;padding:20px 24px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;padding:10px 14px;background:var(--dark);color:#fff;border-radius:8px;flex-wrap:wrap;">
+      <span style="font-size:18px;font-weight:800;color:var(--yellow);">10:30</span>
+      <span style="font-size:14px;font-weight:700;">業務例會（本次會議）</span>
+      <span style="font-size:12px;opacity:0.8;">投此手冊給全員看、討論任務分配</span>
+    </div>
+    <div style="font-size:15px;color:var(--dark);line-height:1.8;margin-bottom:16px;">
+      <strong style="color:var(--blue);">🧹 會議結束後 · 全員大掃除</strong><br>
+      業務例會結束後，<strong>所有夥伴一起整理辦公室</strong>。開幕前要給客人看到乾淨的樣子，拜託大家認真做一次。
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:12px;">
+      <div style="background:#F1F8F1;border-left:4px solid var(--green);padding:12px 16px;border-radius:8px;">
+        <strong style="color:var(--green);">✅ 個人座位整理</strong>
+        <ul style="margin:6px 0 0 20px;font-size:13px;color:var(--gray);line-height:1.7;">
+          <li>位置不要亂七八糟，拜託整理整齊</li>
+          <li>該帶回家的東西帶回家</li>
+          <li>該藏起來不能給客人看的通通收好</li>
+        </ul>
+      </div>
+      <div style="background:#FFFBE8;border-left:4px solid var(--yellow);padding:12px 16px;border-radius:8px;">
+        <strong style="color:#8A6A00;">🔧 維修／壞掉／髒掉 → 找小呂</strong>
+        <ul style="margin:6px 0 0 20px;font-size:13px;color:var(--gray);line-height:1.7;">
+          <li>辦公室內還有沒有<strong>貼綠色維修標籤</strong>的，找小呂對一下</li>
+          <li>有東西壞掉或髒掉的，<strong>跟小呂說</strong></li>
+        </ul>
+      </div>
+      <div style="background:#E3F2FD;border-left:4px solid var(--blue);padding:12px 16px;border-radius:8px;">
+        <strong style="color:var(--blue);">🏢 各樓層全面清潔</strong>
+        <ul style="margin:6px 0 0 20px;font-size:13px;color:var(--gray);line-height:1.7;">
+          <li>打掃自己座位</li>
+          <li>各樓層位置都檢查仔細</li>
+          <li>明天客人一進門就要是乾淨明亮的感覺</li>
+        </ul>
+      </div>
+      <div style="background:#FFF5F4;border-left:4px solid var(--red);padding:12px 16px;border-radius:8px;">
+        <strong style="color:var(--red);">🚶 17:30 全員掃街（帶名片）</strong>
+        <ul style="margin:6px 0 0 20px;font-size:13px;color:var(--gray);line-height:1.7;">
+          <li>掃除結束後 <strong>17:30 全部人一起去掃街</strong></li>
+          <li><strong>帶名片出門</strong>，挨家挨戶發給平安街周邊鄰居</li>
+          <li>這是鄰居認識我們的關鍵動作，不能少人</li>
+        </ul>
+        <div style="margin-top:10px;padding:10px 12px;background:#fff;border-radius:6px;font-size:13px;line-height:1.8;">
+          <strong style="color:var(--red);">💪 請大家熱情一點！</strong><br>
+          開幕當天<strong>人會很多，一定會影響平安街交通動線</strong>（車位、出入口、噪音），所以<strong>今天掃街要先跟鄰居打招呼、表達歉意</strong>，把關係打好。<br>
+          話術方向：<span style="color:var(--gray);">「我們是隔壁的窩的家，禮拜日要開幕，當天人會比較多，車進車出可能會有點吵雜，<strong>先跟您說不好意思</strong>！也歡迎您來現場吃吃喝喝，有茶點有飲料～這是我的名片。」</span><br>
+          <strong>把鄰居邀到現場比發名片重要</strong>，人來了才有機會變客戶。遇到態度不好的鄰居也要保持禮貌，<strong>他們明天還要住在那</strong>。
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-overview -->
+
+<!-- ══════════════════════════════════════════ -->
+<!-- 👤 我的任務頁                             -->
+<!-- ══════════════════════════════════════════ -->
+<div id="page-me" class="page">
+  <h2 class="section-title">👤 我的任務（選你的名字）</h2>
+  <div class="me-picker-wrap">
+    <label>我是誰？</label>
+    <select id="mePicker">
+      <option value="">— 請選 —</option>
+      <optgroup label="──── 窩的家同仁 ────">
+        <option value="張瓊安">張瓊安</option>
+        <option value="吳彥廷">吳彥廷（小吳哥）</option>
+        <option value="蕭靜芳">蕭靜芳（TINA）</option>
+        <option value="張忠豪">張忠豪</option>
+        <option value="韓珊珊">韓珊珊</option>
+        <option value="呂鴻墀">呂鴻墀</option>
+        <option value="沈郁雯">沈郁雯</option>
+        <option value="張玉慧">張玉慧（慧管家）</option>
+        <option value="李卓威">李卓威</option>
+        <option value="張則泓">張則泓</option>
+        <option value="劉子碩">劉子碩</option>
+        <option value="方鼎文">方鼎文</option>
+        <option value="吳偉民">吳偉民</option>
+        <option value="蕭眞儀">蕭眞儀</option>
+        <option value="林宣佑">林宣佑</option>
+        <option value="謝佳芬">謝佳芬</option>
+        <option value="陳心瑜">陳心瑜</option>
+        <option value="吳炫儒">吳炫儒</option>
+        <option value="吳惠慈">吳惠慈</option>
+        <option value="詹張傳">詹張傳</option>
+        <option value="關宗宇">關宗宇</option>
+      </optgroup>
+    </select>
+    <div style="margin-top:10px;font-size:12px;color:var(--gray);">💡 合作廠商（Ivy、橘子、元氣先生）看「合作廠商」分頁</div>
+  </div>
+
+  <div class="me-summary" id="meSummary"></div>
+  <div class="me-timeline" id="meTimeline">
+    <div class="me-empty">
+      <div class="me-empty-big">👆</div>
+      請先在上方選你的名字<br>
+      <span style="font-size:12px;">會顯示你今天的完整時段任務卡</span>
+    </div>
+  </div>
+
+  <div class="me-contact-card" id="meContactCard" style="display:none;">
+    <h3>📞 我需要找人幫忙時</h3>
+    <div class="contact-row"><strong>全場指揮</strong>｜瓊安（場控）· 現場找她</div>
+    <div class="contact-row"><strong>餐點問題</strong>｜謝文壽（元氣先生司機）· <a href="tel:0922026410">0922-026-410</a></div>
+    <div class="contact-row"><strong>主持相關</strong>｜Ivy 艾薇 · 透過瓊安聯繫</div>
+    <div class="contact-row"><strong>我的崗位備援</strong>｜找機動 A 或機動 B</div>
+  </div>
+</div><!-- /page-me -->
+
+<!-- ══════════════════════════════════════════ -->
+<!-- 📊 排班指派頁                             -->
+<!-- ══════════════════════════════════════════ -->
+<div id="page-assign" class="page">
+  <div class="assign-toolbar">
+    <div>
+      <div class="asn-title">🗓️ 任務分配（崗位 × 時段）</div>
+      <div class="asn-sub">左側 16 個崗位 × 上方 10 時段，把人名拖進該崗位該時段 · 拖回池子取消 · 點 chip 也可取消</div>
+    </div>
+    <div class="asn-actions">
+      <span class="asn-status" id="asnStatus">讀取中…</span>
+      <button class="btn-primary yellow" id="asnExportBtn">📋 複製結果給 Claude</button>
+      <button class="btn-primary" id="asnSaveBtn">💾 儲存到 Ragic</button>
+    </div>
+  </div>
+
+  <div class="matrix-wrap">
+    <table class="matrix" id="asnMatrix">
+      <thead id="asnHead"></thead>
+      <tbody id="asnBody"></tbody>
+    </table>
+  </div>
+
+  <div class="pool-wrap" id="poolWrap">
+    <div class="pool-label" id="poolLabel" style="cursor:pointer;display:flex;align-items:center;gap:8px;user-select:none;">
+      <span id="poolToggleIcon" style="font-size:14px;">▼</span>
+      <span>👥 待分配人名池（點我收合／展開）</span>
+    </div>
+    <div class="pool-chips" id="asnPool"></div>
+  </div>
+</div><!-- /page-assign -->
+
+<!-- ══════════════════════════════════════════ -->
+<!-- 🤝 合作廠商頁                             -->
+<!-- ══════════════════════════════════════════ -->
+<div id="page-vendor" class="page">
+  <h2 class="section-title">🤝 合作廠商</h2>
+  <p style="margin-bottom:20px;font-size:14px;color:var(--gray);">
+    開幕當天有三類外包廠商：主持人、外匯餐點、攝影。他們不是窩的家同仁，請記得臉、知道找誰對接。下方三個分頁分別介紹。
+  </p>
+
+  <!-- 子分頁切換 -->
+  <div class="subtab-bar">
+    <button class="subtab active" data-sub="host">🎤 主持人</button>
+    <button class="subtab" data-sub="catering">🍽️ 外匯（餐點）</button>
+    <button class="subtab" data-sub="shoot">📸 攝影</button>
+  </div>
+
+  <!-- 🎤 主持人 -->
+  <div class="subpage active" id="sub-host">
+    <div class="vendor-card">
+      <div class="v-hero-row">
+        <img src="vendor_photos/IVY.png" alt="Ivy 艾薇" class="v-photo">
+        <div class="v-hero-info">
+          <div class="v-name-big">Ivy 艾薇</div>
+          <div class="v-tag">主持人</div>
+          <div class="v-role-big">全天活動主持，上下午兩場開場 + 結語</div>
+        </div>
+      </div>
+      <div class="v-msg-box">
+        <strong>📢 請大家協助 Ivy</strong><br>
+        瓊安會全程跟在她旁邊協助。但如果 Ivy 臨時 cue 任何人（點你名上台、請你做某事），<strong>請立刻配合、不要愣住或推託</strong>——這是節奏最怕被打斷的環節。
+      </div>
+      <div class="v-section">
+        <div class="v-section-title">她負責的流程</div>
+        <ul>
+          <li><strong>10:00</strong> 活動前 5 分鐘預告來賓移步觀禮區</li>
+          <li><strong>10:30</strong> 開場 → 唱名貴賓 → cue 致詞（小吳哥 → 邱福臨 → 李杰峰副總）</li>
+          <li><strong>10:45</strong> 剪綵主持：引言 → cue 合照 → cue 動剪 → cue 全體大合照</li>
+          <li><strong>11:00</strong> 邀請來賓進 1F 茶點、口頭帶 Google 五星好評、預告下午場</li>
+          <li><strong>13:00</strong> 下午開場、唱名 BNI 三代表、cue 致詞</li>
+          <li><strong>13:15</strong> 四條 CTA 結語：買房 / 裝修 / 出租 / 社宅</li>
+        </ul>
+      </div>
+      <div class="v-contact-box">
+        👤 對口同仁：<strong>瓊安（場控）</strong><br>
+        📍 整天站 Ivy 旁邊，cue 節奏、遞手卡、處理突發<br>
+        🍱 便當列入份數 · <strong>不吃海鮮</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🍽️ 外匯（餐點） -->
+  <div class="subpage" id="sub-catering">
+    <div class="vendor-card">
+      <div class="v-hero-row">
+        <img src="vendor_photos/元氣先生.png" alt="元氣先生" class="v-photo v-logo">
+        <div class="v-hero-info">
+          <div class="v-name-big">元氣先生 Mr.Ogenki</div>
+          <div class="v-tag">外匯餐點廠商</div>
+          <div class="v-role-big">上午茶點供應 · 09:00 送達 / 17:30 回收</div>
+        </div>
+      </div>
+      <div class="v-msg-box">
+        <strong>📢 請大家協助對接</strong><br>
+        這是外匯廠商，我們付錢請他們送餐。<strong>收貨時請務必跟司機核對餐點明細</strong>（13 箱點心、2 桶飲料、共 28 盤），少送、破損當場提出，不要簽收後才發現。冷藏品（水果塔、野莓塔）要馬上放冰箱。
+      </div>
+      <div class="v-section">
+        <div class="v-section-title">📋 餐點明細（核對用）</div>
+        <div style="margin:10px 0;">
+          <img src="vendor_photos/元氣先生_餐點明細.png" alt="元氣先生餐點明細" style="width:100%;max-width:720px;border:1px solid var(--border);border-radius:8px;display:block;">
+          <div style="font-size:12px;color:var(--gray);margin-top:6px;">👆 09:00 接貨時拿這張對著箱子逐項打勾</div>
+        </div>
+      </div>
+      <div class="v-section">
+        <div class="v-section-title">他們提供的內容</div>
+        <ul>
+          <li><strong>09:00 送達</strong>：13 箱點心、紅茶 16L、美式咖啡 16L</li>
+          <li>共 28 盤：8 款鹹點 + 5 款甜點</li>
+          <li>司機會各款先幫擺一盤，剩餘 13 盤由我們補充擺盤</li>
+          <li><strong>17:30 回收</strong>：司機回來取餐具器具</li>
+        </ul>
+      </div>
+      <div class="v-contact-box">
+        👤 09:00 接貨：<strong>餐點接貨 A + B</strong>（會議分派）· 核對明細<br>
+        👤 全天補茶水：<strong>茶水補給同仁</strong><br>
+        👤 17:30 回收：<strong>回收對接同仁</strong><br>
+        📞 司機謝文壽：<a href="tel:0922026410" style="color:var(--red);font-weight:700;">0922-026-410</a><br>
+        📞 負責人許暐脡：LINE 聯繫（瓊安有）<br>
+        🧊 注意：冰心水果塔、玫瑰野莓塔需冷藏，放 1F/2F 小冰箱
+      </div>
+    </div>
+  </div>
+
+  <!-- 📸 攝影 -->
+  <div class="subpage" id="sub-shoot">
+    <div class="v-msg-box" style="margin-bottom:20px;">
+      <strong>📢 全員配合事項</strong><br>
+      今天有兩位攝影廠商：<strong>子璇（長+短影音，DJI 單眼+手機）</strong> 和 <strong>橘子（短影音，手機）</strong>。<br>
+      <strong>請大家聽她們調度</strong>——她們可能會請你走位、看鏡頭、重做一次動作，這都是為了拍出好素材，請配合。
+    </div>
+
+    <div class="vendor-card">
+      <div class="v-hero-row">
+        <img src="vendor_photos/子璇.png" alt="子璇" class="v-photo">
+        <div class="v-hero-info">
+          <div class="v-name-big">子璇</div>
+          <div class="v-tag">攝影師 · 主力</div>
+          <div class="v-role-big">長＋短影音拍攝（DJI 單眼 + 手機）</div>
+        </div>
+      </div>
+      <div class="v-section">
+        <div class="v-section-title">她的角色</div>
+        <ul>
+          <li>全天主力攝影師，<strong>聽她調度走位</strong></li>
+          <li><strong>長影音（活動紀錄片）主拍</strong>：邊拍邊錄，動態+靜態交錯，後製剪成 3-5 分鐘官方紀錄影片</li>
+          <li>同時負責短影音 6 支的主鏡頭素材（DJI + 手機）</li>
+          <li>會拍剪綵、致詞、導覽、茶敘、合照</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vendor-card">
+      <div class="v-hero-row">
+        <img src="vendor_photos/橘子.png" alt="橘子" class="v-photo">
+        <div class="v-hero-info">
+          <div class="v-name-big">橘子</div>
+          <div class="v-tag">攝影師 · 短影音</div>
+          <div class="v-role-big">協助短影音拍攝（手機）</div>
+        </div>
+      </div>
+      <div class="v-section">
+        <div class="v-section-title">她的角色</div>
+        <ul>
+          <li>協助拍攝短影音（手機直拍）</li>
+          <li>配合子璇一起調度，重點鏡頭不漏拍</li>
+          <li>收工時間 13:00–14:00（便當是否列入 4/24 早會確認）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="v-contact-box">
+      👤 對口同仁：<strong>拍攝指揮</strong>（會議分派決定）<br>
+      📍 職責：帶兩位攝影走位、告訴她們下個重點鏡頭在哪、確保不漏拍<br>
+      🎬 重點畫面：剪綵騎樓正面+側面、小吳哥接匾特寫、致詞近景、LOGO 背板入鏡、茶敘人群、各樓層導覽搭配輪播
+    </div>
+  </div>
+
+  <div style="margin-top:24px;padding:18px;background:#FFFBE8;border-left:4px solid var(--yellow);border-radius:8px;">
+    <strong>💡 廠商對接原則</strong><br>
+    <span style="font-size:13px;color:var(--gray);">
+      廠商不熟我們同仁，他們只會找對口窗口溝通。所有廠商有狀況第一時間找 <strong>瓊安（場控）</strong>，瓊安再分派給對應同仁處理。
+    </span>
+  </div>
+</div><!-- /page-vendor -->
+
+
+<div id="page-roles" class="page">
+  <style>
+    .role-intro {
+      background: linear-gradient(135deg, #FFF8E7 0%, #FFF 100%);
+      border-left: 4px solid var(--yellow);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      border-radius: 4px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--gray);
+    }
+    .role-intro strong { color: var(--dark); }
+
+    .role-group { margin-bottom: 32px; }
+    .role-group-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 0 0 12px 0;
+      padding: 8px 14px;
+      background: var(--light);
+      border-radius: 6px;
+      border-left: 5px solid var(--red);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .role-group-title .role-emoji { font-size: 20px; }
+    .role-group-title .role-group-hint {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--gray);
+      margin-left: auto;
+    }
+
+    .role-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+    }
+
+    .role-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: #FFF;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .role-card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    .role-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .role-card-name { font-size: 16px; font-weight: 700; color: var(--dark); }
+    .role-card-count {
+      font-size: 12px;
+      background: var(--red);
+      color: #FFF;
+      padding: 2px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+    .role-card-count.fixed { background: var(--gray); }
+
+    .role-field {
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 6px 0;
+      color: var(--dark);
+    }
+    .role-field-label {
+      display: inline-block;
+      font-weight: 700;
+      color: var(--blue);
+      min-width: 54px;
+    }
+    .role-field-time .role-field-label { color: var(--red); }
+    .role-field-fit .role-field-label { color: var(--green); }
+
+    .role-card ul {
+      margin: 4px 0 4px 0;
+      padding-left: 18px;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--gray);
+    }
+    .role-card ul li { margin-bottom: 2px; }
+
+    .role-card-foot {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--border);
+      font-size: 12px;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .role-card-foot::before {
+      content: "🙋";
+      font-size: 14px;
+    }
+
+    .role-card.role-fixed {
+      background: #FAFAFC;
+      border-style: dashed;
+    }
+
+    .role-term-tip {
+      background: #FFFBE8;
+      border: 1px dashed var(--yellow);
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--dark);
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .role-cards { grid-template-columns: 1fr; }
+      .role-group-title .role-group-hint { display: none; }
+    }
+  </style>
+
+  <h2 class="section-title">🎯 崗位總覽｜21 個崗位在做什麼？</h2>
+
+  <div class="role-intro">
+    <strong>給每一位夥伴看的：</strong>這頁列出當天所有崗位的工作內容、時段跟適合特質。請先快速瀏覽，<strong>想一下哪個崗位自己做得來、哪個想試試看</strong>，再到下一頁「排班指派」認領。<br>
+    每個崗位下面都寫了「適合誰」，不是限制，是給你判斷用的。真的不確定就挑 2-3 個意願崗位，瓊安會幫忙調配。<br>
+    <strong style="color:var(--red);">⚠️ 原則：日常問題先找機動 A/B、同部門同仁、組長；真正緊急（嘉賓問題、客訴升級、流程中斷）才找瓊安。</strong>
+  </div>
+
+  <!-- 指揮組 -->
+  <div class="role-group">
+    <h3 class="role-group-title">
+      <span class="role-emoji">🎯</span> 指揮組
+      <span class="role-group-hint">全場節奏的掌舵手</span>
+    </h3>
+    <div class="role-cards">
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">場控（站主持人旁）</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>09:00 起全程關鍵節點</div>
+        <ul>
+          <li>站在主持人 Ivy 旁邊，掌控節目節奏</li>
+          <li>通知各組上場：剪綵、致詞、導覽出發</li>
+          <li>突發狀況即時判斷處理（嘉賓問題、客訴升級、流程中斷）</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>反應快、熟悉全場流程、敢當機立斷的人（此崗位瓊安本人站）</div>
+        <div class="role-term-tip">📌 <strong>術語 cue</strong>：場控術語，輕聲提醒或手勢示意「該你了」。例：10:30 到了，場控 cue Ivy 開場致詞。</div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">拍攝指揮</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>10:00 – 14:00（攝影師只有 4 小時）</div>
+        <ul>
+          <li><strong>跟子璇＋橘子討論分鏡與拍攝內容</strong>（不是走位嚮導，是內容決策者）</li>
+          <li>參考「🎬 短影音」分頁的 6 支影片腳本，決定優先順序</li>
+          <li><strong>盯時間</strong>：攝影師 10:00 開工、14:00 收工，要把 6 支影片的必要素材都拍完</li>
+          <li>確保剪綵、致詞、接匾等最重要時刻不漏拍</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>看得懂腳本分鏡、會判斷優先順序、能跟廠商快速決策的人</div>
+
+        <div style="background:#FFF8E1;border:1px solid var(--yellow);border-radius:8px;padding:10px 12px;margin-top:10px;font-size:12px;line-height:1.8;">
+          <strong style="color:#8A6A00;">📹 兩種影音輸出</strong><br>
+          ・<strong>長影音（活動紀錄片）</strong>：子璇主拍，邊拍邊錄，動態鏡頭 + 靜態畫面交錯。完整紀錄整場活動氛圍，事後剪成 3-5 分鐘官方紀錄影片。<br>
+          ・<strong>短影音 6 支</strong>：子璇＋橘子合作，按腳本分鏡拍攝。每支 30 秒，社群推廣用。
+        </div>
+
+        <div style="background:#F5F5F7;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-top:12px;font-size:12px;line-height:1.8;">
+          <strong style="color:var(--red);">📸 必拍畫面檢查表</strong>（逐項跟攝影師確認）<br>
+
+          <strong style="color:var(--dark);">10:00–10:30 迎賓</strong><br>
+          ・入口紅毯 / 簽到處（空景 + 來賓簽到動作）<br>
+          ・掃 QR Code 五星好評的畫面（客人低頭掃手機）<br>
+          ・全員迎賓合影（業務部整齊站騎樓外歡迎）<br><br>
+
+          <strong style="color:var(--dark);">10:30–10:45 致詞</strong><br>
+          ・Ivy 主持全景＋特寫<br>
+          ・每位致詞者獨立近景（小吳哥、邱福臨、李副總）<br>
+          ・觀眾反應鏡頭（點頭、鼓掌、笑）<br>
+          ・<strong>贈匾三段</strong>：① 李副總雙手遞匾預備 ② 雙方握匾瞬間 ③ 合照留影<br><br>
+
+          <strong style="color:var(--dark);">10:45–11:00 剪綵（最重要）</strong><br>
+          ・剪綵 5 人就位站好（還沒剪）· 正面＋側面<br>
+          ・遞手套、遞金剪的動作（業務部女同仁優雅動作）<br>
+          ・<strong>剪下去的瞬間</strong>（紅布條斷、5 人同步）<br>
+          ・剪完 5 人舉剪刀合照＋全體大合照<br>
+          ・LOGO 背板入鏡、整個騎樓氛圍<br><br>
+
+          <strong style="color:var(--dark);">11:00–11:30 茶敘／導覽</strong><br>
+          ・茶點桌面擺盤（元氣先生點心開場照）<br>
+          ・茶敘人群互動（帶 LOGO 背板入鏡）<br>
+          ・各樓層導覽片段（1F 住商、2F 設計、3F 優式、4F 凌群／錄播）<br>
+          ・輪播螢幕畫面＋人在聽<br><br>
+
+          <strong style="color:var(--dark);">6 支短影音腳本拍攝</strong><br>
+          ・影片 1：小呂在 2F 辦公區（詳見短影音分頁）<br>
+          ・影片 2：忠豪 / 馬丁在 3F 辦公區<br>
+          ・影片 3：邱店長從 1F 大門走入<br>
+          ・影片 4：小吳哥從門口跑到 4F<br>
+          ・影片 5：20 位新人快問快答<br>
+          ・影片 6：屋主見證（走廊 + 房內）<br><br>
+
+          <strong style="color:var(--dark);">其他加值鏡頭（時間夠就拍）</strong><br>
+          ・辜總到場握手寒暄（他 11:00 到）<br>
+          ・吳沂修到場（約 11:30）<br>
+          ・合作廠商入場（住商總部代表、優式店東、BNI 代表）<br>
+          ・全體員工大合照（活動尾聲）<br>
+          ・空景：外觀招牌、騎樓布置、各樓層環境
+        </div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">拍攝素材支援</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>全天</div>
+        <ul>
+          <li>領公司 <strong>DJI Pocket 4</strong>，到處補拍 B-roll 素材</li>
+          <li>跟子璇、橘子錯開角度，不搶主機位</li>
+          <li>重點：迎賓、致詞觀眾反應、剪綵側面、茶敘氣氛、各樓層氛圍</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>會用運動相機／穩定器、眼睛會找畫面、不怕走動的人</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 接待組 -->
+  <div class="role-group">
+    <h3 class="role-group-title">
+      <span class="role-emoji">🤝</span> 接待組
+      <span class="role-group-hint">客人對公司的第一印象</span>
+    </h3>
+    <div class="role-cards">
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">入口招呼／迎賓／簽到</div>
+          <div class="role-card-count">2 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>10:00 起持續到剪綵後</div>
+        <ul>
+          <li>門口迎賓、帶位引導進場</li>
+          <li>簽到表核對姓名（大展分會 16 人、剪綵/致詞嘉賓）</li>
+          <li>請客人掃 Google QR Code 留五星評論</li>
+          <li>指引洗手間、茶水位置</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>笑容自然、口條清楚、不怕跟陌生人互動的業務同仁</div>
+        <div style="background:#FFF5F4;border:1px solid var(--red);border-radius:8px;padding:10px 12px;margin-top:10px;font-size:12px;line-height:1.7;">
+          <strong style="color:var(--red);">🚨 最重要任務：隱藏大咖通報</strong><br>
+          有些貴賓很大咖但很低調，不願意致詞、也不透漏會不會來、幾點來。<br>
+          <strong>簽到時如果認出大咖（或看到重要名字），請私下 cue 瓊安</strong> —— 瓊安會跟主持人 Ivy 安排適當時機介紹嘉賓。<br>
+          <span style="color:var(--gray);">⚠️ 不要直接公開宣布、不要當場要求致詞。主持節奏必須由瓊安判斷。</span>
+        </div>
+        <div style="background:#FFFBE8;border:1px dashed #F0A500;border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;line-height:1.7;">
+          <strong style="color:#8A6A00;">📌 已知特殊通報：辜總 + 吳沂修（必 cue 瓊安）</strong><br>
+          · <strong>辜博鴻</strong>（凌群總經理、茶會贊助者）· 預計 <strong>約 11:00</strong> 到場，剛好省午餐。<span style="color:var(--gray);">明確表示不致詞、就是來吃喝祝賀。</span><br>
+          · <strong>吳沂修 🍗</strong>（辜總員工）· 預計 <strong>約 11:30</strong> 到場（早上有行程）。<br>
+          <strong style="color:var(--red);">簽到看到這兩位 → 立刻 cue 瓊安 + 主持人 Ivy</strong>，瓊安會請 Ivy 在適當時機點名致意。
+        </div>
+        <div class="role-card-foot">問路/補位自己處理；隱藏大咖＋辜總＋吳沂修立刻 cue 瓊安</div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">貴賓接待｜BNI 組</div>
+          <div class="role-card-count">3 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>10:00–13:00</div>
+        <ul>
+          <li>專門接待小吳哥 BNI 圈的貴賓</li>
+          <li>招呼、引導、介紹環境</li>
+          <li>確保 BNI 貴賓全程被照顧到</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>認識 BNI 成員或小吳哥人脈圈的同仁優先（建議小吳哥／忠豪／WEIWEI）</div>
+        <div class="role-card-foot">貴賓一般需求自己應對，身份衝突才找瓊安</div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">貴賓接待｜優式組</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>10:00–13:00</div>
+        <ul>
+          <li>TINA 專責，接待優式店東（Teresa、其他店東）</li>
+          <li>熟絡老朋友、介紹 3F 新空間</li>
+          <li>促成店東跟集團高層互動</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>TINA 固定（本身熟悉優式店東）</div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">機動顧全場 A</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>全天遊走</div>
+        <ul>
+          <li>全場遊走、哪裡缺人補哪裡</li>
+          <li>發現客人沒人招呼就主動上</li>
+          <li><strong>協助其他同仁的日常小問題</strong>（補位、引路、答客問）</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>觀察力強、眼裡有事、閒不住的人</div>
+        <div class="role-card-foot">你是「全場的備援」—— 同仁找你的次數應該比找瓊安多</div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">機動顧全場 B</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>全天遊走</div>
+        <ul>
+          <li>與機動 A 分工，顧另一側樓層</li>
+          <li>補位、遞東西、臨時任務</li>
+          <li>回報場內動態給場控</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>做事主動、會自己找事做、不等指令的人</div>
+        <div class="role-card-foot">跟機動 A 互為備援，兩人輪流用餐/上廁所</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 剪綵組 -->
+  <div class="role-group">
+    <h3 class="role-group-title">
+      <span class="role-emoji">✂️</span> 剪綵組
+      <span class="role-group-hint">10:30–10:45 的 15 分鐘高光</span>
+    </h3>
+    <div class="role-cards">
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">剪綵嘉賓動線引導</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>10:30–10:45</div>
+        <ul>
+          <li>把剪綵嘉賓從休息區引導到剪綵定位</li>
+          <li>排好站位順序（見下方站位圖）</li>
+          <li>剪綵後引導離場拍合照</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>動線感好、不怕面對高層長輩、口氣得體的人</div>
+        <div class="role-term-tip">📌 <strong>剪綵站位</strong>（面向鏡頭／騎樓外）：<br>
+          <code style="font-size:11px;">紅布條──────────────────</code><br>
+          Teresa → TINA → <strong>小吳哥（中央）</strong> → 邱福臨 → 李杰峰副總<br>
+          手套與金剪由左側開始遞。
+        </div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">剪綵遞手套</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>10:45 剪綵瞬間</div>
+        <ul>
+          <li>托盤遞白手套給每位剪綵嘉賓（從左至右）</li>
+          <li>配合嘉賓順序，不能卡住節奏</li>
+          <li>剪綵結束收回手套</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>建議女同仁、儀態佳、動作優雅</div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">剪綵遞金剪</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>10:45 剪綵瞬間</div>
+        <ul>
+          <li>托盤遞金剪給每位剪綵嘉賓（從左至右）</li>
+          <li>與遞手套同仁配合好順序</li>
+          <li>剪綵完收剪刀歸位</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>建議女同仁、儀態佳、動作穩不慌</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 導覽（全員共同責任） -->
+  <div class="role-group">
+    <h3 class="role-group-title">
+      <span class="role-emoji">🏢</span> 樓層導覽（全員共同責任）
+      <span class="role-group-hint">不指派、見人就接</span>
+    </h3>
+    <div style="background:#FFFBE8;border-left:4px solid var(--yellow);padding:14px 18px;border-radius:8px;font-size:14px;line-height:1.8;color:var(--dark);">
+      <strong>樓層導覽不設專責崗位，全員共同責任</strong>。客人上任何一層樓，<strong>該樓層附近同仁立刻主動接待</strong>，講解自己樓層業務：
+      <ul style="margin:10px 0 10px 22px;color:var(--gray);">
+        <li><strong>1F 住商</strong>：買賣仲介服務，搭輪播影片</li>
+        <li><strong>2F 設計</strong>：室內設計 + 自營工程（不外包），搭輪播簡報</li>
+        <li><strong>3F 優式</strong>：租賃仲介 + 包租代管，搭輪播影片。想開加盟店轉給 TINA</li>
+        <li><strong>4F 凌群／錄播</strong>：前半品牌錄播、後半凌群社宅包租代管</li>
+      </ul>
+      <strong style="color:var(--red);">提醒</strong>：<br>
+      · 導覽時口頭帶 Google 五星好評 QR Code（立牌擺各樓層桌面，見下方示意圖）<br>
+      · 自己不熟的樓層業務就喊機動 A/B 過來支援<br>
+      · 不要把客人晾在樓上沒人理
+    </div>
+    <div style="margin-top:14px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;">
+      <img src="vendor_photos/google五星好評_桌牌.png" alt="Google 五星好評桌牌" style="width:180px;height:auto;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.15);flex-shrink:0;">
+      <div style="flex:1;min-width:200px;font-size:13px;line-height:1.7;color:var(--dark);">
+        <strong style="color:var(--red);">⭐ Google 五星好評桌牌示意</strong><br>
+        <span style="color:var(--gray);">各樓層桌面會擺這張立牌（共 6 個），導覽時主動指給客人：「今天開幕，可以幫我們掃 QR Code 留個 5 星嗎？」<br>
+        上面有窩的家 LOGO + 團隊照 + QR Code，客人 30 秒就能完成。</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 餐飲組 -->
+  <div class="role-group">
+    <h3 class="role-group-title">
+      <span class="role-emoji">🍱</span> 餐飲組
+      <span class="role-group-hint">從早餐盤到晚上回收</span>
+    </h3>
+    <div class="role-cards">
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">餐點接貨 A（＋17:30 回收）</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>09:00 送達 / 17:30 回收</div>
+        <ul>
+          <li>09:00 在門口接元氣先生外送</li>
+          <li>核對 13 箱點心數量、品項（明細在合作廠商頁）</li>
+          <li>簽收、指引司機卸貨位置</li>
+          <li>17:30 留守配合司機回收餐具器材</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>能準時到場、細心核對數量的人</div>
+        <div style="background:#FFF5F4;border-left:3px solid var(--red);padding:8px 10px;margin-top:10px;border-radius:6px;font-size:12px;line-height:1.6;">
+          📞 <strong>司機謝文壽</strong>：<a href="tel:0922026410" style="color:var(--red);font-weight:700;">0922-026-410</a>
+        </div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">餐點接貨 B</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>09:00–10:00</div>
+        <ul>
+          <li>協助 A 組擺盤、分配到各樓層</li>
+          <li>冷藏品（水果塔、野莓塔）即時放冰箱</li>
+          <li>確認擺放位置乾淨美觀</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>動作快、有擺盤美感、不怕動手的人</div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">茶水補給／桌面清潔</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>全天持續</div>
+        <ul>
+          <li>隨時補茶水、補餐點</li>
+          <li>清理空盤、整理桌面</li>
+          <li>保持場地整潔不狼狽</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>眼裡有事、不怕雜務、愛乾淨的人</div>
+      </div>
+
+      <div class="role-card">
+        <div class="role-card-head">
+          <div class="role-card-name">便當訂購＋12:00 接貨</div>
+          <div class="role-card-count">1 人</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>前置訂購｜12:00 接貨</div>
+        <ul>
+          <li>活動前統計在場人數、訂便當</li>
+          <li>12:00 接貨、核對數量</li>
+          <li>注意：Ivy 跟瓊安不吃海鮮</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">適合</span>行政能力好、會記特殊飲食需求的人</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 固定崗位 -->
+  <div class="role-group">
+    <h3 class="role-group-title">
+      <span class="role-emoji">📌</span> 固定角色
+      <span class="role-group-hint">已定人選，不需排班</span>
+    </h3>
+    <div class="role-cards">
+
+      <div class="role-card role-fixed">
+        <div class="role-card-head">
+          <div class="role-card-name">主持人 Ivy</div>
+          <div class="role-card-count fixed">廠商固定</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>全程</div>
+        <ul>
+          <li>全場主持、串接流程</li>
+          <li>帶剪綵、致詞、互動環節</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">說明</span>已由 Ivy 擔任，不需指派。對接窗口瓊安。</div>
+      </div>
+
+      <div class="role-card role-fixed">
+        <div class="role-card-head">
+          <div class="role-card-name">集團執行長致詞</div>
+          <div class="role-card-count fixed">固定</div>
+        </div>
+        <div class="role-field role-field-time"><span class="role-field-label">時段</span>10:30 / 13:00</div>
+        <ul>
+          <li>小吳哥代表集團致詞</li>
+          <li>串連貴賓、員工、合作夥伴</li>
+        </ul>
+        <div class="role-field role-field-fit"><span class="role-field-label">說明</span>執行長本人，不需指派</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<div id="page-reels" class="page">
+  <style>
+    .reel-wrap { max-width: 1100px; margin: 0 auto; color: var(--dark); }
+    .reel-hero { background: linear-gradient(135deg, var(--dark) 0%, #2A2A4A 100%); color: #fff; padding: 28px 24px; border-radius: 16px; margin-bottom: 20px; }
+    .reel-hero h1 { margin: 0 0 12px; font-size: 26px; letter-spacing: 1px; }
+    .reel-hero .reel-lead { background: rgba(245, 197, 24, 0.15); border-left: 4px solid var(--yellow); padding: 12px 16px; border-radius: 6px; margin: 14px 0; line-height: 1.7; font-size: 15px; }
+    .reel-tips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+    .reel-tip { background: rgba(255,255,255,0.08); border-radius: 8px; padding: 10px 12px; font-size: 13px; line-height: 1.6; }
+    .reel-tip b { color: var(--yellow); display: block; margin-bottom: 4px; }
+
+    .reel-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .reel-card { border: 1px solid var(--border); border-radius: 12px; background: #fff; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+    .reel-card summary { cursor: pointer; padding: 16px 18px; list-style: none; background: var(--light); border-bottom: 1px solid var(--border); }
+    .reel-card summary::-webkit-details-marker { display: none; }
+    .reel-card summary::after { content: "＋"; float: right; font-size: 20px; color: var(--red); font-weight: bold; }
+    .reel-card[open] summary::after { content: "－"; }
+    .reel-badge { display: inline-block; background: var(--red); color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-right: 8px; letter-spacing: 1px; }
+    .reel-brand { display: inline-block; background: var(--yellow); color: var(--dark); font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: 4px; font-weight: 600; }
+    .reel-card summary h3 { display: inline; font-size: 16px; margin: 0; color: var(--dark); }
+    .reel-meta { font-size: 13px; color: var(--gray); margin-top: 6px; }
+    .reel-body { padding: 16px 18px; }
+    .reel-section { margin-bottom: 14px; }
+    .reel-section h4 { font-size: 13px; color: var(--red); margin: 0 0 6px; letter-spacing: 1px; border-left: 3px solid var(--red); padding-left: 8px; }
+    .reel-section p, .reel-section li { font-size: 13.5px; line-height: 1.7; color: var(--dark); margin: 4px 0; }
+
+    .reel-shot { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; background: #FAFAFC; }
+    .reel-shot-head { font-size: 12px; color: var(--red); font-weight: 600; margin-bottom: 4px; }
+    .reel-shot-scene { font-size: 13px; color: var(--gray); margin-bottom: 6px; }
+    .reel-dialog { background: #fff; border-left: 3px solid var(--yellow); padding: 8px 10px; font-size: 13px; line-height: 1.7; border-radius: 4px; }
+    .reel-dialog .reel-speaker { color: var(--red); font-weight: 600; margin-right: 4px; }
+    .reel-todo { background: #FFF4D6; color: #8A6A00; padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+
+    .reel-callout { background: #FFF8F7; border: 1px dashed var(--red); padding: 10px 12px; border-radius: 8px; font-size: 13px; line-height: 1.6; margin-top: 10px; }
+    .reel-callout b { color: var(--red); }
+    .reel-support { background: #F0F4FF; border-left: 3px solid #4A6DDB; padding: 8px 12px; border-radius: 4px; font-size: 13px; line-height: 1.6; margin-top: 8px; }
+
+    .reel-qa-list { counter-reset: qa; padding: 0; list-style: none; margin: 0; }
+    .reel-qa-list li { counter-increment: qa; background: #FAFAFC; border-left: 3px solid var(--yellow); padding: 10px 12px 10px 40px; margin-bottom: 6px; border-radius: 4px; position: relative; font-size: 14px; line-height: 1.6; }
+    .reel-qa-list li::before { content: counter(qa); position: absolute; left: 10px; top: 10px; background: var(--red); color: #fff; width: 22px; height: 22px; border-radius: 50%; text-align: center; font-size: 12px; font-weight: 600; line-height: 22px; }
+
+    .reel-footer { margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .reel-footer-card { background: var(--light); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+    .reel-footer-card h4 { margin: 0 0 6px; font-size: 14px; color: var(--red); }
+    .reel-footer-card p { margin: 0; font-size: 13px; line-height: 1.7; color: var(--dark); }
+
+    @media (max-width: 720px) {
+      .reel-tips { grid-template-columns: 1fr; }
+      .reel-grid { grid-template-columns: 1fr; }
+      .reel-footer { grid-template-columns: 1fr; }
+      .reel-hero h1 { font-size: 22px; }
+    }
+  </style>
+
+  <div class="reel-wrap">
+    <div class="reel-hero">
+      <h1>🎬 短影音拍攝腳本</h1>
+      <div class="reel-lead">
+        <b>全員告知：</b>當天 <b style="color: var(--yellow);">子璇</b>（主力，DJI＋手機）和 <b style="color: var(--yellow);">橘子</b>（手機）會引導大家拍攝 <b style="color: var(--yellow);">6 支短影音</b>，每支 30 秒。<br>
+        請大家事先讀自己會出現的影片段落，記一下大致對白，到時聽攝影師調度即可。
+      </div>
+      <div class="reel-tips">
+        <div class="reel-tip"><b>① 聽攝影師調度</b>位置、動作、走位都配合子璇和橘子的指示</div>
+        <div class="reel-tip"><b>② 對白不用一字不差</b>關鍵訊息講到即可，自然最重要</div>
+        <div class="reel-tip"><b>③ 待補部分 4/24 會議討論</b>影片一特殊案例、影片六公司口號</div>
+      </div>
+    </div>
+
+    <div class="reel-grid">
+
+      <details class="reel-card" open>
+        <summary>
+          <span class="reel-badge">影片 1</span>
+          <h3>老屋整形醫師</h3>
+          <span class="reel-brand">窩的家</span>
+          <div class="reel-meta">📍 二樓辦公區　｜　👤 主角：小呂</div>
+        </summary>
+        <div class="reel-body">
+          <div class="reel-section"><h4>主題</h4><p>【設計服務】強調老屋翻新的專業和價值</p></div>
+          <div class="reel-section"><h4>分鏡</h4>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 1</div>
+              <div class="reel-shot-scene">小呂坐辦公桌，電腦放屋況差照片，假裝講電話，背對鏡頭再轉過來面向鏡頭</div>
+              <div class="reel-dialog"><span class="reel-speaker">小呂：</span>「這種房子，你敢租我就敢接，我跟你說很多人覺得舊房只能拆掉，<i>（轉身）</i>我告訴你它是沒被發覺的鑽石！」</div>
+            </div>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 2</div>
+              <div class="reel-shot-scene">小呂站起來走，二樓辦公區移動，夥伴們分工合作：有人拿捲尺量牆、有人在平板上滑 3D 圖</div>
+              <div class="reel-dialog"><span class="reel-speaker">小呂：</span>「在『窩的家』，我們不只畫圖，我們是設計資產的價值。從水電基礎到美學軟裝，全部科學化管理。」</div>
+            </div>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 3</div>
+              <div class="reel-shot-scene">小呂泡咖啡／拿點心，走回電腦桌，畫面給設計好的屋子照片</div>
+              <div class="reel-dialog"><span class="reel-speaker">小呂：</span>「<span class="reel-todo">待補：特別厲害的案例</span>，我們幫房東省預算，卻幫房客圓了夢。好的設計，是讓房子自己會說話，租金翻倍的秘密就在這！」</div>
+            </div>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 4</div>
+              <div class="reel-shot-scene">夥伴們從辦公桌後站起來，全體一起比出「OK」手勢</div>
+              <div class="reel-dialog"><span class="reel-speaker">小呂：</span>「想讓你的房子脫胎換骨？現在就找窩的家！」</div>
+            </div>
+          </div>
+          <div class="reel-callout"><b>攝影師調度提示：</b>分鏡 2 需要動態感，夥伴的「量牆」「滑平板」動作請做足。分鏡 3 桌面的「設計好的屋子照片」事前準備好印出來或電腦顯示。</div>
+          <div class="reel-support"><b>🙋 要支援誰：</b>4-5 位 2F 設計部夥伴當背景，分鏡 4 請全體 2F 同仁入鏡比 OK。</div>
+        </div>
+      </details>
+
+      <details class="reel-card">
+        <summary>
+          <span class="reel-badge">影片 2</span>
+          <h3>包租公的優雅革命</h3>
+          <span class="reel-brand">優式租賃</span>
+          <div class="reel-meta">📍 三樓辦公區　｜　👤 主角：忠豪（崩潰房東）、馬丁（優雅救星）</div>
+        </summary>
+        <div class="reel-body">
+          <div class="reel-section"><h4>主題</h4><p>【租賃代管】用反差感呈現代管服務的解脫與優雅</p></div>
+          <div class="reel-section"><h4>分鏡</h4>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 1</div>
+              <div class="reel-shot-scene">忠豪接電話偷拍感覺，用忠豪視角拍攝馬丁，馬丁走進遞咖啡搶過電話</div>
+              <div class="reel-dialog"><span class="reel-speaker">忠豪：</span>「哎唷，漏水、催租、還要處理奧房客，你當房東怎麼當的這麼累阿～」</div>
+              <div class="reel-dialog" style="margin-top:6px;"><span class="reel-speaker">馬丁：</span>「It's a piece of cake. 優式租賃讓你成為優雅房東，走，帶你去看！」</div>
+            </div>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 2</div>
+              <div class="reel-shot-scene">鏡頭跟隨馬丁掃過「代管很多房子」的意象（很多鑰匙或其他代表物），馬丁英文介紹，忠豪台語翻譯</div>
+              <div class="reel-dialog"><span class="reel-speaker">馬丁：</span>「Digital Management is our secret.」</div>
+              <div class="reel-dialog" style="margin-top:6px;"><span class="reel-speaker">忠豪（台語）：</span>「講簡單一點就是免跑現場，我們幫你 24 小時顧厝。」</div>
+            </div>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 3</div>
+              <div class="reel-shot-scene">夥伴簽約側臉特寫，馬丁跟忠豪在旁</div>
+              <div class="reel-dialog">「優式租賃，擁有全台最完整的代管體系。不管是外商高管還是在地房東，我們通通搞定！」</div>
+            </div>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 4</div>
+              <div class="reel-shot-scene">鏡頭拉遠，5-10 位夥伴從兩側走進畫面</div>
+              <div class="reel-dialog">「別再為瑣事煩惱！來總部三樓，讓你當個優雅的房東！」</div>
+            </div>
+          </div>
+          <div class="reel-callout"><b>攝影師調度提示：</b>分鏡 2 馬丁要秀「很多鑰匙」的意象 —— 請 3F 代管組夥伴提供<b>一大串鑰匙</b>，或用<b>鑰匙牆、房屋檔案夾、平板 App 畫面</b>等其他代表物，4/24 前準備好。</div>
+          <div class="reel-support"><b>🙋 要支援誰：</b>分鏡 3 需要 1 位夥伴做簽約側臉特寫。分鏡 4 需要 5-10 位 3F 代管組夥伴從兩側走入畫面。</div>
+        </div>
+      </details>
+
+      <details class="reel-card">
+        <summary>
+          <span class="reel-badge">影片 3</span>
+          <h3>最強後援戰隊</h3>
+          <span class="reel-brand">住商不動產</span>
+          <div class="reel-meta">📍 一樓大門　｜　👤 主角：邱店長（邱福臨）</div>
+        </summary>
+        <div class="reel-body">
+          <div class="reel-section"><h4>主題</h4><p>【買賣業務】強調團隊戰力，整棟樓都是後援</p></div>
+          <div class="reel-section"><h4>分鏡</h4>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 1</div>
+              <div class="reel-shot-scene">邱店長從一樓大門走入，兩旁夥伴依序加入隊伍，氣勢如軍隊</div>
+              <div class="reel-dialog"><span class="reel-speaker">邱店長：</span>「買賣房子是一輩子的大事，你還在相信個人英雄嗎？在住商，我們出動的是一整個專家團隊！」</div>
+            </div>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 2</div>
+              <div class="reel-shot-scene">鏡頭向上指往二、三樓，邱店長指著樓上，樓上夥伴同時揮手</div>
+              <div class="reel-dialog"><span class="reel-speaker">邱店長：</span>「買房怕修繕？樓上就是設計師。想收租？樓上就是代管專家。我們整棟樓都是你的最強後援！」</div>
+            </div>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 3</div>
+              <div class="reel-shot-scene">全體穿制服在一樓櫃台前站好，邱店長帶頭做出邀請手勢</div>
+              <div class="reel-dialog"><span class="reel-speaker">邱店長：</span>「買賣房子，找對團隊比找對物件更重要。一樓住商戰隊，隨時為你待命！」</div>
+            </div>
+          </div>
+          <div class="reel-callout"><b>攝影師調度提示：</b>分鏡 1「依序加入隊伍」要有節奏感，夥伴一個接一個從左右兩側 step-in。分鏡 2 需要 2F、3F 夥伴配合在陽台／樓梯口同時揮手。</div>
+          <div class="reel-support"><b>🙋 要支援誰：</b>全體住商業務務必<b>穿制服</b>到一樓集合。分鏡 2 需要 2F 設計部、3F 代管組各派 3-5 人到樓梯口揮手。</div>
+        </div>
+      </details>
+
+      <details class="reel-card">
+        <summary>
+          <span class="reel-badge">影片 4</span>
+          <h3>一條龍總部大開箱</h3>
+          <span class="reel-brand">整合服務</span>
+          <div class="reel-meta">📍 從門口跑到四樓　｜　👤 主角：小吳哥</div>
+        </summary>
+        <div class="reel-body">
+          <div class="reel-section"><h4>主題</h4><p>【整合服務】房產百貨公司概念，一棟樓包辦所有服務</p></div>
+          <div class="reel-section"><h4>分鏡</h4>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 1</div>
+              <div class="reel-shot-scene">小吳哥從門口開始跑，快速跟拍，跑到門口轉身帶手勢往上看</div>
+              <div class="reel-dialog"><span class="reel-speaker">小吳哥：</span>「全台唯一房產百貨公司開幕了！一樓住商買賣，二樓窩的家裝修，三樓優式租賃，四樓聯富社宅！」</div>
+            </div>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 2</div>
+              <div class="reel-shot-scene">鏡頭拍小吳哥從一樓跑到四樓，每層樓給一個代表服務的物品，在三樓交給租賃</div>
+              <div class="reel-dialog"><span class="reel-speaker">小吳哥：</span>「以前你要跑四家店，現在只要走樓梯。從你買下房子的第一天，到它變成你的退休金，我們全包了！」</div>
+            </div>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 3</div>
+              <div class="reel-shot-scene">剪入開幕當天來賓、餐點、人潮的 B-roll，小吳哥在四樓俯瞰全體夥伴</div>
+              <div class="reel-dialog"><span class="reel-speaker">小吳哥：</span>「這不只是一個辦公室，這是房產的未來。找專業、找效率、找安心，來這棟樓就對了！」</div>
+            </div>
+          </div>
+          <div class="reel-callout"><b>攝影師調度提示：</b>分鏡 2 每層樓的代表物品 4/24 前決定（例：1F 合約 → 2F 設計圖 → 3F 鑰匙 → 4F 社宅牌子）。DJI 從樓梯間跟拍，節奏要快。</div>
+          <div class="reel-support"><b>🙋 要支援誰：</b>各樓層派 1-2 位夥伴在小吳哥經過時交接物品。分鏡 3 四樓俯瞰時，全體夥伴請配合在下方走動或揮手。</div>
+        </div>
+      </details>
+
+      <details class="reel-card">
+        <summary>
+          <span class="reel-badge">影片 5</span>
+          <h3>新人專業快問快答</h3>
+          <span class="reel-brand">人才招募</span>
+          <div class="reel-meta">👥 20 位新人每人一題，每題限時 3 秒</div>
+        </summary>
+        <div class="reel-body">
+          <div class="reel-section"><h4>拍攝情境</h4><p>鏡頭在 20 位新人中快速移動，<b>一人一題，每題限時 3 秒</b>。建議新人 4/24 前先想好答案。</p></div>
+          <div class="reel-section"><h4>10 題題目</h4>
+            <ol class="reel-qa-list">
+              <li>當初為什麼敢加入這間公司？</li>
+              <li>身為房仲新人，最怕被問什麼？</li>
+              <li>代管新人最常處理的事？</li>
+              <li>設計新人真的需要會畫圖嗎？</li>
+              <li>一條龍服務對新人有什麼好處？</li>
+              <li>老闆小吳哥私下是什麼樣子？</li>
+              <li>沒經驗真的能成交嗎？</li>
+              <li>這棟樓最吸引你的角落？</li>
+              <li>用一個房產術語形容你的熱情？</li>
+              <li>給還在投履歷的人一句話？</li>
+            </ol>
+          </div>
+          <div class="reel-callout"><b>攝影師調度提示：</b>新人站位由子璇當天安排。答題時<b>看鏡頭、大聲、簡短</b>，3 秒內講完，金句更好。</div>
+          <div class="reel-support"><b>🙋 要支援誰：</b>全集團 20 位新人（住商 + 窩的家 + 優式 + 聯富社宅），當天依題目分組。</div>
+        </div>
+      </details>
+
+      <details class="reel-card">
+        <summary>
+          <span class="reel-badge">影片 6</span>
+          <h3>房東的真心告白</h3>
+          <span class="reel-brand">聯富社宅</span>
+          <div class="reel-meta">📍 總部走廊、房內　｜　👤 主角：屋主本人</div>
+        </summary>
+        <div class="reel-body">
+          <div class="reel-section"><h4>主題</h4><p>【屋主見證】第三方屋主真實見證，比公司自己講更有說服力</p></div>
+          <div class="reel-section"><h4>分鏡</h4>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 1</div>
+              <div class="reel-shot-scene">屋主在總部走廊，指著手機</div>
+              <div class="reel-dialog"><span class="reel-speaker">屋主：</span>「太扯了，我的房子也變好有質感，你看這是以前的照片<i>（拿起手機給鏡頭）</i>」</div>
+            </div>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 2</div>
+              <div class="reel-shot-scene">屋主逛房子</div>
+              <div class="reel-dialog"><span class="reel-speaker">屋主：</span>「他們幫我把老房子重新規劃，還幫我申請社會住宅。不只省了稅，收入竟然比以前更穩定。」</div>
+            </div>
+            <div class="reel-shot">
+              <div class="reel-shot-head">分鏡 3</div>
+              <div class="reel-shot-scene">屋主面向鏡頭，背景是夥伴們，夥伴們跳出來喊口號</div>
+              <div class="reel-dialog"><span class="reel-speaker">屋主：</span>「現在我才明白，什麼叫『專業代管』。想跟我一樣優雅收租？找這群人準沒錯！」</div>
+              <div class="reel-dialog" style="margin-top:6px;"><span class="reel-speaker">全體夥伴：</span>「<span class="reel-todo">待補：和公司有關的口號</span>」</div>
+            </div>
+          </div>
+          <div class="reel-callout"><b>攝影師調度提示：</b>屋主手機「以前的照片」4/24 前請代管組協調屋主準備好。分鏡 3 全體夥伴的口號 4/24 會議拍板定案。</div>
+          <div class="reel-support"><b>🙋 要支援誰：</b>分鏡 3 需要 8-10 位夥伴當背景，聽到口號時「跳出來」要有節奏感，建議由 3F 代管組主導。</div>
+        </div>
+      </details>
+
+    </div>
+
+    <div class="reel-footer">
+      <div class="reel-footer-card">
+        <h4>👔 著裝提醒</h4>
+        <p>請穿<b>制服或品牌色服裝</b>。影片三住商戰隊<b>全體務必穿制服</b>在一樓集合。沒有制服的部門請以窩的家珊瑚紅／明黃／深藍灰系色調為準。</p>
+      </div>
+      <div class="reel-footer-card">
+        <h4>🎭 心態提醒</h4>
+        <p>攝影師可能會<b>重拍好幾次</b>，請配合、不要不好意思。對白講不好沒關係，自然最重要。</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div id="page-speakers" class="page">
+  <style>
+    .sp-intro {
+      background: linear-gradient(135deg, #FFF8E7 0%, #FFF 100%);
+      border-left: 4px solid var(--yellow);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      border-radius: 4px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--gray);
+    }
+    .sp-intro strong { color: var(--dark); }
+
+    .sp-group { margin-bottom: 32px; }
+    .sp-group-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 0 0 12px;
+      padding: 8px 14px;
+      background: var(--light);
+      border-left: 5px solid var(--red);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sp-group-title .sp-subtitle {
+      font-size: 13px;
+      color: var(--gray);
+      font-weight: 400;
+      margin-left: auto;
+    }
+    .sp-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 14px;
+    }
+    .sp-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 18px;
+      position: relative;
+    }
+    .sp-card-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--border);
+      flex-wrap: wrap;
+    }
+    .sp-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+      border: 3px solid #fff;
+    }
+    .sp-order {
+      background: var(--red);
+      color: #fff;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 26px;
+      font-weight: 800;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .sp-order.gray { background: var(--gray); }
+    .sp-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+    .sp-pinyin {
+      font-size: 12px;
+      color: var(--red);
+      font-weight: 700;
+      margin-left: 4px;
+    }
+    .sp-role {
+      font-size: 13px;
+      color: var(--gray);
+      margin-top: 2px;
+      width: 100%;
+    }
+    .sp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .sp-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+    .sp-tag-speak { background: #FFF0EF; color: var(--red); }
+    .sp-tag-cut { background: #FFF0F5; color: #D81B60; }
+    .sp-tag-vip { background: #E3F2FD; color: var(--blue); }
+    .sp-tag-sponsor { background: #FFFBE8; color: #8A6A00; }
+    .sp-tag-absent { background: #F5F5F5; color: #888; text-decoration: line-through; }
+    .sp-feature {
+      background: var(--light);
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--dark);
+      border-left: 3px solid var(--yellow);
+    }
+    .sp-feature strong { color: var(--red); }
+
+    .sp-absent-card {
+      background: #FAFAFA;
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+    .sp-absent-card strong { color: var(--dark); }
+  </style>
+
+  <h2 class="section-title">🏆 致詞嘉賓與貴賓</h2>
+
+  <div class="sp-intro">
+    <strong>給全員讀的：</strong>以下是 4/26 開幕當天會到場的重要嘉賓。<strong>請記臉、記身份、記位階</strong>，看到他們主動打招呼、優先照顧。迎賓、貴賓接待、場控、動線引導崗位務必熟讀。
+  </div>
+
+  <!-- 上午場致詞 -->
+  <div class="sp-group">
+    <h3 class="sp-group-title">🎤 上午場致詞（10:30–10:45）<span class="sp-subtitle">3 位，依序上台</span></h3>
+    <div class="sp-cards">
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <div class="sp-order">1</div>
+          <div>
+            <div class="sp-name">吳彥廷（小吳哥）</div>
+            <div class="sp-role">窩的家集團 執行長</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-speak">🎤 上午致詞</span>
+          <span class="sp-tag sp-tag-cut">✂️ 剪綵壓軸</span>
+          <span class="sp-tag sp-tag-speak">🎤 下午致詞</span>
+        </div>
+        <div class="sp-feature">
+                    <strong>注意</strong>：整天主角，重要畫面他都要在。
+        </div>
+      </div>
+
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <div class="sp-order">2</div>
+          <div>
+            <div class="sp-name">邱福臨</div>
+            <div class="sp-role">住商不動產 · 正義國小加盟店 店長（合作好夥伴）</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-speak">🎤 上午致詞</span>
+          <span class="sp-tag sp-tag-cut">✂️ 剪綵站台</span>
+          <span class="sp-tag sp-tag-sponsor">💰 店面贊助</span>
+        </div>
+        <div class="sp-feature">
+                    <strong>稱呼</strong>：邱店長。
+        </div>
+      </div>
+
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <div class="sp-order">3</div>
+          <div>
+            <div class="sp-name">李杰峰</div>
+            <div class="sp-role">住商不動產 總公司 · 副總</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-speak">🎤 上午致詞</span>
+          <span class="sp-tag sp-tag-vip">🏆 贈匾方</span>
+        </div>
+        <div class="sp-feature">
+                    <strong>接待</strong>：住商總部最高代表層級，由 <strong>小吳哥本人親自接待</strong>。迎賓見到李副總進場，直接通報小吳哥，不要塞給任何接待組。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 剪綵嘉賓（不致詞） -->
+  <div class="sp-group">
+    <h3 class="sp-group-title">✂️ 剪綵嘉賓（10:45）<span class="sp-subtitle">5 人站台，依順序排位</span></h3>
+    <div style="background:#FFF8E1;border-left:4px solid var(--yellow);padding:12px 16px;border-radius:6px;margin-bottom:14px;font-size:13px;line-height:1.8;">
+      <strong>站位順序（面向鏡頭／騎樓外）：</strong><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;Teresa ＞ TINA ＞ <strong style="color:var(--red);">小吳哥（中央）</strong> ＞ 邱福臨 ＞ 李杰峰副總<br>
+      遞手套、遞金剪由左側（Teresa 端）開始。動線引導同仁務必記此順序。
+    </div>
+    <div class="sp-cards">
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <div class="sp-order">1</div>
+          <div>
+            <div class="sp-name">Teresa 老師</div>
+            <div class="sp-role">優式租售總部代表</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-cut">✂️ 剪綵站台（左 1）</span>
+        </div>
+        <div class="sp-feature">
+          <strong>接待</strong>：到場直接帶給 TINA（優式組接待）。
+        </div>
+      </div>
+
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <div class="sp-order">2</div>
+          <div>
+            <div class="sp-name">蕭靜芳（TINA）</div>
+            <div class="sp-role">優式租售 三重窩的家加盟店 店長（本集團同仁）</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-cut">✂️ 剪綵站台（左 2）</span>
+          <span class="sp-tag sp-tag-vip">同仁</span>
+        </div>
+        <div class="sp-feature">
+          <strong>任務</strong>：優式組貴賓接待專責（不接 BNI）。
+        </div>
+      </div>
+
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <div class="sp-order">3</div>
+          <div>
+            <div class="sp-name">吳彥廷（小吳哥）</div>
+            <div class="sp-role">窩的家集團 執行長</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-cut">✂️ 剪綵中央</span>
+          <span class="sp-tag sp-tag-speak">🎤 主角</span>
+        </div>
+        <div class="sp-feature">
+          <strong>站位</strong>：5 人最中央，整場活動主角。
+        </div>
+      </div>
+
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <div class="sp-order">4</div>
+          <div>
+            <div class="sp-name">邱福臨</div>
+            <div class="sp-role">住商不動產 · 正義國小加盟店 店長（合作好夥伴）</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-cut">✂️ 剪綵站台（右 2）</span>
+          <span class="sp-tag sp-tag-speak">🎤 上午致詞</span>
+        </div>
+        <div class="sp-feature">
+          <strong>稱呼</strong>：邱店長。
+        </div>
+      </div>
+
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <div class="sp-order">5</div>
+          <div>
+            <div class="sp-name">李杰峰副總</div>
+            <div class="sp-role">住商不動產 總公司 · 副總</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-cut">✂️ 剪綵站台（右 1）</span>
+          <span class="sp-tag sp-tag-speak">🎤 上午致詞</span>
+          <span class="sp-tag sp-tag-vip">🏆 剪綵後贈匾</span>
+        </div>
+        <div class="sp-feature">
+          <strong>接待</strong>：住商總部最高代表層級，由 <strong>小吳哥本人親自接待</strong>。<br>
+          <strong>剪綵完接著贈匾儀式</strong>：李副總把「開幕誌慶」匾交給小吳哥、雙方握匾合照。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 不致詞但會來祝賀 -->
+  <div class="sp-group">
+    <h3 class="sp-group-title">🍷 到場祝賀（不致詞、不剪綵）<span class="sp-subtitle">受邀貴賓，特殊接待</span></h3>
+    <div class="sp-cards">
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <div>
+            <div class="sp-name">辜博鴻 + 吳沂修 🍗</div>
+            <div class="sp-role">凌群不動產（總經理 + 員工）</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-sponsor">💰 茶會贊助</span>
+          <span class="sp-tag sp-tag-vip">社宅業務借牌合作方</span>
+        </div>
+        <div class="sp-feature">
+          <strong>到場時間</strong>：辜總約 11:00 / 吳沂修約 11:30，整體 <strong>11:00–11:30 區間</strong>到。<br>
+          <strong>身份</strong>：凌群是我們社宅業務借牌合作方，辜總贊助今天茶會（$10,000 元氣先生外燴）。<br>
+          <strong>4/21 LINE 表態</strong>：「不用安排致詞，過去吃吃喝喝打屁、祝賀開幕」。<br>
+          <strong>稱呼</strong>：辜總。<strong>見到本人請主動道謝贊助茶點，立刻 cue 瓊安+ Ivy</strong>，瓊安會請 Ivy 在適當時機台上點名致意。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 下午場致詞 -->
+  <div class="sp-group">
+    <h3 class="sp-group-title">🎤 下午場致詞（13:00–13:15）<span class="sp-subtitle">小吳哥 + 王理事長 + 各分會主席</span></h3>
+    <div class="sp-cards">
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <div class="sp-order">1</div>
+          <div>
+            <div class="sp-name">吳彥廷（小吳哥）</div>
+            <div class="sp-role">窩的家集團 執行長</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-speak">🎤 下午首位致詞</span>
+        </div>
+        <div class="sp-feature">下午場首位，開場三年前兩人店面 → 30 人團隊 → 一條龍。</div>
+      </div>
+
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <div class="sp-order">2</div>
+          <div>
+            <div class="sp-name">王則人</div>
+            <div class="sp-role">新北市租賃住宅服務商業同業公會 理事長</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-speak">🎤 下午致詞</span>
+          <span class="sp-tag sp-tag-vip">公會理事長</span>
+        </div>
+        <div class="sp-feature">
+                    <strong>身份</strong>：租賃公會新北理事長，下午場列為特別來賓。
+        </div>
+      </div>
+
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <div class="sp-order">3</div>
+          <div>
+            <div class="sp-name">BNI 三位代表</div>
+            <div class="sp-role">邱愛莉 · 呂昀宣 · 諸葛俊鳴</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-speak">🎤 下午致詞</span>
+        </div>
+        <div class="sp-feature">
+          王理事長之後，<strong>邱愛莉、呂昀宣、諸葛俊鳴</strong> 三位依序上台致詞。<br>
+          完整介紹見下方「🤝 下午場 BNI 代表貴賓」三張卡片。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 下午 BNI 代表貴賓 -->
+  <div class="sp-group">
+    <h3 class="sp-group-title">🤝 下午場 BNI 代表貴賓（致詞者）<span class="sp-subtitle">王理事長後依序上台致詞</span></h3>
+    <div class="sp-cards">
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <img src="vendor_photos/邱愛莉.png" alt="邱愛莉" class="sp-avatar">
+          <div>
+            <div class="sp-name">邱愛莉</div>
+            <div class="sp-role">House123 執行長 · 華都更分會發起人</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-vip">BNI 代表</span>
+        </div>
+        <div class="sp-feature">
+          <strong>稱呼</strong>：本人確認稱呼「邱愛莉」（2026-04-20 確認）。<br>
+          <strong>身份</strong>：House123 執行長，房產知名人物。
+        </div>
+      </div>
+
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <img src="vendor_photos/呂昀宣.png" alt="呂昀宣" class="sp-avatar">
+          <div>
+            <div class="sp-name">呂昀宣（昀宣）</div>
+            <div class="sp-role">晨諾創意 執行長 · BNI 大展分會主席</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-vip">BNI 代表</span>
+        </div>
+        <div class="sp-feature"><strong>身份</strong>：BNI 大展分會主席。大展分會 16 位夥伴名單見下方。</div>
+      </div>
+
+      <div class="sp-card">
+        <div class="sp-card-head">
+          <img src="vendor_photos/諸葛俊鳴.png" alt="諸葛俊鳴" class="sp-avatar">
+          <div>
+            <div class="sp-name">諸葛俊鳴</div>
+            <div class="sp-role">BNI 安信分會代表</div>
+          </div>
+        </div>
+        <div class="sp-tags">
+          <span class="sp-tag sp-tag-vip">BNI 代表</span>
+        </div>
+        <div class="sp-feature">
+          <strong>身份</strong>：BNI 安信分會代表。<br>
+          <strong>接待</strong>：主要由 <strong>小呂</strong> 負責對接安信分會（小吳哥當天會很忙，當備援）。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 大展白金分會（忠豪邀請） -->
+  <div class="sp-group">
+    <h3 class="sp-group-title">🎫 大展白金分會 · 下午 12:00 場<span class="sp-subtitle">忠豪的分會夥伴（忠豪 = 大展分會成員）</span></h3>
+    <div style="background:#E3F2FD;border-left:4px solid var(--blue);padding:14px 18px;border-radius:8px;margin-bottom:14px;font-size:14px;line-height:1.8;">
+      <strong>📌 迎賓請注意</strong>：看到以下名單的人報到，<strong>立刻引導找忠豪</strong>（忠豪應該會自己接待，這份名單供迎賓核對身份用）。<br>
+      <span style="font-size:12px;color:var(--gray);">他們是下午 12 點場次，由 BNI 大展分會主席呂昀宣帶領，共 16 人（含攜伴）。</span>
+    </div>
+    <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 20px;">
+      <div style="font-size:13px;color:var(--gray);margin-bottom:8px;"><strong>報到名單（接龍順序）</strong></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(120px, 1fr));gap:8px;font-size:14px;">
+        <div>忠豪 +2</div>
+        <div>美鳳 +1</div>
+        <div>昀宣 +1</div>
+        <div>子靚 +1</div>
+        <div>富貴 +1</div>
+        <div>伯超 ×1</div>
+        <div>世豪 +1</div>
+        <div>金鈴 +1</div>
+        <div>國龍 +1</div>
+        <div>雀伶 +1</div>
+        <div>宏南 +1</div>
+        <div>乙仙 +1</div>
+        <div>俊宇 +1</div>
+        <div>Cama +1</div>
+        <div>韋旱 +2</div>
+        <div>韋成 +1</div>
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--border);font-size:12px;color:var(--gray);">
+        📍 報到地點：三重區平安街 59 號 · 📞 洽詢：0916-332-312（忠豪）
+      </div>
+    </div>
+  </div>
+
+  <!-- 無法到場 -->
+  <div class="sp-group">
+    <h3 class="sp-group-title">❌ 無法到場（原邀請但已確認缺席）</h3>
+    <div class="sp-absent-card">
+      <strong>劉貞君 理事長</strong>（中華民國租賃住宅服務商業同業公會全國聯合會）<br>
+      原規劃列剪綵嘉賓之一，已確認無法到場。
+    </div>
+  </div>
+
+  <div style="margin-top:24px;padding:16px 18px;background:#FFF5F4;border:2px solid var(--red);border-radius:10px;">
+    <strong style="color:var(--red);">🚨 簽到夥伴最重要任務 · 隱藏大咖通報</strong><br>
+    <span style="font-size:13px;color:var(--dark);line-height:1.8;">
+      除了上方明列名單，<strong>還可能有很大咖但很低調的貴賓到場</strong> —— 他們不會事先說要來、不願致詞、也不透漏身份。<br>
+      <strong>簽到時若認出大咖（或簽到表看到重要名字）請私下 cue 瓊安</strong>，瓊安會跟主持人 Ivy 安排合適時機在台上介紹。<br>
+      <span style="color:var(--gray);">⚠️ 不要公開宣布、不要當場要求致詞，節奏由瓊安和 Ivy 判斷。</span>
+    </span>
+  </div>
+
+  <div style="margin-top:12px;padding:16px 18px;background:#FFFBE8;border-left:4px solid var(--yellow);border-radius:8px;">
+    <strong>📌 全員請注意</strong><br>
+    <span style="font-size:13px;color:var(--gray);line-height:1.8;">
+      ① 看到上方明列嘉賓入場，迎賓立刻通報對應接待（李副總 → 小吳哥本人；Teresa → TINA；辜總 → 瓊安；大展分會 → 忠豪）。<br>
+      ② 不確定身份先客氣詢問「請問您是？」再轉介，<strong>不要讓嘉賓站在入口超過 30 秒沒人接待</strong>。<br>
+      ③ 辜總親自到場時，茶水同仁請主動遞上茶飲。
+    </span>
+  </div>
+</div>
+
+
+<div id="page-registrations" class="page">
+  <style>
+    .reg-session { margin-bottom: 24px; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .reg-session-head { padding: 14px 20px; color: #fff; font-weight: 800; font-size: 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .reg-session-head.morning { background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%); }
+    .reg-session-head.afternoon1 { background: linear-gradient(135deg, #D84315 0%, #BF360C 100%); }
+    .reg-session-head.afternoon2 { background: linear-gradient(135deg, #6A1B9A 0%, #4A148C 100%); }
+    .reg-session-count { font-size: 13px; opacity: 0.9; font-weight: 500; margin-left: auto; }
+    .reg-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .reg-table th { background: #FAFAFA; color: var(--gray); font-weight: 700; padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 12px; }
+    .reg-table td { padding: 10px 12px; border-bottom: 1px solid #F0F0F3; }
+    .reg-table tbody tr:hover { background: #FAFAFC; }
+    .reg-name { font-weight: 700; color: var(--dark); }
+    .reg-id-tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; color: #fff; font-weight: 600; }
+    .reg-phone { color: var(--red); font-weight: 600; font-variant-numeric: tabular-nums; text-decoration: none; }
+    .reg-unit { color: var(--gray); font-size: 12px; }
+    .reg-total { background: linear-gradient(135deg, var(--dark) 0%, #2A2A4A 100%); color: #fff; padding: 20px 24px; border-radius: 14px; margin-bottom: 20px; }
+    .reg-total h3 { font-size: 22px; margin-bottom: 10px; }
+    .reg-total-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-top: 14px; }
+    .reg-stat { background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; text-align: center; }
+    .reg-stat-num { font-size: 26px; font-weight: 900; color: var(--yellow); line-height: 1.2; }
+    .reg-stat-label { font-size: 12px; color: #ccc; margin-top: 4px; }
+    .reg-note { background: #FFFBE8; border-left: 4px solid var(--yellow); padding: 12px 16px; border-radius: 6px; margin-top: 14px; font-size: 13px; color: var(--dark); line-height: 1.7; }
+  </style>
+
+  <h2 class="section-title">📋 報名名單（Ragic 即時）</h2>
+
+  <div class="reg-total">
+    <h3>合計 <span style="color:var(--yellow);">34</span> 位來賓<span style="font-size:14px;font-weight:500;opacity:0.9;">（Ragic 報名 17 + 大展分會 16 + 額外邀約 1）</span></h3>
+    <div style="font-size:13px;opacity:0.85;">迎賓簽到時拿這份對名字。下午場二已併入場一。</div>
+    <div class="reg-total-stats">
+      <div class="reg-stat"><div class="reg-stat-num">11</div><div class="reg-stat-label">上午場 10:00</div></div>
+      <div class="reg-stat"><div class="reg-stat-num">22</div><div class="reg-stat-label">下午場一 13:00<br><span style="font-size:10px;">（含大展 16）</span></div></div>
+      <div class="reg-stat"><div class="reg-stat-num">20</div><div class="reg-stat-label">BNI 夥伴（含大展）</div></div>
+      <div class="reg-stat"><div class="reg-stat-num">11</div><div class="reg-stat-label">合作廠商</div></div>
+      <div class="reg-stat"><div class="reg-stat-num">3</div><div class="reg-stat-label">屋主/學員</div></div>
+    </div>
+  </div>
+
+  <div class="reg-session">
+    <div class="reg-session-head morning">
+      🕐 上午場 10:00
+      <span class="reg-session-count">11 人</span>
+    </div>
+    <table class="reg-table">
+      <thead><tr><th>姓名</th><th>身份</th><th>單位</th><th>電話</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="reg-name">吳巧如</span></td>
+          <td><span class="reg-id-tag" style="background:#2E7D32;">🏠 屋主</span></td>
+          <td><span class="reg-unit">一家好資產管理有限公司</span></td>
+          <td><a href="tel:0987325095" class="reg-phone">0987325095</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">邱愛莉</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI夥伴</span></td>
+          <td><span class="reg-unit">House123/BNI 華都更分會</span></td>
+          <td><a href="tel:0988953090" class="reg-phone">0988953090</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">陳亦誠</span></td>
+          <td><span class="reg-id-tag" style="background:#FF9800;">🧰 合作夥伴/廠商</span></td>
+          <td><span class="reg-unit">誠豐行電器有限公司</span></td>
+          <td><a href="tel:0989459800" class="reg-phone">0989459800</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">柳儀美</span><br><span style="font-size:10px;color:var(--red);font-weight:600;">⭐ 小吳哥瘋理財學員</span></td>
+          <td><span class="reg-id-tag" style="background:#9C27B0;">📚 瘋理財學員</span></td>
+          <td><span class="reg-unit">自有屋主</span></td>
+          <td><a href="tel:0916411190" class="reg-phone">0916411190</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">黃子洋</span></td>
+          <td><span class="reg-id-tag" style="background:#FF9800;">🧰 合作夥伴/廠商</span></td>
+          <td><span class="reg-unit">永策不動產股份有限公司</span></td>
+          <td><a href="tel:+886960028752" class="reg-phone">+886960028752</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">葉國斌</span></td>
+          <td><span class="reg-id-tag" style="background:#FF9800;">🧰 合作夥伴/廠商</span></td>
+          <td><span class="reg-unit">艾麗卡裝飾建材</span></td>
+          <td><a href="tel:0936758881" class="reg-phone">0936758881</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">陳昱安5位</span></td>
+          <td><span class="reg-id-tag" style="background:#FF9800;">🧰 合作夥伴/廠商</span></td>
+          <td><span class="reg-unit">住商不動產加盟總部</span></td>
+          <td><a href="tel:0987126847" class="reg-phone">0987126847</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">官燦奎</span></td>
+          <td><span class="reg-id-tag" style="background:#FF9800;">🧰 合作夥伴/廠商</span></td>
+          <td><span class="reg-unit">理想家房屋租售有限公司</span></td>
+          <td><a href="tel:0956877566" class="reg-phone">0956877566</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">王文姿</span></td>
+          <td><span class="reg-id-tag" style="background:#FF9800;">🧰 合作夥伴/廠商</span></td>
+          <td><span class="reg-unit">理想家房屋租售有限公司</span></td>
+          <td><a href="tel:0909520320" class="reg-phone">0909520320</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">洪偉哲</span></td>
+          <td><span class="reg-id-tag" style="background:#FF9800;">🧰 合作夥伴/廠商</span></td>
+          <td><span class="reg-unit">哲木工程行</span></td>
+          <td><a href="tel:0933163160" class="reg-phone">0933163160</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">李冠璋</span></td>
+          <td><span class="reg-id-tag" style="background:#FF9800;">🧰 合作夥伴/廠商</span></td>
+          <td><span class="reg-unit">理想家房屋租售有限公司</span></td>
+          <td><a href="tel:0926630765" class="reg-phone">0926630765</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="reg-session">
+    <div class="reg-session-head afternoon1">
+      🕐 下午場一 13:00（BNI 場）
+      <span class="reg-session-count">22 人（含大展 16）</span>
+    </div>
+    <table class="reg-table">
+      <thead><tr><th>姓名</th><th>身份</th><th>單位</th><th>電話</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="reg-name">高璿秝</span></td>
+          <td><span class="reg-id-tag" style="background:#FF9800;">🧰 合作夥伴/廠商</span></td>
+          <td><span class="reg-unit">艾柏漢廚具</span></td>
+          <td><a href="tel:0955553122" class="reg-phone">0955553122</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">邱金鈴</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI夥伴</span></td>
+          <td><span class="reg-unit">中信房屋樹林冠軍團隊</span></td>
+          <td><a href="tel:0909895478" class="reg-phone">0909895478</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">Elaine</span></td>
+          <td><span class="reg-id-tag" style="background:#9C27B0;">📚 瘋理財學員</span></td>
+          <td><span class="reg-unit">中學教師</span></td>
+          <td><a href="tel:0918659197" class="reg-phone">0918659197</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">廖文藝</span><br><span style="font-size:10px;color:var(--red);font-weight:600;">➡️ 忠豪大展分會</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI夥伴</span></td>
+          <td><span class="reg-unit">BNI大展分會/宏億室內裝修工程有限公司</span></td>
+          <td><a href="tel:0913930999" class="reg-phone">0913930999</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">何璟彤</span><br><span style="font-size:10px;color:var(--red);font-weight:600;">➡️ BNI 夥伴</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI夥伴</span></td>
+          <td><span class="reg-unit">富士達保經</span></td>
+          <td><a href="tel:0985573937" class="reg-phone">0985573937</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">陳宜亭</span><br><span style="font-size:10px;color:var(--red);font-weight:600;">WEIWEI 邀請 · 實際 15:00 才到</span></td>
+          <td><span class="reg-id-tag" style="background:#FF9800;">🧰 合作夥伴</span></td>
+          <td><span class="reg-unit">新同心融資貸款</span></td>
+          <td>—</td>
+        </tr>
+        <tr><td colspan="4" style="background:#F5F5F7;padding:8px 12px;font-size:12px;color:var(--gray);font-weight:700;">── 以下為 BNI 大展分會接龍（忠豪邀請·未走 Ragic 報名·共 16 人，約 12:30 起陸續到） ──</td></tr>
+        <tr>
+          <td><span class="reg-name">忠豪 +2</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展 · 窩的家同仁</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">窩的家（召集人）</span></td>
+          <td><a href="tel:0916332312" class="reg-phone">0916332312</a></td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">美鳳 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">昀宣 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展 · 分會主席</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">晨諾創意執行長</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">子靚 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">富貴 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">伯超 ×1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">世豪 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">金鈴 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">國龍 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">雀伶 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">宏南 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">乙仙 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">俊宇 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">Cama +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">韋旱 +2</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">韋成 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
+          <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="reg-session">
+    <div class="reg-session-head morning">
+      🕐 未填場次（請迎賓現場詢問）
+      <span class="reg-session-count">1 人</span>
+    </div>
+    <table class="reg-table">
+      <thead><tr><th>姓名</th><th>身份</th><th>單位</th><th>電話</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="reg-name">何元豪</span><br><span style="font-size:10px;color:var(--gray);font-weight:600;">合作的外部設計師</span></td>
+          <td><span class="reg-id-tag" style="background:#FF9800;">🧰 合作廠商</span></td>
+          <td><span class="reg-unit">外部設計師</span></td>
+          <td><a href="tel:" class="reg-phone">未留</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="reg-note">
+    <strong>📌 迎賓簽到備忘</strong><br>
+    ① 來賓報到請對名字核對場次，<strong>沒在名單上的要問「您是？」確認身份</strong>再引導。<br>
+    ② BNI 夥伴（含大展分會 16 人）下午 12:30 起陸續到，引導找忠豪。<br>
+    ③ 發現大咖級貴賓（即使名單上有）請私下 cue 瓊安，安排介紹時機。<br>
+    ④ 此名單以 Ragic 即時為準，若 Ragic 有新增，重整頁面不會自動更新（目前嵌入的是靜態截圖版）。
+  </div>
+</div>
+
+<!-- 崗位選擇浮層 -->
+<div class="spp-overlay" id="sppOverlay">
+  <div class="spp-box">
+    <div class="spp-head">
+      <div class="spp-title" id="sppTitle">選崗位</div>
+      <button class="close-x" id="sppCloseBtn">×</button>
+    </div>
+    <div class="spp-body" id="sppBody"></div>
+  </div>
+</div>
+
+<footer>
+  窩的家集團｜2026/04/26 開幕作戰手冊 · 會議版 v1 · 2026/04/24 製作
+</footer>
+
+<script>
+// ══════════════════════════════════════════
+// 核心資料定義
+// ══════════════════════════════════════════
+
+// 10 個時段
+const SLOTS = [
+  { key: '09:00', time: '09:00', label: '佈置',      ico: '🛠️', name: '餐點到場 + 佈置' },
+  { key: '10:00', time: '10:00', label: '迎賓',      ico: '👋', name: '迎賓' },
+  { key: '10:30', time: '10:30', label: '致詞',      ico: '🎤', name: '開場 + 致詞' },
+  { key: '10:45', time: '10:45', label: '剪綵',      ico: '✂️', name: '剪綵儀式', highlight: true },
+  { key: '11:00', time: '11:00', label: '導覽茶敘',  ico: '🍽️', name: '導覽 + 茶敘' },
+  { key: '11:30', time: '11:30', label: '自由便當',  ico: '🍱', name: '自由交流 + 便當' },
+  { key: '13:00', time: '13:00', label: '下午致詞',  ico: '🎤', name: '下午開場致詞' },
+  { key: '13:15', time: '13:15', label: 'CTA結語',   ico: '⭐', name: 'CTA 結語' },
+  { key: '13:30', time: '13:30', label: '下午自由',  ico: '💬', name: '自由參觀' },
+  { key: '17:30', time: '17:30', label: '回收',      ico: '📦', name: '元氣回收' }
+];
+
+// 21 個崗位定義（+ 每個崗位在每個時段「實際要做什麼」）
+const ROLES = {
+  'joan': {
+    name: '場控（瓊安 · 全場指揮站 Ivy 旁）', color: 'joan', count: 1,
+    slots: {
+      '09:00': '確認背板、看板、QR Code 立牌、螢幕輪播、音響、剪綵設備全部就位。',
+      '10:00': '活動前 5 分鐘跟 Ivy 一起預告：請大家移步觀禮區。',
+      '10:30': '站 Ivy 旁邊。掌握節奏、cue 致詞者出場。',
+      '10:45': '剪綵儀式場控、剪綵完 cue 贈匾儀式（李副總 → 小吳哥）。',
+      '10:45': '確認 5 位剪綵嘉賓已到騎樓、手套金剪都備好。',
+      '13:00': '貼 Ivy 場控。注意 13:15 前結束避免與導覽重疊。',
+      '13:15': 'cue Ivy 做 CTA 結語、提醒 Google 五星好評。'
+    }
+  },
+  'ivy': {
+    name: '主持人 Ivy', color: 'ivy', count: 1,
+    slots: {
+      '10:00': '活動前 5 分鐘跟瓊安一起預告：請各位移步觀禮區。',
+      '10:30': '開場 → 唱名與會貴賓 → cue 致詞：小吳哥 → 邱福臨店長 → 李杰峰副總（住商總部）。',
+      '10:45': '引言 → cue 合照 → cue 動剪 → cue 全體大合照。',
+      '11:00': '邀請來賓進 1F 享用茶點，口頭帶 Google 五星好評，預告下午場 13:00 開始。',
+      '13:00': '重複開場主軸，唱名 BNI 三代表（邱愛莉／呂昀宣／諸葛俊鳴），cue 致詞。',
+      '13:15': '四條 CTA：買房→1F／裝修→2F／出租→3F／社宅→4F。再提醒 Google 五星好評。'
+    }
+  },
+  'boss': {
+    name: '集團執行長（小吳哥致詞）', color: 'boss', count: 1,
+    slots: {
+      '10:30': '首位致詞。',
+      '10:45': '剪綵完成後，接李副總贈匾儀式（匾文：三重正義國小加盟店開幕誌慶／住商總部董事長陳錫琮暨全體工作同仁敬賀）。',
+      '13:00': '下午首位致詞。後續為王則人理事長 → 各分會主席。'
+    }
+  },
+  'vip-bni': {
+    name: '貴賓接待 BNI 組 · 下午場（小吳哥陪愛莉 + 小呂陪諸葛俊鳴 + 忠豪陪昀宣）', color: 'vip', count: 3,
+    slots: {
+      '13:00': '12:30 起 BNI 貴賓陸續到 → 13:00 致詞三代表就坐。分工：小吳哥接邱愛莉（華都更分會只她一人，不能放她單獨／也不能放 Ivy 單獨）、小呂接諸葛俊鳴（安信分會）、忠豪接呂昀宣（大展分會）。',
+      '13:15': '結語 CTA 陪座、帶動氣氛。',
+      '13:30': '下午自由參觀：<strong>小吳哥重點與邱愛莉做 121 聊天</strong>（促成深度互動、爭取後續合作）；其餘兩位繼續陪同諸葛／昀宣 + 大展分會夥伴。'
+    }
+  },
+  'vip-yoshi': {
+    name: '貴賓接待 優式組 · 上午場（TINA 主力＋WEIWEI 協助）', color: 'vip', count: 2,
+    slots: {
+      '10:00': '接待優式系統店東（Teresa、其他店東）。TINA 為主、WEIWEI 協助。',
+      '10:30': '致詞時陪優式店東坐前排觀禮。',
+      '10:45': '剪綵時 TINA 本人上場站台，WEIWEI 陪其他優式店東觀禮。',
+      '11:00': '帶優式店東到 3F 看優式加盟店布置、交流。'
+    }
+  },
+  'food-a': {
+    name: '餐點接貨 A（09:00 接貨 + 17:30 回收對接）', color: 'food', count: 1,
+    slots: {
+      '09:00': '接元氣先生司機謝文壽（0922-026-410），13 箱點心，核對明細、簽收、各款先擺一盤。',
+      '17:30': '留守配合謝文壽回收餐點器具、保溫箱、餐盤。'
+    }
+  },
+  'food-b': {
+    name: '餐點接貨 B（擺盤＋回收協助）', color: 'food', count: 1,
+    slots: {
+      '09:00': '協助 A 擺盤，剩餘 13 盤補充上桌。冷藏品（水果塔、野莓塔）放 1F/2F 小冰箱。',
+      '17:30': '協助 A 清點餐具器材、確認場地歸還原狀。'
+    }
+  },
+  'welcome': {
+    name: '入口招呼／迎賓／簽到（帶位＋認人＋QR Code）', color: 'welcome', count: 2,
+    slots: {
+      '10:00': '站騎樓門口帶位。請來賓掃 Google QR Code 留五星好評，引導進 1F。',
+      '10:30': '致詞期間守入口，遲到貴賓進場引導就座（避免打擾致詞）。',
+      '10:45': '剪綵期間守入口，有客人到仍要招呼、引導到騎樓觀禮區。',
+      '11:00': '導覽茶敘時段繼續迎賓。客人陸續到，簽到要照常。',
+      '11:30': '自由交流時段輪流吃飯，但入口隨時要有人。',
+      '13:00': '下午場開始前主力時段，BNI 貴賓（約 12:30 起）+ 大展分會 16 人陸續到，簽到核對、引導找忠豪。',
+      '13:15': '下午結語期間守入口，遲到貴賓引導就座。',
+      '13:30': '下午自由參觀時段繼續迎賓，直到 17:30 結束。',
+      '17:30': '活動結束前最後確認簽到表完整性，送客道別。'
+    }
+  },
+  'guide-cut': {
+    name: '剪綵動線引導（帶 5 嘉賓就位）', color: 'cut', count: 1,
+    slots: {
+      '10:30': '致詞期間到剪綵嘉賓身邊待命，10:43 預備帶位。',
+      '10:45': '剪綵完成後立刻協調贈匾：請李副總 + 小吳哥到定位、確認匾額已備好、cue 攝影師預備拍三段（遞匾預備／握匾瞬間／合照）。',
+      '10:45': '帶 5 位嘉賓從室內走到騎樓就位（Teresa → TINA → 小吳哥（中央） → 邱福臨 → 李杰峰副總）。'
+    }
+  },
+  'glove': {
+    name: '剪綵遞手套（建議女同仁）', color: 'cut', count: 1,
+    slots: {
+      '10:45': '建議女同仁。逐一遞白手套給 5 位嘉賓，拍照後立即回收。'
+    }
+  },
+  'scissor': {
+    name: '剪綵遞金剪（建議女同仁）', color: 'cut', count: 1,
+    slots: {
+      '10:45': '建議女同仁。嘉賓戴好手套後遞金剪，拍照後立即回收。'
+    }
+  },
+  'floater-a': {
+    name: '機動顧全場 A（遊走補位＋盯人流）', color: 'float', count: 1,
+    slots: {
+      '09:00': '協助最後場地檢查、補位支援、歡迎早到客人。',
+      '10:00': '迎賓尖峰時段補位，帶位到 1F 前排。',
+      '10:30': '致詞期間巡場，看哪個樓層/角落沒人招呼。',
+      '10:45': '剪綵期間在騎樓周邊維持秩序、招呼晚到貴賓。',
+      '11:00': '導覽茶敘主力巡場。1F 滿 25 人時往樓上帶、不往外帶。',
+      '11:30': '自由交流時段補位，哪裡冷清往哪補人氣。',
+      '13:00': '下午致詞期間巡場，注意貴賓就座狀況。',
+      '13:15': '結語 CTA 時段協助帶動氣氛。',
+      '13:30': '下午自由參觀主力巡場，注意茶水、桌面、人流。',
+      '17:30': '活動結束協助送客、清場。'
+    }
+  },
+  'floater-b': {
+    name: '機動顧全場 B（遊走補位＋盯人流）', color: 'float', count: 1,
+    slots: {
+      '09:00': '協助最後場地檢查、補位支援。',
+      '10:00': '迎賓尖峰另一側補位，A 在哪這個就顧另一邊。',
+      '10:30': '致詞期間巡場，補 A 沒顧到的角落。',
+      '10:45': '剪綵期間另一側維持秩序。',
+      '11:00': '與 A 分工，一人顧 1F/2F、另一人顧 3F/4F。',
+      '11:30': '自由交流繼續遊走補位、輪流吃飯。',
+      '13:00': 'BNI 三代表引座協助，陪 BNI 組接待。',
+      '13:15': '結語 CTA 時段協助帶動氣氛。',
+      '13:30': '下午自由參觀分樓層巡場。',
+      '17:30': '活動結束協助送客、清場。'
+    }
+  },
+  'traffic-cd': {
+    name: '機動輔助組 CD（門口交通安全）', color: 'float', count: 2,
+    slots: {
+      '10:00': '站騎樓/馬路口看人看車。來賓下車、上車、過馬路時<strong>主動上前協助</strong>，避免被車撞到。',
+      '10:30': '致詞期間繼續顧門口，<strong>尤其剪綵前嘉賓會聚集騎樓外</strong>，交通壓力最大。',
+      '10:45': '剪綵時站騎樓兩側，阻擋來車、保護嘉賓。機車摩托車若要經過請客氣請對方繞道或慢行。',
+      '11:00': '導覽茶敘後客人來去，仍要守門口交通'
+    }
+  },
+  'cleaner': {
+    name: '茶水補給／桌面清潔（全天補位）', color: 'clean', count: 2,
+    slots: {
+      '10:00': '準備好茶水、確認餐點擺盤狀態。',
+      '10:30': '致詞時段低調補茶水、補盤。',
+      '11:00': '導覽茶敘主力：補餐點、清桌面、冷藏品適時取出補盤。',
+      '11:30': '13:00 前確認元氣先生下午場備餐完畢；兩人輪流吃便當。',
+      '13:00': '下午致詞期間低調補位。',
+      '13:30': '下午自由參觀持續補茶水、清桌面。',
+      '17:30': '協助餐點接貨 A/B 做最後清場。'
+    }
+  },
+  'shoot': {
+    name: '拍攝指揮（與子璇＋橘子討論分鏡＋控時）', color: 'shoot', count: 1,
+    slots: {
+      '10:00': '<strong>攝影師 10:00 開工、只有 4 小時（到 14:00）</strong>。先跟子璇、橘子對齊 6 支短影音腳本分鏡、優先順序、誰出場、在哪拍。',
+      '10:30': '致詞時段：盯每一位致詞者都有近景、接匾瞬間（小吳哥＋李副總雙手握匾）要拍到、觀眾反應鏡頭也要補。',
+      '10:45': '<strong>剪綵是最重要時刻，關鍵動作要拍「三段」</strong>：<br>① 嘉賓戴手套拿剪刀就位的預備照（還沒剪）<br>② 剪刀剪下紅布條瞬間的動作照<br>③ 剪完 5 人舉手/合照的完成照<br>騎樓正面 + 側面 + LOGO 背板入鏡都要有。<br><br><strong>💬 cue 攝影師話術（禮貌版）</strong>：<br>「子璇（或橘子）我們老闆很重視這個畫面，剪下去前麻煩先幫我們拍一張預備的、然後剪的瞬間、剪完再一張合照，這樣三段我們家老闆會很愛～辛苦你了！」<br>（不要用「記得拍喔」「不要忘記」這種句式，會讓攝影師覺得我們不信任她專業。改成「老闆很重視」「你幫我們一下」這種請求型）',
+      '11:00': '導覽茶敘：決定哪些樓層畫面、哪幾個同仁入鏡、哪段要補 B-roll。',
+      '11:30': '與攝影師抓時間，<strong>確認 14:00 前 6 支影片必要素材都拍完</strong>。沒拍到的會後補不了。',
+      '13:00': '下午致詞（若攝影師延長到場）：BNI 三代表致詞、新人快問快答可能也要拍。'
+    }
+  },
+  'broll': {
+    name: '拍攝素材支援（拿 DJI Pocket 4 補 B-roll）', color: 'shoot', count: 1,
+    slots: {
+      '09:00': '領公司 DJI Pocket 4，測試錄影、充飽電。',
+      '10:00': '拍迎賓、來賓進場、掃 QR Code 五星好評的畫面。',
+      '10:30': '跟子璇、橘子錯開角度，補拍致詞觀眾反應、空間氛圍。',
+      '10:45': '剪綵側面 B-roll、不搶正面主機位。',
+      '11:00': '各樓層導覽跟拍、茶敘人群氣氛、LOGO 背板入鏡。',
+      '11:30': '自由交流時段走動補拍素材。',
+      '13:00': '下午致詞觀眾反應、BNI 三代表近景。',
+      '13:30': '下午自由交流氣氛補拍。'
+    }
+  },
+  'bento': {
+    name: '便當訂購＋接貨（12:00 · Ivy/瓊安不吃海鮮）', color: 'bento', count: 1,
+    slots: {
+      '11:30': '12:00 便當送達接貨。數量 = 當天公司實際在場人數（含 Ivy）。Ivy 與瓊安不吃海鮮。橘子收工時間需確認是否列入。'
+    }
+  },
+};
+
+// 排班用：只有窩的家同仁（廠商已固定崗位，不參與排班）
+const STAFF_LIST = [
+  '張瓊安','吳彥廷','蕭靜芳','張忠豪','韓珊珊','呂鴻墀','沈郁雯','張玉慧',
+  '李卓威','張則泓','劉子碩','方鼎文','吳偉民','蕭眞儀',
+  '林宣佑','謝佳芬','陳心瑜','吳炫儒','吳惠慈','詹張傳','關宗宇',
+  '中信夥伴'
+];
+// 廠商：有固定任務，供「我的任務頁」選但不進矩陣
+const VENDOR_NAMES = ['Ivy', '橘子'];
+
+// ══════════════════════════════════════════
+// Ragic
+// ══════════════════════════════════════════
+const RAGIC_URL = 'https://ap15.ragic.com/wuohome/operation/14';
+const RAGIC_AUTH = 'Basic VEZsOEwzYzVJdWdoWXRDM3ptS2YwRytLV21BaWhPTDRLWXhPb2FLZ3VBUm1BZE90VzJtZzlTNjVlbCszRnZkRw==';
+
+let rolesData = {};
+let roleAssignments = {};
+let personToRoles = {};
+let mvDraft = {};
+
+async function fetchRagicData() {
+  const res = await fetch(RAGIC_URL + '?api&limit=50', {
+    headers: { 'Authorization': RAGIC_AUTH }
+  });
+  const data = await res.json();
+  rolesData = {};
+  roleAssignments = {};
+  personToRoles = {};
+  Object.values(data).forEach(row => {
+    const code = row['角色代碼'];
+    if (!code) return;
+    const assignees = Array.isArray(row['指派人員'])
+      ? row['指派人員'].filter(x => x)
+      : (row['指派人員'] ? [row['指派人員']] : []);
+    rolesData[code] = {
+      ragicId: row['_ragicId'],
+      name: row['角色名稱'] || ROLES[code]?.name || code,
+      count: parseInt(row['建議人數'] || ROLES[code]?.count || '1'),
+      assignees,
+      status: row['狀態'] || '待定'
+    };
+    roleAssignments[code] = assignees;
+    assignees.forEach(n => {
+      if (!personToRoles[n]) personToRoles[n] = [];
+      personToRoles[n].push(code);
+    });
+  });
+}
+
+function buildFallback() {
+  rolesData = {};
+  roleAssignments = {};
+  personToRoles = {};
+  Object.entries(ROLES).forEach(([code, r]) => {
+    rolesData[code] = { ragicId: null, name: r.name, count: r.count, assignees: [], status: '待定' };
+    roleAssignments[code] = [];
+  });
+}
+
+async function saveToRagic(code, assignees) {
+  const row = rolesData[code];
+  if (!row || !row.ragicId) return false;
+  const fd = new URLSearchParams();
+  assignees.forEach(n => fd.append('指派人員[]', n));
+  if (assignees.length === 0) fd.append('指派人員[]', '');
+  fd.append('狀態', assignees.length >= row.count ? '已指派' : (assignees.length > 0 ? '部分指派' : '待定'));
+  const res = await fetch(RAGIC_URL + '/' + row.ragicId, {
+    method: 'POST',
+    headers: {
+      'Authorization': RAGIC_AUTH,
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    },
+    body: fd.toString()
+  });
+  const j = await res.json();
+  return j.status === 'SUCCESS';
+}
+
+// ══════════════════════════════════════════
+// 時鐘
+// ══════════════════════════════════════════
+function pad(n) { return n < 10 ? '0' + n : '' + n; }
+function tickClock() {
+  const n = new Date();
+  document.getElementById('liveClock').textContent = pad(n.getHours()) + ':' + pad(n.getMinutes());
+  // 倒數到 4/26 10:00
+  const target = new Date(2026, 3, 26, 10, 0, 0); // 月份是 0-index
+  const diff = target - n;
+  const cd = document.getElementById('countdown');
+  if (cd) {
+    if (diff <= 0) {
+      cd.textContent = '🎉 活動進行中';
+    } else {
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      if (d > 0) cd.textContent = `還有 ${d} 天 ${h} 小時`;
+      else if (h > 0) cd.textContent = `還有 ${h} 小時 ${m} 分`;
+      else cd.textContent = `剩 ${m} 分鐘`;
+    }
+  }
+}
+tickClock();
+setInterval(tickClock, 30000);
+
+// ══════════════════════════════════════════
+// Tab 切換
+// ══════════════════════════════════════════
+// 廠商頁子分頁切換
+document.querySelectorAll('.subtab').forEach(st => {
+  st.addEventListener('click', () => {
+    const sub = st.dataset.sub;
+    document.querySelectorAll('.subtab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.subpage').forEach(p => p.classList.remove('active'));
+    st.classList.add('active');
+    document.getElementById('sub-' + sub).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.tb-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.page;
+    document.querySelectorAll('.tb-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('page-' + target).classList.add('active');
+    if (target === 'assign') {
+      // rolesData 若空則重載；否則直接重渲染（避免卡在讀取中）
+      if (Object.keys(rolesData).length === 0) {
+        loadAssignPage();
+      } else {
+        const status = document.getElementById('asnStatus');
+        if (rolesData[Object.keys(rolesData)[0]].ragicId) {
+          status.textContent = '✅ 已載入 · 拖拉即可編輯';
+          status.className = 'asn-status saved';
+        } else {
+          status.textContent = '⚠️ Ragic 連不到（本機檔案）· 用本地清單 · 會議後把結果給 Claude 寫入';
+          status.className = 'asn-status error';
+        }
+        if (Object.keys(mvDraft).length === 0) initDraft();
+        renderMatrix();
+        renderPool();
+      }
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+// ══════════════════════════════════════════
+// 📖 全景頁：渲染視覺時間軸
+// ══════════════════════════════════════════
+function renderVTimeline() {
+  const track = document.getElementById('vtTrack');
+  track.innerHTML = '';
+  SLOTS.forEach(s => {
+    const step = document.createElement('div');
+    step.className = 'vt-step' + (s.highlight ? ' highlight' : '');
+    // 統計該時段所有崗位總需要人數
+    let total = 0;
+    Object.values(ROLES).forEach(r => {
+      if (r.slots[s.key]) total += r.count;
+    });
+    step.innerHTML = `
+      <div class="vt-time">${s.time}</div>
+      <div class="vt-ico">${s.ico}</div>
+      <div class="vt-name">${s.name}</div>
+      <div class="vt-people">${total} 人崗</div>
+    `;
+    track.appendChild(step);
+  });
+}
+renderVTimeline();
+
+// ══════════════════════════════════════════
+// 👤 我的任務頁
+// ══════════════════════════════════════════
+const mePicker = document.getElementById('mePicker');
+mePicker.addEventListener('change', () => {
+  renderMe(mePicker.value);
+  localStorage.setItem('meeting-me', mePicker.value);
+});
+
+// 還原上次選擇
+if (localStorage.getItem('meeting-me')) {
+  mePicker.value = localStorage.getItem('meeting-me');
+  renderMe(mePicker.value);
+}
+
+function renderMe(name) {
+  const timeline = document.getElementById('meTimeline');
+  const summary = document.getElementById('meSummary');
+  const contactCard = document.getElementById('meContactCard');
+
+  if (!name) {
+    timeline.innerHTML = '<div class="me-empty"><div class="me-empty-big">👆</div>請先在上方選你的名字<br><span style="font-size:12px;">會顯示你今天的完整時段任務卡</span></div>';
+    summary.classList.remove('show');
+    contactCard.style.display = 'none';
+    return;
+  }
+
+  // 找這個人被指派到哪些崗位
+  const myRoles = personToRoles[name] || [];
+
+  // 收集每個時段要做的事
+  const mySlots = [];
+  SLOTS.forEach(slot => {
+    const tasks = [];
+    myRoles.forEach(code => {
+      const r = ROLES[code];
+      if (r && r.slots[slot.key]) {
+        tasks.push({ code, roleName: r.name, do: r.slots[slot.key] });
+      }
+    });
+    if (tasks.length > 0) mySlots.push({ slot, tasks });
+  });
+
+  if (mySlots.length === 0) {
+    timeline.innerHTML = `
+      <div class="me-empty">
+        <div class="me-empty-big">🤔</div>
+        <strong>${name}</strong> 目前還沒被指派任務<br>
+        <span style="font-size:12px;">請等 4/24 會議分派後重新整理頁面</span>
+      </div>`;
+    summary.classList.remove('show');
+    contactCard.style.display = 'none';
+    return;
+  }
+
+  summary.classList.add('show');
+  summary.innerHTML = `
+    <div>嗨 <strong>${name}</strong>！你今天有 <span class="cnt">${mySlots.length}</span> 個時段要忙，共 <span class="cnt">${myRoles.length}</span> 個崗位。</div>
+    <div style="font-size:13px;margin-top:6px;opacity:0.8;">依時段順序往下看，每張卡寫你具體要做什麼。</div>
+  `;
+
+  timeline.innerHTML = '';
+  mySlots.forEach(({ slot, tasks }) => {
+    const card = document.createElement('div');
+    card.className = 'me-card';
+    const tasksHtml = tasks.map(t => `
+      <div style="margin-bottom:8px;">
+        <div class="me-role">${slot.ico} ${t.roleName}</div>
+        <div class="me-do">${t.do}</div>
+      </div>
+    `).join('');
+    card.innerHTML = `
+      <div class="me-card-head">
+        <div class="me-time">${slot.time}</div>
+        <div style="font-size:13px;color:var(--gray);">${slot.name}</div>
+      </div>
+      ${tasksHtml}
+      <div class="me-helpers">💡 需要幫忙：找 <strong>機動 A/B</strong> 或 <strong>瓊安</strong>。</div>
+    `;
+    timeline.appendChild(card);
+  });
+
+  contactCard.style.display = 'block';
+}
+
+// ══════════════════════════════════════════
+// 📊 排班指派頁：矩陣 + 拖拉
+// ══════════════════════════════════════════
+async function loadAssignPage() {
+  const status = document.getElementById('asnStatus');
+  status.textContent = '從 Ragic 讀取…';
+  status.className = 'asn-status saving';
+  let ok = false;
+  try {
+    await fetchRagicData();
+    ok = Object.keys(rolesData).length > 0;
+  } catch (e) {
+    console.warn('Ragic 失敗：', e);
+  }
+  if (!ok) {
+    buildFallback();
+    status.textContent = '⚠️ Ragic 連不到（本機檔案）· 用本地清單 · 會議後把結果給 Claude 寫入';
+    status.className = 'asn-status error';
+  } else {
+    status.textContent = '✅ 已載入 · 拖拉即可編輯';
+    status.className = 'asn-status saved';
+  }
+  initDraft();
+  renderMatrix();
+  renderPool();
+}
+
+function initDraft() {
+  mvDraft = {};
+  Object.entries(roleAssignments).forEach(([k, v]) => { mvDraft[k] = [...v]; });
+}
+
+function personSlotRoles(name, slotKey) {
+  const out = [];
+  Object.entries(mvDraft).forEach(([code, names]) => {
+    if (!names.includes(name)) return;
+    const r = ROLES[code];
+    if (r && r.slots[slotKey]) out.push(code);
+  });
+  return out;
+}
+function personTaskCount(name) {
+  let c = 0;
+  Object.values(mvDraft).forEach(names => { if (names.includes(name)) c++; });
+  return c;
+}
+
+function renderMatrix() {
+  // 轉置版：列 = 崗位，欄 = 時段
+  const head = document.getElementById('asnHead');
+  const body = document.getElementById('asnBody');
+  head.innerHTML = '';
+  body.innerHTML = '';
+
+  const trH = document.createElement('tr');
+  trH.innerHTML = '<th class="mv-group-th">組別</th><th>崗位 \\ 時段</th>';
+  SLOTS.forEach(s => {
+    trH.innerHTML += `<th><span class="t-big">${s.time}</span><span class="t-sub">${s.label}</span></th>`;
+  });
+  head.appendChild(trH);
+
+  // 分組結構：每組一個顏色標籤
+  const GROUPS = [
+    { name: '指揮', color: '#E8473F', codes: ['joan'] },
+    { name: '接待', color: '#1565C0', codes: ['welcome','vip-bni','vip-yoshi','floater-a','floater-b','traffic-cd'] },
+    { name: '剪綵', color: '#D81B60', codes: ['guide-cut','glove','scissor'] },
+    { name: '餐飲', color: '#FF9800', codes: ['food-a','food-b','cleaner','bento'] },
+    { name: '拍攝', color: '#455A64', codes: ['shoot','broll'] }
+  ];
+
+  GROUPS.forEach(group => {
+    group.codes.forEach((code, idx) => {
+    const r = ROLES[code];
+    if (!r) return;
+    const tr = document.createElement('tr');
+    // 每組第一列加直式組別標籤 td（rowspan = 該組崗位數）
+    if (idx === 0) {
+      const groupTd = document.createElement('td');
+      groupTd.className = 'mv-group-td';
+      groupTd.rowSpan = group.codes.length;
+      groupTd.style.background = group.color;
+      groupTd.innerHTML = group.name.split('').join('<br>');
+      tr.appendChild(groupTd);
+    }
+    const assigned = mvDraft[code] || [];
+    const need = r.count;
+    const statusTag = assigned.length === 0 ? '待派' : (assigned.length >= need ? '✓ 滿' : `${assigned.length}/${need}`);
+    const statusCls = assigned.length === 0 ? 'busy' : (assigned.length >= need ? 'normal' : '');
+    // 全名：括號內小字（說明）+ 括號外大字（主名）
+    let mainName = r.name;
+    let subName = '';
+    const mParen = r.name.match(/^([^（(]+)[（(]([^）)]+)[）)]$/);
+    if (mParen) {
+      mainName = mParen[1].trim();
+      subName = mParen[2].trim();
+    }
+
+    const nameTd = document.createElement('td');
+    nameTd.className = 'mv-name';
+    nameTd.innerHTML = `
+      <div style="font-weight:700;font-size:13px;">${mainName}</div>
+      ${subName ? `<div style="font-size:11px;color:var(--gray);margin-top:1px;line-height:1.3;">${subName}</div>` : ''}
+      <div style="display:flex;align-items:center;gap:6px;margin-top:4px;">
+        <span class="nm-tag">需 ${need} 人</span>
+        <span class="nm-count ${statusCls}" title="指派進度">${statusTag}</span>
+      </div>
+    `;
+    tr.appendChild(nameTd);
+
+    SLOTS.forEach(slot => {
+      const td = document.createElement('td');
+      const hasSlot = !!r.slots[slot.key];
+      const cell = document.createElement('div');
+      cell.dataset.role = code;
+      cell.dataset.slot = slot.key;
+
+      if (!hasSlot) {
+        cell.className = 'mv-cell inactive';
+        cell.innerHTML = '<span style="color:#ccc;font-size:14px;">—</span>';
+      } else {
+        cell.className = 'mv-cell' + (assigned.length === 0 ? ' empty' : '');
+        assigned.forEach(name => {
+          const chip = document.createElement('div');
+          chip.className = `mv-role-chip color-${r.color}`;
+          chip.textContent = name;
+          chip.draggable = true;
+          chip.dataset.fromRole = code;
+          chip.dataset.fromName = name;
+          chip.title = `${name} · ${r.name}\n點一下取消 · 拖可換崗`;
+          chip.addEventListener('dragstart', onChipDragStart);
+          chip.addEventListener('dragend', onDragEnd);
+          chip.addEventListener('click', e => {
+            e.stopPropagation();
+            if (confirm(`取消「${name}」的「${r.name}」指派？`)) {
+              mvDraft[code] = (mvDraft[code] || []).filter(n => n !== name);
+              renderMatrix();
+              renderPool();
+            }
+          });
+          cell.appendChild(chip);
+        });
+        cell.addEventListener('dragover', onCellDragOver);
+        cell.addEventListener('dragleave', onCellDragLeave);
+        cell.addEventListener('drop', onCellDrop);
+      }
+      td.appendChild(cell);
+      tr.appendChild(td);
+    });
+    body.appendChild(tr);
+    });
+  });
+}
+
+function renderPool() {
+  const pool = document.getElementById('asnPool');
+  pool.innerHTML = '';
+
+  // 計算每個人的工作量（被指派的崗位數，以及跨幾個時段）
+  const loadMap = {};  // name → { roleCount, slotCount }
+  STAFF_LIST.forEach(name => { loadMap[name] = { roleCount: 0, slotCount: 0 }; });
+  Object.entries(mvDraft).forEach(([code, names]) => {
+    const r = ROLES[code];
+    if (!r) return;
+    const slotCount = Object.keys(r.slots).length;
+    names.forEach(name => {
+      if (loadMap[name]) {
+        loadMap[name].roleCount += 1;
+        loadMap[name].slotCount += slotCount;
+      }
+    });
+  });
+
+  // 排序：工作量少→多（讓未分配的先出現）
+  const sorted = [...STAFF_LIST].sort((a, b) =>
+    loadMap[a].slotCount - loadMap[b].slotCount
+  );
+
+  // 未分配同仁列表
+  const unassigned = STAFF_LIST.filter(n => loadMap[n].roleCount === 0);
+
+  // 頂部統計列
+  const statRow = document.createElement('div');
+  statRow.style.cssText = 'width:100%;margin-bottom:12px;padding:10px 12px;background:#fff;border-radius:8px;font-size:12px;line-height:1.7;';
+  if (unassigned.length > 0) {
+    statRow.innerHTML = `
+      <div style="color:var(--red);font-weight:700;margin-bottom:4px;">⚠️ 還沒分配到工作的 ${unassigned.length} 人：</div>
+      <div style="color:var(--dark);">${unassigned.join('、')}</div>
+    `;
+  } else {
+    statRow.innerHTML = '<div style="color:var(--green);font-weight:700;">✅ 所有同仁都已分配到工作</div>';
+  }
+  pool.appendChild(statRow);
+
+  // 佔位符名單（非窩的家同仁，名稱待定）
+  const PLACEHOLDER_NAMES = ['中信夥伴'];
+
+  // 人名膠囊（依工作量排序）
+  sorted.forEach(name => {
+    const load = loadMap[name];
+    const isPlaceholder = PLACEHOLDER_NAMES.includes(name);
+    const chip = document.createElement('div');
+    chip.className = 'pool-chip';
+    // 工作量決定邊框顏色
+    let badgeColor = '#999';
+    let badgeBg = '#f0f0f0';
+    if (isPlaceholder) {
+      // 佔位符：紫色虛線、背景淺紫
+      chip.style.borderColor = '#9C27B0';
+      chip.style.borderStyle = 'dashed';
+      chip.style.color = '#9C27B0';
+      chip.style.background = '#F3E5F5';
+      badgeColor = '#fff'; badgeBg = '#9C27B0';
+    } else if (load.roleCount === 0) {
+      chip.style.borderColor = '#F0A500';
+      chip.style.borderStyle = 'dashed';
+      chip.style.opacity = '0.95';
+    } else if (load.slotCount >= 8) {
+      badgeColor = '#fff'; badgeBg = 'var(--red)';
+      chip.style.borderColor = 'var(--red)';
+    } else if (load.slotCount >= 4) {
+      badgeColor = '#fff'; badgeBg = '#F0A500';
+    } else {
+      badgeColor = '#fff'; badgeBg = 'var(--green)';
+    }
+    chip.innerHTML = `
+      <span>${isPlaceholder ? '❓' : ''}${name}</span>
+      <span style="display:inline-block;min-width:20px;height:20px;padding:0 6px;margin-left:6px;border-radius:10px;background:${badgeBg};color:${badgeColor};font-size:11px;font-weight:700;line-height:20px;text-align:center;vertical-align:middle;" title="${load.roleCount} 個崗位 · 共 ${load.slotCount} 個時段">${load.slotCount}</span>
+    `;
+    chip.draggable = true;
+    chip.dataset.person = name;
+    chip.title = isPlaceholder ? '人選待定（佔位符，可拖到任何崗位代表該位置由中信夥伴來）' : '';
+    chip.addEventListener('dragstart', onPoolDragStart);
+    chip.addEventListener('dragend', onDragEnd);
+    pool.appendChild(chip);
+  });
+}
+
+let drag = null;
+function onPoolDragStart(e) {
+  const chip = e.currentTarget;
+  drag = { kind: 'pool', name: chip.dataset.person };
+  chip.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', drag.name);
+}
+function onChipDragStart(e) {
+  drag = {
+    kind: 'chip',
+    fromName: e.target.dataset.fromName,
+    fromRole: e.target.dataset.fromRole
+  };
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', drag.fromName);
+  e.stopPropagation();
+}
+function onDragEnd(e) {
+  e.target.classList.remove('dragging');
+  document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+}
+function onCellDragOver(e) { if (drag) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); } }
+function onCellDragLeave(e) { e.currentTarget.classList.remove('drag-over'); }
+function onCellDrop(e) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  if (!drag) return;
+  const targetRole = e.currentTarget.dataset.role;
+  if (!targetRole) { drag = null; return; }
+
+  if (drag.kind === 'pool') {
+    // 從人名池拖到崗位：加人
+    if (!mvDraft[targetRole]) mvDraft[targetRole] = [];
+    if (!mvDraft[targetRole].includes(drag.name)) {
+      mvDraft[targetRole].push(drag.name);
+    }
+    renderMatrix(); renderPool();
+  } else if (drag.kind === 'chip') {
+    // 崗位間轉移
+    const fromRole = drag.fromRole;
+    const name = drag.fromName;
+    if (fromRole !== targetRole) {
+      mvDraft[fromRole] = (mvDraft[fromRole] || []).filter(n => n !== name);
+      if (!mvDraft[targetRole]) mvDraft[targetRole] = [];
+      if (!mvDraft[targetRole].includes(name)) mvDraft[targetRole].push(name);
+      renderMatrix(); renderPool();
+    }
+  }
+  drag = null;
+}
+
+// 人名池折疊切換
+document.getElementById('poolLabel').addEventListener('click', () => {
+  const wrap = document.getElementById('poolWrap');
+  const icon = document.getElementById('poolToggleIcon');
+  wrap.classList.toggle('collapsed');
+  icon.textContent = wrap.classList.contains('collapsed') ? '▶' : '▼';
+});
+
+const poolEl = document.getElementById('asnPool');
+poolEl.addEventListener('dragover', e => {
+  if (drag && drag.kind === 'chip') { e.preventDefault(); poolEl.classList.add('drag-over'); }
+});
+poolEl.addEventListener('dragleave', () => poolEl.classList.remove('drag-over'));
+poolEl.addEventListener('drop', e => {
+  e.preventDefault();
+  poolEl.classList.remove('drag-over');
+  if (drag && drag.kind === 'chip') {
+    mvDraft[drag.fromRole] = (mvDraft[drag.fromRole] || []).filter(n => n !== drag.fromName);
+    renderMatrix(); renderPool();
+  }
+  drag = null;
+});
+
+// 崗位選擇浮層
+function openPicker(name, slotKey, removeRole) {
+  const ov = document.getElementById('sppOverlay');
+  document.getElementById('sppTitle').textContent = `${name} · ${slotKey} 要做什麼？`;
+  const body = document.getElementById('sppBody');
+  body.innerHTML = '';
+  const options = Object.entries(ROLES).filter(([c, r]) => r.slots[slotKey]);
+  if (options.length === 0) {
+    body.innerHTML = '<p style="font-size:13px;color:#999;padding:10px;">這個時段沒有崗位可選</p>';
+  } else {
+    options.forEach(([code, r]) => {
+      const cur = mvDraft[code] || [];
+      const already = cur.includes(name);
+      const full = cur.length >= r.count && !already;
+      const row = rolesData[code] || { count: r.count, name: r.name };
+      const opt = document.createElement('div');
+      opt.className = 'spp-opt' + (full ? ' full' : '');
+      opt.innerHTML = `
+        <div>
+          <div style="font-weight:700;">${r.name}</div>
+          <div class="so-meta">已指派 ${cur.length}/${r.count} · ${cur.join('、') || '空'}</div>
+        </div>
+        <div class="so-meta">${already ? '✅ 已選' : (full ? '已滿' : '點我指派')}</div>
+      `;
+      opt.addEventListener('click', () => {
+        if (full) return;
+        if (removeRole && removeRole !== code) {
+          mvDraft[removeRole] = (mvDraft[removeRole] || []).filter(n => n !== name);
+        }
+        if (!already) {
+          if (!mvDraft[code]) mvDraft[code] = [];
+          mvDraft[code].push(name);
+        }
+        ov.classList.remove('show');
+        renderMatrix(); renderPool();
+      });
+      body.appendChild(opt);
+    });
+  }
+  ov.classList.add('show');
+}
+document.getElementById('sppCloseBtn').addEventListener('click', () => document.getElementById('sppOverlay').classList.remove('show'));
+document.getElementById('sppOverlay').addEventListener('click', e => { if (e.target.id === 'sppOverlay') e.target.classList.remove('show'); });
+
+// 複製結果
+document.getElementById('asnExportBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('asnExportBtn');
+  const status = document.getElementById('asnStatus');
+  const lines = ['# 4/26 開幕排班結果（' + new Date().toLocaleString('zh-TW') + '）', ''];
+  Object.entries(mvDraft).forEach(([code, names]) => {
+    const r = ROLES[code];
+    if (!r) return;
+    const need = r.count;
+    const state = names.length >= need ? '✓' : (names.length > 0 ? '△' : '✗');
+    lines.push(`${state} [${code}] ${r.name}（需 ${need}）：${names.join('、') || '（空）'}`);
+  });
+  lines.push('', '```json', JSON.stringify(mvDraft, null, 2), '```');
+  const text = lines.join('\n');
+  try {
+    await navigator.clipboard.writeText(text);
+    status.textContent = '✅ 已複製到剪貼簿 · 貼給 Claude 寫 Ragic';
+    status.className = 'asn-status saved';
+    btn.textContent = '✓ 已複製';
+    setTimeout(() => { btn.textContent = '📋 複製結果給 Claude'; }, 2500);
+  } catch (e) {
+    const w = window.open('', '_blank', 'width=600,height=500');
+    w.document.write('<pre style="font-family:monospace;padding:20px;white-space:pre-wrap;">' + text.replace(/</g, '&lt;') + '</pre>');
+    status.textContent = '📋 已開新視窗，Ctrl+A Ctrl+C 複製';
+    status.className = 'asn-status error';
+  }
+});
+
+// 儲存 Ragic
+document.getElementById('asnSaveBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('asnSaveBtn');
+  const status = document.getElementById('asnStatus');
+  btn.disabled = true;
+  btn.textContent = '儲存中…';
+  status.textContent = '寫回 Ragic…';
+  status.className = 'asn-status saving';
+  try {
+    const changes = [];
+    Object.keys(mvDraft).forEach(code => {
+      const a = [...(roleAssignments[code] || [])].sort().join(',');
+      const b = [...(mvDraft[code] || [])].sort().join(',');
+      if (a !== b) changes.push(code);
+    });
+    if (changes.length === 0) {
+      status.textContent = '✅ 沒有變動';
+      status.className = 'asn-status saved';
+    } else {
+      let ok = 0, fail = 0;
+      for (const code of changes) {
+        const s = await saveToRagic(code, mvDraft[code]);
+        if (s) ok++; else fail++;
+      }
+      status.textContent = `✅ 儲存 ${ok}/${changes.length}` + (fail ? ` · ❌ 失敗 ${fail}` : '');
+      status.className = 'asn-status ' + (fail ? 'error' : 'saved');
+      await fetchRagicData();
+      initDraft();
+      renderMatrix();
+      renderPool();
+    }
+  } catch (e) {
+    status.textContent = '❌ 失敗：' + e.message;
+    status.className = 'asn-status error';
+  }
+  btn.disabled = false;
+  btn.textContent = '💾 儲存到 Ragic';
+});
+
+// ══════════════════════════════════════════
+// 初始化
+// ══════════════════════════════════════════
+(async function init() {
+  const status = document.getElementById('asnStatus');
+  let ragicOk = false;
+  try {
+    await fetchRagicData();
+    ragicOk = Object.keys(rolesData).length > 0;
+  } catch (e) {
+    console.warn('Ragic 失敗', e);
+  }
+  if (!ragicOk) {
+    buildFallback();
+    if (status) {
+      status.textContent = '⚠️ Ragic 連不到（本機檔案）· 用本地清單 · 會議後把結果給 Claude 寫入';
+      status.className = 'asn-status error';
+    }
+  } else {
+    if (status) {
+      status.textContent = '✅ 已載入 · 拖拉即可編輯';
+      status.className = 'asn-status saved';
+    }
+  }
+  initDraft();
+  // 重新 render 我的任務頁（因為 personToRoles 要更新）
+  if (mePicker.value) renderMe(mePicker.value);
+})();
+</script>
+
+</body>
+</html>
