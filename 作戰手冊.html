@@ -2694,6 +2694,106 @@
     .reg-stat-num { font-size: 26px; font-weight: 900; color: var(--yellow); line-height: 1.2; }
     .reg-stat-label { font-size: 12px; color: #ccc; margin-top: 4px; }
     .reg-note { background: #FFFBE8; border-left: 4px solid var(--yellow); padding: 12px 16px; border-radius: 6px; margin-top: 14px; font-size: 13px; color: var(--dark); line-height: 1.7; }
+
+    /* ══════════════════════════════════════════════════════ */
+    /* 📱 手機版統整 override（≤ 600px）                       */
+    /* ══════════════════════════════════════════════════════ */
+    @media (max-width: 600px) {
+      body { font-size: 15px; }
+
+      /* 頂部 Tab：橫向滑動單排、縮小 */
+      .topbar { padding: 8px 10px; }
+      .topbar-row { gap: 8px; flex-wrap: nowrap; }
+      .tb-clock { font-size: 20px; min-width: auto; letter-spacing: 1px; }
+      .tb-title { display: none; }
+      .tb-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 3px;
+        border-radius: 8px;
+        max-width: calc(100vw - 80px);
+      }
+      .tb-tabs::-webkit-scrollbar { display: none; }
+      .tb-tab {
+        padding: 7px 12px;
+        font-size: 12.5px;
+        flex-shrink: 0;
+      }
+
+      /* 頁面 padding 與 max-width */
+      .page { padding: 14px 12px 48px; }
+
+      /* 共用元件 */
+      .section-title { font-size: 18px; border-left-width: 5px; padding-left: 10px; }
+      .card { padding: 16px; border-radius: 12px; }
+
+      /* Hero */
+      .hero { padding: 20px 16px; border-radius: 12px; }
+      .hero h1 { font-size: 22px; margin-bottom: 12px; }
+      .hero-lead { font-size: 14px; }
+      .hero-meta-row { gap: 14px; margin-bottom: 14px; }
+      .hm-value { font-size: 14px; }
+      .hero-points { gap: 18px; margin-bottom: 16px; }
+      .hp { padding: 12px 14px; }
+      .hp-title { font-size: 15px; }
+      .hp-sub { font-size: 12px; }
+      .hero-foot { gap: 6px; padding-top: 12px; }
+      .hf-chip { font-size: 12px; padding: 5px 10px; }
+      .hf-label { width: 100%; margin-bottom: 4px; }
+
+      /* 視覺時間軸已有 overflow-x:auto，手機滑動 */
+      .vtimeline { padding: 16px 12px; }
+      .vt-step { min-width: 110px; padding: 12px 8px; }
+      .vt-time { font-size: 14px; }
+      .vt-name { font-size: 12px; }
+      .vt-ico { font-size: 22px; }
+      .vt-people { font-size: 10px; }
+
+      /* grid3 / top-task-grid / glossary 都已有 1fr 預設，只需縮 padding */
+      .top-tasks, .glossary { padding: 16px; }
+      .top-task h3 { font-size: 15px; }
+      .top-task p { font-size: 13px; }
+      .gg-head { padding: 12px 14px; font-size: 15px; }
+      .gg-body { padding: 12px 14px 14px; }
+
+      /* 崗位總覽：已 1fr，縮 padding + hint 已隱藏 */
+      .role-card { padding: 14px; }
+
+      /* 嘉賓頁 sp-cards（auto-fill 320px min 已會降成 1 欄）*/
+      /* 短影音：已處理 720px 斷點，不用再調 */
+      .reel-hero { padding: 20px 16px; }
+      .reel-hero h1 { font-size: 20px; }
+      .reel-lead { font-size: 14px; }
+
+      /* 報名名單表格：橫向可滑 + 縮字 */
+      .reg-total { padding: 16px; }
+      .reg-total h3 { font-size: 18px; }
+      .reg-total-stats { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .reg-stat { padding: 10px 8px; }
+      .reg-stat-num { font-size: 22px; }
+      .reg-stat-label { font-size: 11px; }
+      .reg-session-head { padding: 12px 14px; font-size: 14px; }
+      .reg-session { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .reg-table { font-size: 12px; min-width: 540px; }
+      .reg-table th, .reg-table td { padding: 8px 10px; }
+
+      /* 浮層（崗位指派）手機全螢幕感 */
+      .spp-overlay { padding: 10px; }
+      .spp-box { max-height: 92vh; }
+
+      /* 2/3/auto-fill 硬欄位的 inline style 無法 override，先針對 class 處理 */
+      .reel-tips { grid-template-columns: 1fr; }
+    }
+
+    /* 超小螢幕（≤ 380px，iPhone SE 等） */
+    @media (max-width: 380px) {
+      .tb-tab { padding: 6px 10px; font-size: 12px; }
+      .tb-clock { font-size: 18px; }
+      .hero h1 { font-size: 20px; }
+      .reg-total-stats { grid-template-columns: 1fr 1fr; }
+    }
   </style>
 
   <h2 class="section-title">📋 報名名單（Ragic 即時）</h2>
