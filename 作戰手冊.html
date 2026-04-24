@@ -3468,6 +3468,18 @@ document.querySelectorAll('.subtab').forEach(st => {
   });
 });
 
+// 📱 手機版（≤600px）預設打開「我的任務」分頁（不要停在活動全景，因為大家不會橫向滑）
+if (window.innerWidth <= 600) {
+  document.querySelectorAll('.tb-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const meTab = document.querySelector('.tb-tab[data-page="me"]');
+  const mePage = document.getElementById('page-me');
+  if (meTab && mePage) {
+    meTab.classList.add('active');
+    mePage.classList.add('active');
+  }
+}
+
 document.querySelectorAll('.tb-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     const target = tab.dataset.page;
