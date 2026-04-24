@@ -3323,13 +3323,42 @@ async function fetchRagicData() {
   });
 }
 
+// ⭐ 4/24 早會最終排班結果（寫死，不再從 Ragic 抓）
+const FINAL_ASSIGNMENTS = {
+  'joan':       ['張瓊安'],
+  'ivy':        [],
+  'boss':       [],
+  'vip-bni':    ['吳彥廷', '呂鴻墀', '張忠豪'],
+  'vip-yoshi':  ['蕭靜芳', '蕭眞儀'],
+  'food-a':     ['謝佳芬'],
+  'food-b':     ['張玉慧'],
+  'welcome':    ['蕭靜芳', '蕭眞儀'],
+  'guide-cut':  ['張忠豪'],
+  'glove':      ['陳心瑜'],
+  'scissor':    ['沈郁雯', '張玉慧'],
+  'floater-a':  ['林宣佑', '詹張傳'],
+  'floater-b':  ['李卓威', '劉子碩'],
+  'traffic-cd': ['吳炫儒', '張則泓'],
+  'cleaner':    ['張玉慧', '謝佳芬'],
+  'shoot':      ['關宗宇'],
+  'broll':      ['方鼎文'],
+  'bento':      ['韓珊珊']
+};
+
 function buildFallback() {
   rolesData = {};
   roleAssignments = {};
   personToRoles = {};
   Object.entries(ROLES).forEach(([code, r]) => {
-    rolesData[code] = { ragicId: null, name: r.name, count: r.count, assignees: [], status: '待定' };
-    roleAssignments[code] = [];
+    const assignees = FINAL_ASSIGNMENTS[code] || [];
+    const status = assignees.length === 0 ? '待定' :
+                   assignees.length >= r.count ? '已確認' : '部分指派';
+    rolesData[code] = { ragicId: null, name: r.name, count: r.count, assignees, status };
+    roleAssignments[code] = [...assignees];
+    assignees.forEach(name => {
+      if (!personToRoles[name]) personToRoles[name] = [];
+      personToRoles[name].push(code);
+    });
   });
 }
 
@@ -3536,24 +3565,11 @@ function renderMe(name) {
 // 📊 排班指派頁：矩陣 + 拖拉
 // ══════════════════════════════════════════
 async function loadAssignPage() {
+  // ⭐ 4/24 會議完成後：直接顯示寫死的最終排班
   const status = document.getElementById('asnStatus');
-  status.textContent = '從 Ragic 讀取…';
-  status.className = 'asn-status saving';
-  let ok = false;
-  try {
-    await fetchRagicData();
-    ok = Object.keys(rolesData).length > 0;
-  } catch (e) {
-    console.warn('Ragic 失敗：', e);
-  }
-  if (!ok) {
-    buildFallback();
-    status.textContent = '⚠️ Ragic 連不到（本機檔案）· 用本地清單 · 會議後把結果給 Claude 寫入';
-    status.className = 'asn-status error';
-  } else {
-    status.textContent = '✅ 已載入 · 拖拉即可編輯';
-    status.className = 'asn-status saved';
-  }
+  buildFallback();
+  status.textContent = '✅ 4/24 早會最終排班（已固定）';
+  status.className = 'asn-status saved';
   initDraft();
   renderMatrix();
   renderPool();
@@ -3959,28 +3975,14 @@ document.getElementById('asnSaveBtn').addEventListener('click', async () => {
 // 初始化
 // ══════════════════════════════════════════
 (async function init() {
+  // ⭐ 4/24 會議完成後：直接用寫死的排班結果，不再從 Ragic 抓覆蓋
+  buildFallback();
   const status = document.getElementById('asnStatus');
-  let ragicOk = false;
-  try {
-    await fetchRagicData();
-    ragicOk = Object.keys(rolesData).length > 0;
-  } catch (e) {
-    console.warn('Ragic 失敗', e);
-  }
-  if (!ragicOk) {
-    buildFallback();
-    if (status) {
-      status.textContent = '⚠️ Ragic 連不到（本機檔案）· 用本地清單 · 會議後把結果給 Claude 寫入';
-      status.className = 'asn-status error';
-    }
-  } else {
-    if (status) {
-      status.textContent = '✅ 已載入 · 拖拉即可編輯';
-      status.className = 'asn-status saved';
-    }
+  if (status) {
+    status.textContent = '✅ 4/24 早會最終排班（已固定）';
+    status.className = 'asn-status saved';
   }
   initDraft();
-  // 重新 render 我的任務頁（因為 personToRoles 要更新）
   if (mePicker.value) renderMe(mePicker.value);
 })();
 </script>
