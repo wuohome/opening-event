@@ -2721,6 +2721,15 @@
         font-size: 12.5px;
         flex-shrink: 0;
       }
+      /* 📱 手機版分頁順序：我的任務排第一，其他往右 */
+      .tb-tab[data-page="me"]       { order: 1; }
+      .tb-tab[data-page="overview"] { order: 2; }
+      .tb-tab[data-page="roles"]    { order: 3; }
+      .tb-tab[data-page="speakers"] { order: 4; }
+      .tb-tab[data-page="registrations"] { order: 5; }
+      .tb-tab[data-page="assign"]   { order: 6; }
+      .tb-tab[data-page="vendor"]   { order: 7; }
+      .tb-tab[data-page="reels"]    { order: 8; }
 
       /* 頁面 padding 與 max-width */
       .page { padding: 14px 12px 48px; }
@@ -2799,7 +2808,7 @@
   <h2 class="section-title">📋 報名名單（Ragic 即時）</h2>
 
   <div class="reg-total">
-    <h3>合計 <span style="color:var(--yellow);">34</span> 位來賓<span style="font-size:14px;font-weight:500;opacity:0.9;">（Ragic 報名 17 + 大展分會 16 + 額外邀約 1）</span></h3>
+    <h3>合計 <span style="color:var(--yellow);">38</span> 位外部來賓<span style="font-size:14px;font-weight:500;opacity:0.9;">（Ragic 17 + 大展 15 + 安信 5 + 額外 1 · 已扣金鈴重複）</span></h3>
     <div style="font-size:13px;opacity:0.85;">迎賓簽到時拿這份對名字。下午場二已併入場一。</div>
     <div class="reg-total-stats">
       <div class="reg-stat"><div class="reg-stat-num">11</div><div class="reg-stat-label">上午場 10:00</div></div>
@@ -2902,8 +2911,8 @@
           <td><a href="tel:0955553122" class="reg-phone">0955553122</a></td>
         </tr>
         <tr>
-          <td><span class="reg-name">邱金鈴</span></td>
-          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI夥伴</span></td>
+          <td><span class="reg-name">邱金鈴</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展 · +1 攜伴 · 忠豪接待</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
           <td><span class="reg-unit">中信房屋樹林冠軍團隊</span></td>
           <td><a href="tel:0909895478" class="reg-phone">0909895478</a></td>
         </tr>
@@ -2931,7 +2940,7 @@
           <td><span class="reg-unit">新同心融資貸款（BNI 新同心分會）</span></td>
           <td>—</td>
         </tr>
-        <tr><td colspan="4" style="background:#F5F5F7;padding:8px 12px;font-size:12px;color:var(--gray);font-weight:700;">── 以下為 BNI 大展分會接龍（忠豪邀請·未走 Ragic 報名·共 16 人，約 12:30 起陸續到） ──</td></tr>
+        <tr><td colspan="4" style="background:#F5F5F7;padding:8px 12px;font-size:12px;color:var(--gray);font-weight:700;">── 以下為 BNI 大展分會接龍（忠豪邀請·未走 Ragic 報名·共 15 人 + 邱金鈴已在上方 Ragic 名單，約 12:30 起陸續到） ──</td></tr>
         <tr>
           <td><span class="reg-name">忠豪 +2</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展 · 窩的家同仁</span></td>
           <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
@@ -2970,12 +2979,6 @@
         </tr>
         <tr>
           <td><span class="reg-name">世豪 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
-          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
-          <td><span class="reg-unit">—</span></td>
-          <td>—</td>
-        </tr>
-        <tr>
-          <td><span class="reg-name">金鈴 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
           <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
           <td><span class="reg-unit">—</span></td>
           <td>—</td>
@@ -3026,6 +3029,49 @@
           <td><span class="reg-name">韋成 +1</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 大展</span></td>
           <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI大展</span></td>
           <td><span class="reg-unit">—</span></td>
+          <td>—</td>
+        </tr>
+        <tr><td colspan="4" style="background:#F5F5F7;padding:8px 12px;font-size:12px;color:var(--gray);font-weight:700;">── 以下為 BNI 安信分會接龍（小吳哥/小呂主邀·共 7 人含本集團 2 人） ──</td></tr>
+        <tr>
+          <td><span class="reg-name">簡柏洋</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 安信</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI安信</span></td>
+          <td><span class="reg-unit">財富管理</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">林昱成</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 安信</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI安信</span></td>
+          <td><span class="reg-unit">地政士</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">呂鴻墀（小呂）</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 安信 · 本集團同仁</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI安信</span></td>
+          <td><span class="reg-unit">室內設計（窩的家）</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">曾玉昇</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 安信</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI安信</span></td>
+          <td><span class="reg-unit">二手車買賣</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">諸葛俊鳴</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 安信 · 分會代表</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI安信</span></td>
+          <td><span class="reg-unit">鳴泰文化</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">吳彥廷（小吳哥）</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 安信 · 本集團執行長</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI安信</span></td>
+          <td><span class="reg-unit">房仲業（窩的家）</span></td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><span class="reg-name">林淑儀</span><br><span style="font-size:10px;color:#1565C0;font-weight:600;">BNI 安信 · 跨區（竹苗）</span></td>
+          <td><span class="reg-id-tag" style="background:#1565C0;">🤝 BNI安信</span></td>
+          <td><span class="reg-unit">包租代管（竹苗）</span></td>
           <td>—</td>
         </tr>
       </tbody>
