@@ -3331,8 +3331,10 @@ const VENDOR_NAMES = ['Ivy', '橘子'];
 // ══════════════════════════════════════════
 // Ragic
 // ══════════════════════════════════════════
-const RAGIC_URL = 'https://ap15.ragic.com/wuohome/operation/14';
-const RAGIC_AUTH = 'Basic VEZsOEwzYzVJdWdoWXRDM3ptS2YwRkllTFlXVXlwaEpEcG1IajBXM0NiU1A0emdURlN1WFZHMDRQS28zM2F1bA==';
+// 2026-05-13: 4/26 活動已結束、Ragic admin key 已 rotate 失效。
+// 拿掉 hardcoded key 字串避免 public repo 安全洞，fetch 函式保留但會自動 fallback 到 FINAL_ASSIGNMENTS。
+const RAGIC_URL = '';
+const RAGIC_AUTH = '';
 
 let rolesData = {};
 let roleAssignments = {};
@@ -3340,6 +3342,7 @@ let personToRoles = {};
 let mvDraft = {};
 
 async function fetchRagicData() {
+  if (!RAGIC_URL) return; // 2026-05-13: key 已拿掉、活動已結束
   const res = await fetch(RAGIC_URL + '?api&limit=50', {
     headers: { 'Authorization': RAGIC_AUTH }
   });
@@ -3408,6 +3411,7 @@ function buildFallback() {
 }
 
 async function saveToRagic(code, assignees) {
+  if (!RAGIC_URL) return false; // 2026-05-13: key 已拿掉、活動已結束
   const row = rolesData[code];
   if (!row || !row.ragicId) return false;
   const fd = new URLSearchParams();
